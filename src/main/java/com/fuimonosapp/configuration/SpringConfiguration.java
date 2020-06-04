@@ -1,4 +1,4 @@
-package com.fuimonos.configuration;
+package com.fuimonosapp.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

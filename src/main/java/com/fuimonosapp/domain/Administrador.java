@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -28,11 +30,13 @@ public class Administrador {
 	private String pass;
 	
 	@Column(name="ultimo_inicio")
-	@DateTimeFormat(pattern="dd/MM/yyyy hh:mm")
+	@Temporal(TemporalType.DATE)
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date ultimo_inicio;
 	
 	@Column(name="fecha_creacion")
-	@DateTimeFormat(pattern="dd/MM/yyyy hh:mm")
+	@Temporal(TemporalType.DATE)
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date fecha_creacion;
 
 	public Integer getAdministrador_id() {

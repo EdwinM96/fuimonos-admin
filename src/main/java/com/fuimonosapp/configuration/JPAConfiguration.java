@@ -1,4 +1,4 @@
-package com.fuimonos.configuration;
+package com.fuimonosapp.configuration;
 
 import java.util.Properties;
 
