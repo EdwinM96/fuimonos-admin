@@ -7,11 +7,13 @@ package com.fuimonosapp.repository;
 
 import com.fuimonosapp.domain.Administrador;
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.stereotype.Repository;
+import com.fuimonosapp.domain.OpcionesSubMenu;
 /**
  *
  * @author Javier
  */
-public interface OpcionesSubMenuRepository extends JpaRepository<OpcionesSubMenuRepository, Integer> {
+@Repository
+public interface OpcionesSubMenuRepository extends JpaRepository<OpcionesSubMenu, Integer> {
     
 }

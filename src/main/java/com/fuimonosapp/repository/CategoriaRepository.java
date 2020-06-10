@@ -7,11 +7,13 @@ package com.fuimonosapp.repository;
 
 import com.fuimonosapp.domain.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Javier
  */
+@Repository
 public interface  CategoriaRepository extends JpaRepository<Categoria, Integer> {
     
 }

@@ -25,12 +25,12 @@ public class Restaurante {
 	@Column(name="username")
 	private String username;
 	
-	@Column(name="password")
-	private String password;
+	@Column(name="pass")
+	private String pass;
 	
 	@Column(name="nombre")
 	private String nombre;
-	
+	/*
 	@OneToMany(mappedBy="menu",fetch=FetchType.EAGER)
 	private List<Menu> menus;
 
@@ -43,7 +43,7 @@ public class Restaurante {
 	public void setMenus(List<Menu> menus) {
 		this.menus = menus;
 	}
-
+*/
 
 	public Integer getRestaurante_id() {
 		return restaurante_id;
@@ -65,13 +65,13 @@ public class Restaurante {
 	}
 
 
-	public String getPassword() {
-		return password;
+	public String getPass() {
+		return pass;
 	}
 
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPass(String password) {
+		this.pass = password;
 	}
 
 

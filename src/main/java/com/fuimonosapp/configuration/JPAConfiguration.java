@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {"com.christmascards.repository"})
+@EnableJpaRepositories(basePackages = {"com.fuimonosapp.repository"})
 public class JPAConfiguration {
 
 	@Bean
@@ -25,7 +25,7 @@ public class JPAConfiguration {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource((javax.sql.DataSource) dataSource());
 		em.setPersistenceUnitName("persistenceunit");
-		em.setPackagesToScan("com.christmascards.domain");
+		em.setPackagesToScan("com.fuimonosapp.domain");
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
 		Properties jpaProperties = hibernateProperties();
@@ -45,8 +45,8 @@ public class JPAConfiguration {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
 		dataSource.setUrl(System.getenv("FUIMONOS_URL"));
-		dataSource.setUsername(System.getenv("FUIMONOS_USERNAME"));
-		dataSource.setPassword(System.getenv("FUIMONOS_PASSWORD"));
+		dataSource.setUsername(System.getenv("FUIMONOS_PASSWORD"));
+		dataSource.setPassword(System.getenv("FUIMONOS_USERNAME"));
 		return (DataSource) dataSource;
 	}
 	

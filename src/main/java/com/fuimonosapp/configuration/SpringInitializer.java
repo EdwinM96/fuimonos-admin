@@ -20,7 +20,7 @@ public class SpringInitializer implements WebApplicationInitializer{
 		ctx.register(SpringConfiguration.class);
 		ctx.setServletContext(container);
 		
-		ServletRegistration.Dynamic servlet = container.addServlet("christmas-cards", new DispatcherServlet(ctx));
+		ServletRegistration.Dynamic servlet = container.addServlet("servlet", new DispatcherServlet(ctx));
 		
 		servlet.addMapping("/");
 		servlet.setLoadOnStartup(1);

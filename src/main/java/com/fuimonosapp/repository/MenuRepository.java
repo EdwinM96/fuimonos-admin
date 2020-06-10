@@ -7,11 +7,13 @@ package com.fuimonosapp.repository;
 
 import com.fuimonosapp.domain.Menu;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Javier
  */
+@Repository
 public interface MenuRepository extends JpaRepository<Menu, Integer> {
     
 }

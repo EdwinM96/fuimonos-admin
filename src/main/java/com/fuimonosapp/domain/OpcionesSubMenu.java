@@ -18,11 +18,11 @@ public class OpcionesSubMenu {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="opcionessubmenu_id")
 	private Integer opcionessubmenu_id;
-	
+	/*
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="submenu_id")
 	private Submenu submenu;
-	
+	*/
 	@Column(name="nombre_opcion")
 	private String nombre_opcion;
 	
@@ -30,7 +30,7 @@ public class OpcionesSubMenu {
 	private Integer costo_opcion;
 
 	
-
+        /*
 	public Submenu getSubmenu() {
 		return submenu;
 	}
@@ -39,7 +39,7 @@ public class OpcionesSubMenu {
 	public void setSubmenu(Submenu submenu) {
 		this.submenu = submenu;
 	}
-
+        */
 
 	public Integer getOpcionessubmenu_id() {
 		return opcionessubmenu_id;

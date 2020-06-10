@@ -38,12 +38,13 @@ public class Submenu {
 	@Column(name="maximoopcionesaescoger")
 	private Integer maximoopcionesaescoger;
 	
+        /*
 	@OneToMany(mappedBy="opcionessubmenu",fetch=FetchType.EAGER)
 	private List<OpcionesSubMenu> opcionesSubMenus;
-	
+	*/
 	
 
-
+        /*
 	public List<OpcionesSubMenu> getOpcionesSubMenus() {
 		return opcionesSubMenus;
 	}
@@ -52,7 +53,7 @@ public class Submenu {
 	public void setOpcionesSubMenus(List<OpcionesSubMenu> opcionesSubMenus) {
 		this.opcionesSubMenus = opcionesSubMenus;
 	}
-
+        */
 
 	public Integer getSubmenu_id() {
 		return submenu_id;

@@ -31,7 +31,7 @@ public class Platillo {
 	
 	@Column(name="precio_base")
 	private Integer precio_base;
-	
+	/*
 	@OneToMany(mappedBy="submenu",fetch=FetchType.EAGER)
 	private List<Submenu> submenus;
 
@@ -46,7 +46,7 @@ public class Platillo {
 		this.submenus = submenus;
 	}
 
-
+        */
 	public Integer getPlatillo_id() {
 		return platillo_id;
 	}

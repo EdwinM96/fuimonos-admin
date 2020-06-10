@@ -22,7 +22,7 @@ public class Categoria {
 	@Column(name="nombre_categoria")
 	private String nombre_categoria;
 
-        
+        /*
         @OneToOne(mappedBy = "post", cascade = CascadeType.ALL,
         fetch = FetchType.LAZY, optional = false)
         private MenuXCategoria menuxcategorias;
@@ -34,7 +34,7 @@ public class Categoria {
     public void setMenuxcategorias(MenuXCategoria menuxcategorias) {
         this.menuxcategorias = menuxcategorias;
     }
-        
+        */
         
         
 	public Integer getCategoria_id() {
