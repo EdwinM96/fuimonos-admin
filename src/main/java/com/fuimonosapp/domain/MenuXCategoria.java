@@ -17,7 +17,7 @@ public class MenuXCategoria {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="menuxcategoria_id")
 	private Integer menuxcategoria_id;
-        /*
+        
         @OneToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "menu_id")
 	private Menu menu_id;
@@ -25,7 +25,7 @@ public class MenuXCategoria {
         @OneToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "categoria_id")
 	private Categoria categoria_id;
-*/
+        
 	public Integer getMenuxcategoria_id() {
 		return menuxcategoria_id;
 	}
@@ -33,8 +33,8 @@ public class MenuXCategoria {
 	public void setMenuxcategoria_id(Integer menuxcategoria_id) {
 		this.menuxcategoria_id = menuxcategoria_id;
 	}
-/*
-	public Menu getMenu_id() {
+
+        public Menu getMenu_id() {
 		return menu_id;
 	}
 
@@ -49,7 +49,7 @@ public class MenuXCategoria {
 	public void setCategoria_id(Categoria categoria_id) {
 		this.categoria_id = categoria_id;
 	}
-*/
+        
 	public MenuXCategoria() {
 		
 	}

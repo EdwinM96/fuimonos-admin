@@ -30,8 +30,8 @@ public class Restaurante {
 	
 	@Column(name="nombre")
 	private String nombre;
-	/*
-	@OneToMany(mappedBy="menu",fetch=FetchType.EAGER)
+        
+	@OneToMany(mappedBy="restaurante",fetch=FetchType.EAGER)
 	private List<Menu> menus;
 
 
@@ -43,7 +43,6 @@ public class Restaurante {
 	public void setMenus(List<Menu> menus) {
 		this.menus = menus;
 	}
-*/
 
 	public Integer getRestaurante_id() {
 		return restaurante_id;

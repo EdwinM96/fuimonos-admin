@@ -25,12 +25,22 @@ public class MainController {
     @Autowired
     RestauranteService restaService;
     
-    @RequestMapping(value="/main")
+  /*  @RequestMapping(value="/main")
     public ModelAndView homepage(HttpServletRequest request, HttpServletResponse response){
         System.out.println();
         restaService.findAll();
         System.out.println("Entered homepage");
         return new ModelAndView("index");
-    }
+    }*/
+    
+    @RequestMapping("/index")
+	public ModelAndView initMain() {
+		ModelAndView mav = new ModelAndView();
+		
+		
+		mav.setViewName("index");
+		
+		return mav;
+	}
     
 }

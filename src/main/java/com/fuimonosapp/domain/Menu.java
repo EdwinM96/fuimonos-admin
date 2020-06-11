@@ -26,18 +26,18 @@ public class Menu {
 	private Integer menu_id;
 	@Column(name="nombre_menu")
 	private String nombre_menu;
-	/*
+        
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="restaurante_id")
 	private Restaurante restaurante;
 	
-	@OneToMany(mappedBy="platillo",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="menu",fetch=FetchType.EAGER)
 	private List<Platillo> platillos ;
-	/*
-	@OneToOne(mappedBy = "post", cascade = CascadeType.ALL,
+	
+	@OneToOne(mappedBy = "menu_id", cascade = CascadeType.ALL,
         fetch = FetchType.LAZY, optional = false)
         private MenuXCategoria menuxcategorias;
-        
+
     public MenuXCategoria getMenuxcategorias() {
         return menuxcategorias;
     }
@@ -63,7 +63,6 @@ public class Menu {
 	public void setRestaurante(Restaurante restaurante) {
 		this.restaurante = restaurante;
 	}
-        */
 	public Integer getMenu_id() {
 		return menu_id;
 	}
