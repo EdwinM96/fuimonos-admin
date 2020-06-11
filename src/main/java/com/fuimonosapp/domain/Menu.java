@@ -31,7 +31,7 @@ public class Menu {
 	@JoinColumn(name="restaurante_id")
 	private Restaurante restaurante;
 	
-	@OneToMany(mappedBy="menu",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="menu")
 	private List<Platillo> platillos ;
 	
 	@OneToOne(mappedBy = "menu_id", cascade = CascadeType.ALL,

@@ -29,27 +29,38 @@ public class Submenu {
 	@Column(name="titulo")
 	private String titulo;
 	
-	@Column(name="menucobrado")
+	@Column(name="menu_cobrado")
 	private Boolean menucobrado;
 	
-	@Column(name="cobrarapartirde")
+	@Column(name="cobrar1_apartir_de")
 	private Integer cobrarapartirde;
 	
-	@Column(name="maximoopcionesaescoger")
+	@Column(name="maximo_opciones_a_escoger")
 	private Integer maximoopcionesaescoger;
+        
+        @Column(name="minimo_opciones_a_escoger")
+	private Integer minimoopcionesaescoger;
 	
-       @OneToMany(mappedBy="opcionessubmenu_id",fetch=FetchType.EAGER)
-	private List<OpcionesSubMenu> opcionesSubMenus;
+       @OneToMany(mappedBy="opcionsubmenu_id",fetch=FetchType.EAGER)
+	private List<OpcionSubMenu> opcionesSubMenus;
+
+    public Integer getMinimoopcionesaescoger() {
+        return minimoopcionesaescoger;
+    }
+
+    public void setMinimoopcionesaescoger(Integer minimoopcionesaescoger) {
+        this.minimoopcionesaescoger = minimoopcionesaescoger;
+    }
 	
 	
 
 
-	public List<OpcionesSubMenu> getOpcionesSubMenus() {
+	public List<OpcionSubMenu> getOpcionesSubMenus() {
 		return opcionesSubMenus;
 	}
 
 
-	public void setOpcionesSubMenus(List<OpcionesSubMenu> opcionesSubMenus) {
+	public void setOpcionesSubMenus(List<OpcionSubMenu> opcionesSubMenus) {
 		this.opcionesSubMenus = opcionesSubMenus;
 	}
         
