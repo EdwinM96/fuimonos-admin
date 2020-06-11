@@ -5,15 +5,15 @@
  */
 package com.fuimonosapp.repository;
 
-import com.fuimonosapp.domain.Administrador;
+import com.fuimonosapp.domain.Driver;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.fuimonosapp.domain.OpcionSubMenu;
+
 /**
  *
  * @author Javier
  */
 @Repository
-public interface OpcionesSubMenuRepository extends JpaRepository<OpcionSubMenu, Integer> {
+public interface DriverRepository extends JpaRepository<Driver, Integer> {
     
 }

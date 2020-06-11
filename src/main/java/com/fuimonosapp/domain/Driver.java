@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,30 +23,44 @@ import javax.persistence.Table;
 @Entity
 @Table(schema = "public", name = "driver")
 public class Driver {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "driver_id")
     private Integer driver_id;
-    
+
     @Column(name = "nombre_driver")
     private String nombre_driver;
-    
+
     @Column(name = "maximo_de_ordenes_conc")
     private Integer maximo_de_ordenes_conc;
-    
+
     @Column(name = "entrega_actual")
     private String entrega_actual;
-    
-    @OneToOne(mappedBy = "driver_id", cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY, optional = false)
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_pedido_actual")
     private Pedido id_pedido_actual;
     
+     @OneToOne(mappedBy = "driver_asignado", cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY, optional = false)
+        private Pedido pedidos;
+
     @Column(name = "habilitado")
     private Boolean habilitado;
-    
+
     @Column(name = "horas_a_trabajar")
     private Integer horas_a_trabajar;
+
+    public Pedido getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(Pedido pedidos) {
+        this.pedidos = pedidos;
+    }
+    
+    
 
     public Integer getDriver_id() {
         return driver_id;
@@ -87,7 +102,7 @@ public class Driver {
         this.id_pedido_actual = id_pedido_actual;
     }
 
-    
+
 
     public Boolean getHabilitado() {
         return habilitado;
@@ -104,10 +119,9 @@ public class Driver {
     public void setHoras_a_trabajar(Integer horas_a_trabajar) {
         this.horas_a_trabajar = horas_a_trabajar;
     }
-    
-    public Driver(){
-            
+
+    public Driver() {
+
     }
-    
-    
+
 }

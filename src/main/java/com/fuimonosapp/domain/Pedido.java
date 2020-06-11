@@ -6,6 +6,7 @@
 package com.fuimonosapp.domain;
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,8 +46,12 @@ public class Pedido {
     private Restaurante restaurante_id;
     
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "driver_id")
+        @JoinColumn(name = "driver_asignado")
     private Driver driver_asignado;
+    
+    @OneToOne(mappedBy = "id_pedido_actual", cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY, optional = false)
+        private Driver drivers;
     
     @Column(name = "forma_de_pago")
     private String forma_de_pago;
@@ -66,6 +71,16 @@ public class Pedido {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date tiempo_prom_entrega;
+
+    public Driver getDrivers() {
+        return drivers;
+    }
+
+    public void setDrivers(Driver drivers) {
+        this.drivers = drivers;
+    }
+    
+    
 
     public Integer getPedido_id() {
         return pedido_id;
