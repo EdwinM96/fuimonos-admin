@@ -33,7 +33,7 @@ public class MainController {
         return new ModelAndView("index");
     }*/
     
-    @RequestMapping("/")
+    @RequestMapping("/index")
 	public ModelAndView initMain() {
 		ModelAndView mav = new ModelAndView();
 		
