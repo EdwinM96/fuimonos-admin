@@ -22,5 +22,22 @@
     <body>
         <h1>Hello World from dashboard!</h1>
         <a href="${pageContext.request.contextPath}/logout"><button type="button" class="btn btn-primary">Logout</button></a>
+    
+            <table>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Population</th>
+                <th>pass</th>
+            </tr>
+                
+              <c:forEach items="${restaurantes}" var="restaurante" >
+                <tr>
+                    <td>${restaurante.restaurante_id}</td>
+                    <td>${restaurante.nombre}</td>
+                    <td>${restaurante.username}</td>
+                    <td>${restaurante.pass}</td>
+                </tr>
+              </c:forEach>
     </body>
 </html>

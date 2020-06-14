@@ -27,4 +27,8 @@ public class RestauranteService {
         return restaRepository.findAll();
     }
     
+   public Restaurante save(Restaurante restaurante){
+        return restaRepository.saveAndFlush(restaurante);
+    } 
+    
 }
