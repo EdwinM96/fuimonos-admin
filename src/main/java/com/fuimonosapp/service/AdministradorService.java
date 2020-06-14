@@ -23,4 +23,7 @@ public class AdministradorService {
         return adminRepo.saveAndFlush(administrador);
     }
     
+    public Administrador loginAdministrador(Administrador administrador){
+       return adminRepo.findFirstByUsernameAndPass(administrador.getUsername(), administrador.getPass());
+    }
 }

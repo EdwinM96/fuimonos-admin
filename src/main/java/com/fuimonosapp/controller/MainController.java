@@ -6,13 +6,19 @@
 package com.fuimonosapp.controller;
 
 import com.fuimonosapp.repository.RestauranteRepository;
+import com.fuimonosapp.service.AdministradorService;
 import com.fuimonosapp.service.RestauranteService;
+import com.fuimonosapp.util.SessionUtils;
+import com.fuimonosapp.domain.Administrador;
+import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 
 /**
  *
@@ -23,15 +29,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
     
     @Autowired
-    RestauranteService restaService;
+    AdministradorService adminService;
     
-  /*  @RequestMapping(value="/main")
-    public ModelAndView homepage(HttpServletRequest request, HttpServletResponse response){
-        System.out.println();
-        restaService.findAll();
-        System.out.println("Entered homepage");
-        return new ModelAndView("index");
-    }*/
+    SessionUtils sesUtils;
+    
     
     @RequestMapping("/index")
 	public ModelAndView initMain() {
@@ -42,5 +43,49 @@ public class MainController {
 		
 		return mav;
 	}
-    
+        
+        @RequestMapping("/")
+	public ModelAndView index() {
+		ModelAndView mav = new ModelAndView();
+		
+		
+		mav.setViewName("login");
+		
+		return mav;
+	}
+        
+        @RequestMapping("/attempt-login")
+        public void attemptLogin(@RequestParam(value="username", required=true) String username,@RequestParam(value="password", required=true) String password,
+                HttpServletResponse response, HttpServletRequest request) throws IOException{
+            
+                Administrador adminFill = new Administrador();
+                adminFill.setUsername(username);
+                adminFill.setPass(password);
+                Administrador adminResponse = adminService.loginAdministrador(adminFill);
+                if(adminResponse != null){
+                    request.getSession().setAttribute("adminUser", adminResponse);
+                    response.sendRedirect(request.getContextPath()+"/dashboard");
+                }
+                else{
+                   response.sendRedirect(request.getContextPath()+"?failedAttempt=true"); 
+                }
+            
+        }
+        
+        @RequestMapping("/dashboard")
+        public ModelAndView dashboard(HttpServletRequest request, HttpServletResponse response) throws IOException{
+            if(SessionUtils.assertLogin(request)){
+                return new ModelAndView("dashboard");
+            }
+            else{
+                response.sendRedirect(request.getContextPath()+"/");
+            }
+            return null;
+        }
+        
+        @RequestMapping("/logout")
+        public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException{
+            request.getSession().removeAttribute("adminUser");
+            response.sendRedirect(request.getContextPath()+"/");
+        }
 }
