@@ -3,7 +3,7 @@
     Created on : 13/06/2020, 04:36:30 PM
     Author     : HP PC
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -128,7 +128,13 @@
             </style>
         </head>
         <body>
-            <div class="main">
+            <!--<c:if test="${failedAttempt}">
+                    <div class="alert alert-danger text-center" role="alert" style="height:50px; width: 400px; margin-left: 7em">
+                                Credenciales incorrectas!
+                            </div>
+                        </c:if>-->
+            <div class="main" >
+               
     <p class="sign" align="center">Log in</p>
     <form class="form1" action="${pageContext.request.contextPath}/attempt-login" method="POST">
       <input class="un " type="text" align="center" placeholder="Usuario"name="username">

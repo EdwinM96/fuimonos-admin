@@ -45,13 +45,15 @@ public class MainController {
 	}
         
         @RequestMapping("/")
-	public ModelAndView index() {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView index(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		if(request.getParameter("failedAttempt")!=null){
+                    mv.addObject("failedAttempt", true);
+                }
 		
+		mv.setViewName("login");
 		
-		mav.setViewName("login");
-		
-		return mav;
+		return mv;
 	}
         
         @RequestMapping("/attempt-login")
@@ -74,8 +76,11 @@ public class MainController {
         
         @RequestMapping("/dashboard")
         public ModelAndView dashboard(HttpServletRequest request, HttpServletResponse response) throws IOException{
+            
             if(SessionUtils.assertLogin(request)){
-                return new ModelAndView("dashboard");
+                ModelAndView mv = new ModelAndView("dashboard");
+                
+                return mv;
             }
             else{
                 response.sendRedirect(request.getContextPath()+"/");

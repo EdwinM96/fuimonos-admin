@@ -9,6 +9,7 @@ import com.fuimonosapp.domain.Restaurante;
 import com.fuimonosapp.repository.RestauranteRepository;
 import com.fuimonosapp.service.RestauranteService;
 import java.util.List;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,13 +27,14 @@ public class RestauranteController {
     @Autowired
     RestauranteService restaService;
     
+    Logger logger = Logger.getLogger("restaurante");
+    
     @GetMapping("/restaurantes")
     public ModelAndView findAllRes() {
         ModelAndView mav=new ModelAndView();
 
-       List<Restaurante> restaurantes = null;
-       
-       restaurantes= restaService.findAll();
+       List<Restaurante> restaurantes = restaService.findAll();
+       logger.info("Restaurantes list size " + restaurantes.size());
        mav.addObject("restaurantes",restaurantes);
        mav.setViewName("restaurante");
        return mav;
