@@ -5,9 +5,9 @@
  */
 package com.fuimonosapp.controller;
 
+import com.fuimonosapp.domain.Menu;
 import com.fuimonosapp.domain.Restaurante;
-import com.fuimonosapp.repository.RestauranteRepository;
-import com.fuimonosapp.service.RestauranteService;
+import com.fuimonosapp.service.MenuService;
 import java.util.List;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,37 +24,36 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Javier
  */
 @Controller
-public class RestauranteController {
+public class MenuController {
+      @Autowired
+      MenuService menuService;
+      
+       Logger logger = Logger.getLogger("restaurante");
     
-    @Autowired
-    RestauranteService restaService;
-    
-    Logger logger = Logger.getLogger("restaurante");
-    
-    @GetMapping("/restaurantes")
-    public ModelAndView findAllRes() {
+    @GetMapping("/menuss")
+    public ModelAndView findAllMenus() {
         ModelAndView mav=new ModelAndView();
 
-       List<Restaurante> restaurantes = restaService.findAll();
-       logger.info("Restaurantes list size " + restaurantes.size());
-       mav.addObject("restaurantes",restaurantes);
-       mav.setViewName("restaurante");
+       List<Menu> menus = menuService.findAll();
+       logger.info("Menus list size " + menus.size());
+       mav.addObject("menus",menus);
+       mav.setViewName("menu");
        return mav;
         
       
     }
-    	@PostMapping("/saveRestaurante")
-	public ModelAndView saveRestaurante(@ModelAttribute Restaurante restaurante) {
+    	@PostMapping("/saveMenu")
+	public ModelAndView saveMenu(@ModelAttribute Menu menu) {
 		ModelAndView mav = new ModelAndView();
 
                 
 		
 
-			restaService.save(restaurante);
-			List<Restaurante> restaurantes =null;
+			menuService.save(menu);
+			List<Menu> menus =null;
 			
-			mav.addObject("restaurante",restaurantes);
-			mav.setViewName("restaurante");
+			mav.addObject("menu",menus);
+			mav.setViewName("menu");
 		
 		return mav;
 	}
@@ -63,16 +62,16 @@ public class RestauranteController {
         @RequestMapping(value="/busqueda", params="action=borrar")
 	public ModelAndView delete(@RequestParam(value="codigo") int id) {
 		ModelAndView mav = new ModelAndView();
-		List<Restaurante> restaurantes = null;
+		List<Menu> menus = null;
 		
 		try {
-			restaService.delete(id);
-			restaurantes = restaService.findAll();
+			menuService.delete(id);
+			menus = menuService.findAll();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		mav.addObject("restaurantes", restaurantes);
-		mav.setViewName("restaurante");
+		mav.addObject("menus", menus);
+		mav.setViewName("menu");
 		
 		return mav;
 	}
@@ -81,10 +80,11 @@ public class RestauranteController {
         @RequestMapping(value="/busqueda", params="action=actualizar")
 	public ModelAndView update(@RequestParam(value="codigo") int id) {
 		ModelAndView mav = new ModelAndView();
-		Restaurante restaurantes = restaService.findOne(id);
-		mav.addObject("restaurantes", restaurantes);
-		mav.setViewName("actualizarResta");
+		Menu menus = menuService.findOne(id);
+		mav.addObject("menus", menus);
+		mav.setViewName("actualizarMenu");
 		
 		return mav;
 	}
 }
+
