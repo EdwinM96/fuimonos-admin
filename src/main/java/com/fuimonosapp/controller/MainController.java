@@ -93,4 +93,6 @@ public class MainController {
             request.getSession().removeAttribute("adminUser");
             response.sendRedirect(request.getContextPath()+"/");
         }
+        
+       
 }

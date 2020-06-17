@@ -37,5 +37,6 @@
         <h1>Hello World from dashboard!</h1>
         <a href="${pageContext.request.contextPath}/logout"><button type="button" class="btn btn-primary">Logout</button></a>
     
+        <a href="restaurantes">Restaurantes</a>
     </body>
 </html>

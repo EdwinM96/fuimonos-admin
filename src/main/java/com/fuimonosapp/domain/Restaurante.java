@@ -1,4 +1,4 @@
-    package com.fuimonosapp.domain;
+package com.fuimonosapp.domain;
 
 import java.util.Date;
 import java.util.List;
@@ -17,6 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -64,10 +65,11 @@ public class Restaurante {
 
     @Column(name = "descuento")
     private Integer descuento;
-    
-     @OneToOne(mappedBy = "restaurante_id", cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY, optional = false)
-     private Pedido pedido;
+
+    @Transient
+    @OneToOne(mappedBy = "restaurante_id", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    private Pedido pedido;
 
     public Pedido getPedido() {
         return pedido;
@@ -76,10 +78,6 @@ public class Restaurante {
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
-
- 
-     
-     
 
     public Date getHorario_de_apertura() {
         return horario_de_apertura;
@@ -112,8 +110,6 @@ public class Restaurante {
     public void setDepartamento_id(Departamento departamento_id) {
         this.departamento_id = departamento_id;
     }
-
-
 
     public Date getTiempo_estimado_de_entrega() {
         return tiempo_estimado_de_entrega;
