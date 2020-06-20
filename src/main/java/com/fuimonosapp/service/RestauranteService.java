@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fuimonosapp.domain.Restaurante;
 import java.util.List;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 /**
  *
@@ -23,10 +26,22 @@ public class RestauranteService {
 
     @Autowired
     RestauranteRepository restaRepository;
+    
+    Integer PAGESIZE = 10;
 
     @Transactional
     public List<Restaurante> findAll() {
         return restaRepository.findAll();
+    }
+    @Transactional
+    public Page<Restaurante> findBySearchWord(Integer currentPage,String searchWord) {
+        
+        if(searchWord!=null){
+            return restaRepository.findByNombreContains(searchWord, PageRequest.of(currentPage, PAGESIZE));
+        }
+        else{
+            return restaRepository.findAll(PageRequest.of(currentPage, PAGESIZE));
+        }
     }
     @Transactional
     public Restaurante save(Restaurante restaurante) throws DataAccessException {

@@ -6,6 +6,8 @@
 package com.fuimonosapp.repository;
 
 import com.fuimonosapp.domain.Restaurante;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +17,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface RestauranteRepository extends JpaRepository<Restaurante, Integer> {
+    
+    public Page<Restaurante> findAll(Pageable pageable);
+    
+    public Page<Restaurante> findByNombreContains(String nombre, Pageable pageable);
     
 }

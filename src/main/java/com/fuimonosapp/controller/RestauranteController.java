@@ -8,9 +8,17 @@ package com.fuimonosapp.controller;
 import com.fuimonosapp.domain.Restaurante;
 import com.fuimonosapp.repository.RestauranteRepository;
 import com.fuimonosapp.service.RestauranteService;
+import com.fuimonosapp.util.PagingAndSorting;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,16 +37,19 @@ public class RestauranteController {
     @Autowired
     RestauranteService restaService;
     
+    
     Logger logger = Logger.getLogger("restaurante");
     
     @GetMapping("/restaurantes")
-    public ModelAndView findAllRes() {
+    public ModelAndView restaurantesList(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         ModelAndView mav=new ModelAndView();
+        HttpSession session = request.getSession();
 
-       List<Restaurante> restaurantes = restaService.findAll();
-       logger.info("Restaurantes list size " + restaurantes.size());
-       mav.addObject("restaurantes",restaurantes);
-       mav.setViewName("restaurante");
+       Page<Restaurante> restaurantes = restaService.findBySearchWord(session.getAttribute("page")!=null?(Integer)session.getAttribute("page"):0,
+               (String)session.getAttribute("searchWord"));
+       mav.addObject("restaurantes",restaurantes.getContent());
+       mav.addAllObjects(PagingAndSorting.generalPagingAndSorting(restaurantes, request, (String)session.getAttribute("searchWord"), null));
+       mav.setViewName("restaurante/restaurante");
        return mav;
         
       
@@ -58,7 +69,7 @@ public class RestauranteController {
 		
 		return mav;
 	}
-        
+        /*
         //Borrar
         @RequestMapping(value="/busqueda", params="action=borrar")
 	public ModelAndView delete(@RequestParam(value="codigo") int id) {
@@ -86,5 +97,5 @@ public class RestauranteController {
 		mav.setViewName("actualizarResta");
 		
 		return mav;
-	}
+	}*/
 }
