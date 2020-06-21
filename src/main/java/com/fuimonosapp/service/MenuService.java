@@ -23,13 +23,17 @@ public class MenuService {
     @Autowired
     MenuRepository menuRepository;
     
+    @Autowired
+    RestauranteService restaService;
+    
     @Transactional
     public List<Menu> findAll() {
         return menuRepository.findAll();
     }
     @Transactional
-    public Menu save(Menu menu) throws DataAccessException {
-        return menuRepository.saveAndFlush(menu);
+    public void save(Menu menu) throws DataAccessException {
+        menu.setRestaurante(restaService.findOne(menu.getRestaurante_id()));
+         menuRepository.saveAndFlush(menu);
     }
     @Transactional
     public Menu findOne(Integer code) throws DataAccessException {

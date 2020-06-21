@@ -14,10 +14,10 @@
     <body>
         
         <form class="form1" action="${pageContext.request.contextPath}/saveRestaurante" method="POST">
-            <input type="hidden" field="*{restaurante_id}" readonly = "readonly" value="${restaurante.id}"><br>
-            <input class="name " type="text" align="center" placeholder="Usua"name="nombre" field="*{nombre}" value="${restaurante.nombre}"><br>
-            <input class="pass" type="password" align="center" placeholder="Contraseña" name="pass" field="*{pass}" value=""><br>
-                <input class="username" type="text" align="center" placeholder="username" name="username" field="*{username}" value="${restaurante.username}">
+            <input type="hidden"  readonly = "readonly" value="${restaurante.restaurante_id}"><br>
+            <input class="name " type="text" align="center" placeholder="nombre"name="nombre" value="${restaurante.nombre}"><br>
+            <input class="pass" type="password" align="center" placeholder="Contraseña" name="pass"  value=""><br>
+                <input class="username" type="text" align="center" placeholder="username" name="username"  value="${restaurante.username}">
                 
                 <button type="submit" class="submit">Ingresar</button>
             </form>

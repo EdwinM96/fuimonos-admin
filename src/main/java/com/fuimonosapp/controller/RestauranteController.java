@@ -54,7 +54,7 @@ public class RestauranteController {
         
       
     }
-    	@PostMapping("/saveRestaurante")
+    	@RequestMapping("/saveRestaurante")
 	public ModelAndView saveRestaurante(@ModelAttribute Restaurante restaurante) {
 		ModelAndView mav = new ModelAndView();
 
@@ -64,8 +64,8 @@ public class RestauranteController {
 			restaService.save(restaurante);
 			List<Restaurante> restaurantes =null;
 			
-			mav.addObject("restaurante",restaurantes);
-			mav.setViewName("restaurante");
+			mav.addObject("restaurantes", restaurantes);
+		mav.setViewName("restaurantes/restaurante");
 		
 		return mav;
 	}
@@ -83,7 +83,7 @@ public class RestauranteController {
 			e.printStackTrace();
 		}
 		mav.addObject("restaurantes", restaurantes);
-		mav.setViewName("restaurante");
+		mav.setViewName("restaurantes/restaurante");
 		
 		return mav;
 	}
@@ -94,7 +94,7 @@ public class RestauranteController {
 		ModelAndView mav = new ModelAndView();
 		Restaurante restaurante = restaService.findOne(id);
 		mav.addObject("restaurante", restaurante);
-		mav.setViewName("actualizarResta");
+		mav.setViewName("restaurantes/actualizarResta");
 		
 		return mav;
 	}*/

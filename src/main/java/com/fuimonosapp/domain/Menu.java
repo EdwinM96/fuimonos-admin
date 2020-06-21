@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -34,9 +35,23 @@ public class Menu {
 	@OneToMany(mappedBy="menu")
 	private List<Platillo> platillos ;
 	
+        @Transient
 	@OneToOne(mappedBy = "menu_id", cascade = CascadeType.ALL,
         fetch = FetchType.LAZY, optional = false)
         private MenuXCategoria menuxcategorias;
+        
+        @Transient
+        private Integer restaurante_id;
+
+    public Integer getRestaurante_id() {
+        return restaurante_id;
+    }
+
+    public void setRestaurante_id(Integer restaurante_id) {
+        this.restaurante_id = restaurante_id;
+    }
+        
+        
 
     public MenuXCategoria getMenuxcategorias() {
         return menuxcategorias;

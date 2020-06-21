@@ -8,8 +8,10 @@ package com.fuimonosapp.controller;
 import com.fuimonosapp.domain.Menu;
 import com.fuimonosapp.domain.Restaurante;
 import com.fuimonosapp.service.MenuService;
+import com.fuimonosapp.service.RestauranteService;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,66 +27,75 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class MenuController {
-      @Autowired
-      MenuService menuService;
-      
-       Logger logger = Logger.getLogger("restaurante");
-    
-    @GetMapping("/menuss")
+
+    @Autowired
+    MenuService menuService;
+    @Autowired
+    RestauranteService restaService;
+
+    Logger logger = Logger.getLogger("restaurante");
+
+    @GetMapping("/menus")
     public ModelAndView findAllMenus() {
-        ModelAndView mav=new ModelAndView();
+        ModelAndView mav = new ModelAndView();
+        List<Restaurante> restaurantes = restaService.findAll();
 
-       List<Menu> menus = menuService.findAll();
-       logger.info("Menus list size " + menus.size());
-       mav.addObject("menus",menus);
-       mav.setViewName("menu");
-       return mav;
-        
-      
+        List<Menu> menus = menuService.findAll();
+        logger.info("Menus list size " + menus.size());
+        mav.addObject("restaurantes", restaurantes);
+        mav.addObject("menus", menus);
+        mav.setViewName("/menus/menu");
+        return mav;
+
     }
-    	@PostMapping("/saveMenu")
-	public ModelAndView saveMenu(@ModelAttribute Menu menu) {
-		ModelAndView mav = new ModelAndView();
 
-                
-		
+    @PostMapping("/saveMenu")
+    public ModelAndView saveMenu(@ModelAttribute Menu menu) {
+        ModelAndView mav = new ModelAndView();
 
-			menuService.save(menu);
-			List<Menu> menus =null;
-			
-			mav.addObject("menu",menus);
-			mav.setViewName("menu");
-		
-		return mav;
-	}
-        
-        //Borrar
-        @RequestMapping(value="/busqueda", params="action=borrar")
-	public ModelAndView delete(@RequestParam(value="codigo") int id) {
-		ModelAndView mav = new ModelAndView();
-		List<Menu> menus = null;
-		
-		try {
-			menuService.delete(id);
-			menus = menuService.findAll();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		mav.addObject("menus", menus);
-		mav.setViewName("menu");
-		
-		return mav;
-	}
-        
-        //actualizar
-        @RequestMapping(value="/busqueda", params="action=actualizar")
-	public ModelAndView update(@RequestParam(value="codigo") int id) {
-		ModelAndView mav = new ModelAndView();
-		Menu menus = menuService.findOne(id);
-		mav.addObject("menus", menus);
-		mav.setViewName("actualizarMenu");
-		
-		return mav;
-	}
+        //  List<Restaurante> restaurantes  =null;
+        //  restaurantes=restaService.findAll();
+        menuService.save(menu);
+        List<Menu> menus = null;
+        try {
+            menus = menuService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //  menu = new Menu();
+        //mav.addObject("restaurantes",restaurantes);
+        mav.addObject("menu", menus);
+        mav.setViewName("menus/menu");
+
+        return mav;
+    }
+
+    //Borrar
+    @RequestMapping(value = "/busquedaMenu", params = "action=borrarMenu")
+    public ModelAndView deleteMenu(@RequestParam(value = "codigo") int id) {
+        ModelAndView mav = new ModelAndView();
+        List<Menu> menus = null;
+
+        try {
+            menuService.delete(id);
+            menus = menuService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mav.addObject("menus", menus);
+        mav.setViewName("menus/menu");
+
+        return mav;
+    }
+
+    //actualizar
+    @RequestMapping(value = "/busquedaMenu", params = "action=actualizarMenu")
+    public ModelAndView updateMenu(@RequestParam(value = "codigo") int id) {
+        ModelAndView mav = new ModelAndView();
+        Menu menus = menuService.findOne(id);
+        mav.addObject("menus", menus);
+        mav.setViewName("menus/actualizarMenu");
+
+        return mav;
+    }
 }
-
