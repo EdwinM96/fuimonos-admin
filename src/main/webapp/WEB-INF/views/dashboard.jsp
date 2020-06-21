@@ -45,7 +45,7 @@
         <a href="restaurantes">Restaurantes</a>-->
        
        <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
-            <div class="app-header header-shadow" style="background-color: #0062cc; color: white;">
+            <div class="app-header header-shadow" style="background-color: #7F224A; color: white;">
                 <div class="app-header__logo">
                     <div class="logo-src" style="color:white; margin-left: 55px; font-size: 24px; margin-bottom: 28px; max-width: auto">
                         <img src="<c:url value="/resources/img/logo.png"/>" class="logo-img" style="max-width: 60px;">
