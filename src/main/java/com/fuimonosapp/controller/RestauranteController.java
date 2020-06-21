@@ -38,17 +38,17 @@ public class RestauranteController {
     RestauranteService restaService;
     
     
-    Logger logger = Logger.getLogger("restaurante");
+    Logger l = Logger.getLogger("restaurante");
     
     @GetMapping("/restaurantes")
     public ModelAndView restaurantesList(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         ModelAndView mav=new ModelAndView();
         HttpSession session = request.getSession();
-
-       Page<Restaurante> restaurantes = restaService.findBySearchWord(session.getAttribute("page")!=null?(Integer)session.getAttribute("page"):0,
-               (String)session.getAttribute("searchWord"));
+        l.info((String) session.getAttribute("page"));
+       Page<Restaurante> restaurantes = restaService.findBySearchWord(session.getAttribute("page")!=null?Integer.parseInt(request.getParameter("page")):0,
+               request.getParameter("searchWord"));
        mav.addObject("restaurantes",restaurantes.getContent());
-       mav.addAllObjects(PagingAndSorting.generalPagingAndSorting(restaurantes, request, (String)session.getAttribute("searchWord"), null));
+       mav.addAllObjects(PagingAndSorting.generalPagingAndSorting(restaurantes, request, (String)session.getAttribute("searchWord"), null,"restaurantes"));
        mav.setViewName("restaurante/restaurante");
        return mav;
         

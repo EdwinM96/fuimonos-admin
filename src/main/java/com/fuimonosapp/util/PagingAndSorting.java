@@ -19,7 +19,7 @@ import org.springframework.data.domain.Page;
  */
 public class PagingAndSorting {
     
-    public static Map<String,Object> generalPagingAndSorting(Page objectPage, HttpServletRequest request, String searchWord, String sorting) throws UnsupportedEncodingException{
+    public static Map<String,Object> generalPagingAndSorting(Page objectPage, HttpServletRequest request, String searchWord, String sorting, String urlKeyword) throws UnsupportedEncodingException{
         Map<String,Object> valuesMap = new HashMap();
         Integer resultsPage = objectPage.getNumber();
         Integer totalPageCount = objectPage.getTotalPages();
@@ -34,8 +34,8 @@ public class PagingAndSorting {
                 valuesMap.put("secondPageExist", true);
                 valuesMap.put("secondPageNumber", 2);
                 valuesMap.put("nextPageExist",true);
-                valuesMap.put("secondPageUrl",request.getContextPath()+"/dashboard?page=1"+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
-                valuesMap.put("nextPageUrl",request.getContextPath()+"/dashboard?page=1"+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
+                valuesMap.put("secondPageUrl",request.getContextPath()+"/"+urlKeyword+"?page=1"+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
+                valuesMap.put("nextPageUrl",request.getContextPath()+"/"+urlKeyword+"?page=1"+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
             }
             else if(totalPageCount>2){
                 valuesMap.put("thirdPageExist", true);
@@ -43,9 +43,9 @@ public class PagingAndSorting {
                 valuesMap.put("secondPageExist", true);
                 valuesMap.put("secondPageNumber", 2);
                 valuesMap.put("thirdPageNumber",3);
-                valuesMap.put("secondPageUrl",request.getContextPath()+"/dashboard?page=1"+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
-                valuesMap.put("thirdPageUrl",request.getContextPath()+"/dashboard?page=2"+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
-                valuesMap.put("nextPageUrl",request.getContextPath()+"/dashboard?page=1"+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
+                valuesMap.put("secondPageUrl",request.getContextPath()+"/"+urlKeyword+"?page=1"+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
+                valuesMap.put("thirdPageUrl",request.getContextPath()+"/"+urlKeyword+"?page=2"+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
+                valuesMap.put("nextPageUrl",request.getContextPath()+"/"+urlKeyword+"?page=1"+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
             }
         }
         /*Else para indicar que estamos hablando de una entrada posterior a la primera página*/
@@ -56,9 +56,9 @@ public class PagingAndSorting {
                 valuesMap.put("secondPageExist",true);
                 valuesMap.put("thirdPage",true);
                 valuesMap.put("thirdPageExist",true);
-                valuesMap.put("lastPageUrl",request.getContextPath()+"/dashboard?page="+(resultsPage-1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
-                valuesMap.put("secondPageUrl",request.getContextPath()+"/dashboard?page="+(resultsPage-1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
-                valuesMap.put("firstPageUrl",request.getContextPath()+"/dashboard?page="+(resultsPage-2)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
+                valuesMap.put("lastPageUrl",request.getContextPath()+"/"+urlKeyword+"?page="+(resultsPage-1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
+                valuesMap.put("secondPageUrl",request.getContextPath()+"/"+urlKeyword+"?page="+(resultsPage-1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
+                valuesMap.put("firstPageUrl",request.getContextPath()+"/"+urlKeyword+"?page="+(resultsPage-2)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
                 valuesMap.put("thirdPageNumber",resultsPage+1);
                 valuesMap.put("secondPageNumber",resultsPage);
                 valuesMap.put("firstPageNumber",resultsPage-1);
@@ -67,8 +67,8 @@ public class PagingAndSorting {
             else if(totalPageCount.equals(resultsPage+1) && totalPageCount.equals(2)){
                 valuesMap.put("secondPage",true);
                 valuesMap.put("secondPageExist",true);
-                valuesMap.put("lastPageUrl",request.getContextPath()+"/dashboard?page="+(resultsPage-1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
-                valuesMap.put("firstPageUrl",request.getContextPath()+"/dashboard?page="+(resultsPage-1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
+                valuesMap.put("lastPageUrl",request.getContextPath()+"/"+urlKeyword+"?page="+(resultsPage-1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
+                valuesMap.put("firstPageUrl",request.getContextPath()+"/"+urlKeyword+"?page="+(resultsPage-1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
                 valuesMap.put("secondPageNumber",resultsPage+1);
                 valuesMap.put("firstPageNumber",resultsPage);
             }
@@ -79,10 +79,10 @@ public class PagingAndSorting {
                 valuesMap.put("secondPage",true);
                 valuesMap.put("lastPage",true);
                 valuesMap.put("nextPageExist",true);
-                valuesMap.put("lastPageUrl",request.getContextPath()+"/dashboard?page="+(resultsPage-1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
-                valuesMap.put("firstPageUrl",request.getContextPath()+"/dashboard?page="+(resultsPage-1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
-                valuesMap.put("nextPageUrl",request.getContextPath()+"/dashboard?page="+(resultsPage+1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
-                valuesMap.put("thirdPageUrl",request.getContextPath()+"/dashboard?page="+(resultsPage+1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
+                valuesMap.put("lastPageUrl",request.getContextPath()+"/"+urlKeyword+"?page="+(resultsPage-1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
+                valuesMap.put("firstPageUrl",request.getContextPath()+"/"+urlKeyword+"?page="+(resultsPage-1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
+                valuesMap.put("nextPageUrl",request.getContextPath()+"/"+urlKeyword+"?page="+(resultsPage+1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
+                valuesMap.put("thirdPageUrl",request.getContextPath()+"/"+urlKeyword+"?page="+(resultsPage+1)+(searchWord!=null?"&searchWord="+searchWord:"")+(sorting!=null?"&sorting="+sorting:""));
                 valuesMap.put("thirdPageNumber",resultsPage+2);
                 valuesMap.put("secondPageNumber",resultsPage+1);    
                 valuesMap.put("firstPageNumber",resultsPage);
