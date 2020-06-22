@@ -254,11 +254,11 @@
                                                     </div>
                                                     <div class="form-label-group">
                                                         <label for="horario_de_apertura">Horario de apertura <font color="red">*</font></label>
-                                                        <input type="date" id="horario_de_apertura" class="form-control" placeholder="Horario de apertura" value="${restaurante.horario_de_apertura}" pattern="dd-MM-yy" type="date" name="horario_de_apertura" required>
+                                                        <input type="time" id="horario_de_apertura" class="form-control" placeholder="Horario de apertura" value="${restaurante.horario_de_apertura}" pattern="dd-MM-yy" type="date" name="horario_de_apertura" required>
                                                     </div>
                                                     <div class="form-label-group">
                                                         <label for="horario_de_cierre">Horario de cierre <font color="red">*</font></label>
-                                                        <input type="date" id="horario_de_cierre" class="form-control" placeholder="Horario de cierre" value="${restaurante.horario_de_cierre}" pattern="dd-MM-yy" type="date" name="horario_de_cierre" required>
+                                                        <input type="time" id="horario_de_cierre" class="form-control" placeholder="Horario de cierre" value="${restaurante.horario_de_cierre}" pattern="dd-MM-yy" type="date" name="horario_de_cierre" required>
                                                     </div>
                                                     <div class="form-label-group">
                                                         <label for="imagen_de_portada">Imagen de portada <font color="red">*</font></label>
@@ -266,7 +266,7 @@
                                                     </div>
                                                     <div class="form-label-group">
                                                         <label for="tiempo_estimado_de_entrega">Tiempo estimado de entrega</label>
-                                                        <input type="date" id="tiempo_estimado_de_entrega" class="form-control" placeholder="Tiempo estimado de entrega" value="${restaurante.tiempo_estimado_de_entrega}"  name="tiempo_estimado_de_entrega" required>
+                                                        <input type="time" id="tiempo_estimado_de_entrega" class="form-control" placeholder="Tiempo estimado de entrega" value="${restaurante.tiempo_estimado_de_entrega}"  name="tiempo_estimado_de_entrega" required patern="((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm]))">
                                                     </div>
                                                     <div class="form-label-group">
                                                         <label for="descuento">Descuento</label>

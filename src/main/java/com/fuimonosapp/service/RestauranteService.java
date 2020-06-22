@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.fuimonosapp.domain.Restaurante;
+import com.fuimonosapp.repository.DepartamentoRepository;
 import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,9 @@ public class RestauranteService {
 
     @Autowired
     RestauranteRepository restaRepository;
+    
+    @Autowired
+    DepartamentoService depaService;
     
     Integer PAGESIZE = 10;
 
@@ -45,6 +49,8 @@ public class RestauranteService {
     }
     @Transactional
     public Restaurante save(Restaurante restaurante) throws DataAccessException {
+        
+        //restaurante.setDepartamento(depaService.findOne(restaurante.getDepartamento_id()));
         return restaRepository.saveAndFlush(restaurante);
     }
     @Transactional

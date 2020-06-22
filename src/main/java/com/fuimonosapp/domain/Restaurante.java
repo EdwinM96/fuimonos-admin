@@ -54,9 +54,7 @@ public class Restaurante {
     @Column(name = "imagen_de_portada")
     private String imagen_de_portada;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "departamento_id")
-    private Departamento departamento_id;
+   
 
     @Column(name = "tiempo_estimado_de_entrega")
     @Temporal(TemporalType.DATE)
@@ -81,15 +79,16 @@ public class Restaurante {
     @Column(name="cargos_extras")
     private Double cargosExtras;
     
-    @Transient
-    @OneToOne(mappedBy = "departamento_id", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-    private Departamento departamento;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "departamento_id")
+    private Departamento departamento_id;
 
     @Transient
     @OneToOne(mappedBy = "restaurante_id", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, optional = false)
     private Pedido pedido;
+    
+    
 
     public Pedido getPedido() {
         return pedido;
@@ -123,14 +122,14 @@ public class Restaurante {
         this.imagen_de_portada = imagen_de_portada;
     }
 
-    public Departamento getDepartamento_id() {
+   /* public Integer getDepartamento_id() {
         return departamento_id;
     }
 
-    public void setDepartamento_id(Departamento departamento_id) {
+    public void setDepartamento_id(Integer departamento_id) {
         this.departamento_id = departamento_id;
     }
-
+*/
     public Date getTiempo_estimado_de_entrega() {
         return tiempo_estimado_de_entrega;
     }
@@ -229,13 +228,17 @@ public class Restaurante {
         this.cargosExtras = cargosExtras;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
+    public Departamento getDepartamento_id() {
+        return departamento_id;
     }
 
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
+    public void setDepartamento_id(Departamento departamento_id) {
+        this.departamento_id = departamento_id;
     }
+
+    
+
+ 
     
     
 

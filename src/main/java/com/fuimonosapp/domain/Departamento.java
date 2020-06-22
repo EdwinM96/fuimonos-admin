@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -36,7 +37,8 @@ public class Departamento {
     @JoinColumn(name = "pais_id")
     private Pais pais;
 
-
+    @Transient
+    private Integer pais_id;
     
 
     @Column(name = "nombre_departamento")
@@ -49,6 +51,16 @@ public class Departamento {
     @OneToOne(mappedBy = "departamento_id", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, optional = false)
     private Municipio municipio;
+
+    public Integer getPais_id() {
+        return pais_id;
+    }
+
+    public void setPais_id(Integer pais_id) {
+        this.pais_id = pais_id;
+    }
+    
+    
 
     public Restaurante getRestaurante() {
         return restaurante;

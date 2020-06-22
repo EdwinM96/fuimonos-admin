@@ -59,13 +59,17 @@ public class MenuController {
 
     }
 
-    @PostMapping("/saveMenu")
-    public ModelAndView saveMenu(@ModelAttribute Menu menu, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping("/saveMenu")
+    public void saveMenu(@RequestParam(value="nombre_menu",required=true)String nombre_menu,@RequestParam(value="restaurante_id",required=true)Integer restaurante_id,HttpServletResponse response, HttpServletRequest request) throws IOException{
         if(SessionUtils.assertLogin(request)){
-        ModelAndView mav = new ModelAndView();
+  
 
         //  List<Restaurante> restaurantes  =null;
         //  restaurantes=restaService.findAll();
+        Menu menu = new Menu();
+            
+            menu.setNombre_menu(nombre_menu);
+            menu.setRestaurante_id(restaurante_id);
         menuService.save(menu);
         List<Menu> menus = null;
         try {
@@ -75,15 +79,12 @@ public class MenuController {
         }
         //  menu = new Menu();
         //mav.addObject("restaurantes",restaurantes);
-        mav.addObject("menu", menus);
-        mav.setViewName("menus/menu");
-
-        return mav;
+        
         }
         else{
                 response.sendRedirect(request.getContextPath()+"/");
             }
-            return null;
+            //return null;
     }
 
     //Borrar
