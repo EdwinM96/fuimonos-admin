@@ -80,6 +80,11 @@ public class Restaurante {
     
     @Column(name="cargos_extras")
     private Double cargosExtras;
+    
+    @Transient
+    @OneToOne(mappedBy = "departamento_id", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    private Departamento departamento;
 
     @Transient
     @OneToOne(mappedBy = "restaurante_id", cascade = CascadeType.ALL,
@@ -220,6 +225,14 @@ public class Restaurante {
 
     public void setCargosExtras(Double cargosExtras) {
         this.cargosExtras = cargosExtras;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
     
     
