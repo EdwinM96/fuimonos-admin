@@ -65,6 +65,21 @@ public class Restaurante {
 
     @Column(name = "descuento")
     private Integer descuento;
+    
+    @Column (name = "imagen")
+    private String imagen;
+    
+    @Column(name="representante")
+    private String representante;
+    
+    @Column(name="numero_de_contacto")
+    private String numeroDeContacto;
+    
+    @Column(name="comision")
+    private Double comision;
+    
+    @Column(name="cargos_extras")
+    private Double cargosExtras;
 
     @Transient
     @OneToOne(mappedBy = "restaurante_id", cascade = CascadeType.ALL,
@@ -166,6 +181,48 @@ public class Restaurante {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getRepresentante() {
+        return representante;
+    }
+
+    public void setRepresentante(String representante) {
+        this.representante = representante;
+    }
+
+    public String getNumeroDeContacto() {
+        return numeroDeContacto;
+    }
+
+    public void setNumeroDeContacto(String numeroDeContacto) {
+        this.numeroDeContacto = numeroDeContacto;
+    }
+
+    public Double getComision() {
+        return comision;
+    }
+
+    public void setComision(Double comision) {
+        this.comision = comision;
+    }
+
+    public Double getCargosExtras() {
+        return cargosExtras;
+    }
+
+    public void setCargosExtras(Double cargosExtras) {
+        this.cargosExtras = cargosExtras;
+    }
+    
+    
 
     public Restaurante() {
 
