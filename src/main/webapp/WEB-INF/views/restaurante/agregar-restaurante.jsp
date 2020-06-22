@@ -234,6 +234,77 @@
                     <div class="app-main__outer">
 
                         <div class="app-main__inner">
+                            <div class="row">
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-header">Editing Referred Information
+                                       <!-- <p style="color: red">Please note that saving the changes will override all previous information.</p> -->
+                                       </div>
+                                    <form method="POST" action="${pageContext.request.contextPath}/update/referral/input">
+                                        <div class="row mt-4 mb-5">
+                                            <div class="col-lg-1"></div> 
+                                            <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
+                                                <div class="form-label-group">
+                                                    <label for="firstName">First Name <font color="red">*</font></label>
+                                                    <input type="text" id="firstName" class="form-control" placeholder="First Name" name="firstName" value="${refOccasion.friendFirstName}" required>
+                                                </div>
+                                                <div class="form-label-group">
+                                                    <label for="lastName">Last Name</label>
+                                                    <input type="text" id="lastName" class="form-control" placeholder="Last Name" value="${refOccasion.friendLastName}" name="lastName">
+                                                </div>
+                                                <div class="form-label-group">
+                                                    <label for="emailAddress">Email Address <font color="red">*</font></label>
+                                                    <input type="text" id="emailAddress" class="form-control" placeholder="Email Address" value="${refOccasion.email}" name="emailAddress" required>
+                                                </div>
+                                                <div class="form-label-group">
+                                                    <label for="occasion">Occasion <font color="red">*</font></label>
+                                                    <input type="text" id="occasion" class="form-control" placeholder="Occasion" value="${refOccasion.occasion}" name="occasion" required>
+                                                </div>
+                                                <div class="form-label-group ">
+                                                    <label for="occasionDate">Occasion Date <font color="red">*</font></label>
+                                                    <input type="date" id="occasionDate" class="form-control" placeholder="Occasion Date" name="occasionDate"
+                                                           value="<fmt:formatDate value="${refOccasion.occasionDate.time}" pattern="yyyy-MM-dd" type="date" />" required >
+                                                </div>
+                                                <input type="hidden" name="referredOccasionId" value="${refOccasion.referredOccasionId}">
+                                            </div>
+                                            <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
+                                                <label for="countryId">Country</label>
+                                                <select name="country" class="countries form-control" id="countryId">
+                                                    <option value="">Select Country</option>
+                                                </select>
+                                                <label for="stateId">State</label>
+                                                <select name="state" class="states form-control" id="stateId">
+                                                    <option value="">Select State</option>
+                                                </select>
+                                                <label for="cityId">City</label>
+                                                <select name="city" class="cities form-control" id="cityId">
+                                                    <option value="">Select City</option>
+                                                </select>
+                                                <div class="form-label-group">
+                                                    <label for="addressline1">Address Line 1</label>
+                                                    <input type="text" id="addressline1" class="form-control" placeholder="Address Line 1" value="${refOccasion.addressLine1}" name="addressLine1">
+                                                </div>
+                                                <div class="form-label-group">
+                                                    <label for="addressLine2">Address Line 2</label>
+                                                    <input type="text" id="addressLine2" class="form-control" placeholder="Address Line 2" value="${refOccasion.addressLine2}" name="addressLine2">
+                                                </div>
+                                                <div class="form-label-group">
+                                                    <label for="zipCode">Zip Code ${refOccasion.zipCode!=null?'<font color="red">*</font>':""}</label>
+                                                    <input type="text" id="zipCode" class="form-control" placeholder="Zip Code" value="${refOccasion.zipCode}" name="zipCode" ${refOccasion.zipCode!=null?"required":""}>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1"></div>
+                                        </div>
+                                        <div class="text-center mb-5 mt-3">
+                                            <button type="submit" class="btn btn-outline-success btn-lg" style="padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;font-size: 18px; margin-right:10px">Save</button>
+                                            <a href="${pageContext.request.contextPath}/dashboard">
+                                            <button type="button" class="btn btn-outline-danger btn-lg" style="padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;font-size: 18px; margin-left:10px">Cancel</button>
+                                            </a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                             </div>
                         <div class="app-wrapper-footer">
                             <div class="app-footer">
