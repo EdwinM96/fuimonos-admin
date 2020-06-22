@@ -43,12 +43,12 @@ public class Restaurante {
 
     @Column(name = "horario_de_apertura")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+     @DateTimeFormat(pattern="hh:mm")
     private Date horario_de_apertura;
 
     @Column(name = "horario_de_cierre")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+     @DateTimeFormat(pattern="hh:mm")
     private Date horario_de_cierre;
 
     @Column(name = "imagen_de_portada")
@@ -60,7 +60,7 @@ public class Restaurante {
 
     @Column(name = "tiempo_estimado_de_entrega")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(pattern="hh:mm")
     private Date tiempo_estimado_de_entrega;
 
     @Column(name = "descuento")
@@ -73,7 +73,7 @@ public class Restaurante {
     private String representante;
     
     @Column(name="numero_de_contacto")
-    private String numeroDeContacto;
+    private String numero_de_contacto;
     
     @Column(name="comision")
     private Double comision;
@@ -203,13 +203,15 @@ public class Restaurante {
         this.representante = representante;
     }
 
-    public String getNumeroDeContacto() {
-        return numeroDeContacto;
+    public String getNumero_de_contacto() {
+        return numero_de_contacto;
     }
 
-    public void setNumeroDeContacto(String numeroDeContacto) {
-        this.numeroDeContacto = numeroDeContacto;
+    public void setNumero_de_contacto(String numero_de_contacto) {
+        this.numero_de_contacto = numero_de_contacto;
     }
+
+    
 
     public Double getComision() {
         return comision;

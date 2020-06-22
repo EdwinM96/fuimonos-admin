@@ -61,7 +61,7 @@ public class RestauranteController {
             return null;
       
     }
-    	@RequestMapping("/saveRestaurante")
+    	@RequestMapping("restaurante/crear")
 	public ModelAndView saveRestaurante(@ModelAttribute Restaurante restaurante, HttpServletRequest request, HttpServletResponse response) throws IOException {
             if(SessionUtils.assertLogin(request)){
 		ModelAndView mav = new ModelAndView();
@@ -73,7 +73,7 @@ public class RestauranteController {
 			List<Restaurante> restaurantes =null;
 			
 			mav.addObject("restaurantes", restaurantes);
-		mav.setViewName("restaurantes/restaurante");
+		mav.setViewName("restaurante/agregar-restaurante");
 		
 		return mav;
             }
