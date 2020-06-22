@@ -9,8 +9,12 @@ import com.fuimonosapp.domain.Menu;
 import com.fuimonosapp.domain.Restaurante;
 import com.fuimonosapp.service.MenuService;
 import com.fuimonosapp.service.RestauranteService;
+import com.fuimonosapp.util.SessionUtils;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +40,8 @@ public class MenuController {
     Logger logger = Logger.getLogger("restaurante");
 
     @GetMapping("/menus")
-    public ModelAndView findAllMenus() {
+    public ModelAndView findAllMenus(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if(SessionUtils.assertLogin(request)){
         ModelAndView mav = new ModelAndView();
         List<Restaurante> restaurantes = restaService.findAll();
 
@@ -46,11 +51,17 @@ public class MenuController {
         mav.addObject("menus", menus);
         mav.setViewName("/menus/menu");
         return mav;
+        }
+        else{
+                response.sendRedirect(request.getContextPath()+"/");
+            }
+            return null;
 
     }
 
     @PostMapping("/saveMenu")
-    public ModelAndView saveMenu(@ModelAttribute Menu menu) {
+    public ModelAndView saveMenu(@ModelAttribute Menu menu, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if(SessionUtils.assertLogin(request)){
         ModelAndView mav = new ModelAndView();
 
         //  List<Restaurante> restaurantes  =null;
@@ -68,6 +79,11 @@ public class MenuController {
         mav.setViewName("menus/menu");
 
         return mav;
+        }
+        else{
+                response.sendRedirect(request.getContextPath()+"/");
+            }
+            return null;
     }
 
     //Borrar

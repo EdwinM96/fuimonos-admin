@@ -213,7 +213,7 @@
                         </div>    <div class="scrollbar-sidebar">
                             <div class="app-sidebar__inner">
                                 <ul class="vertical-nav-menu">
-                                    <li class="app-sidebar__heading">My Account</li>
+                                    <li class="app-sidebar__heading">Administrador</li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/dashboard" class="mm-active">
                                             <i class="metismenu-icon pe-7s-display2"></i>
@@ -245,7 +245,7 @@
                                                     <th style="width:8%"></th>
                                                     <th>Nombre</th>
                                                     <th>Representante</th>
-                                                    <th style="width:10%"></th>
+                                                    <th style="width:13%"></th>
                                                     <th style="width:5%"></th>
                                                 </tr>
                                             </thead>

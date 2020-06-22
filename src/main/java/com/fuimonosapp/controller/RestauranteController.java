@@ -9,6 +9,8 @@ import com.fuimonosapp.domain.Restaurante;
 import com.fuimonosapp.repository.RestauranteRepository;
 import com.fuimonosapp.service.RestauranteService;
 import com.fuimonosapp.util.PagingAndSorting;
+import com.fuimonosapp.util.SessionUtils;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.logging.Logger;
@@ -41,21 +43,27 @@ public class RestauranteController {
     Logger l = Logger.getLogger("restaurante");
     
     @GetMapping("/restaurantes")
-    public ModelAndView restaurantesList(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
-        ModelAndView mav=new ModelAndView();
-        HttpSession session = request.getSession();
-        l.info(request.getParameter("page"));
-       Page<Restaurante> restaurantes = restaService.findBySearchWord(request.getParameter("page")!=null?Integer.parseInt(request.getParameter("page")):0,
-               request.getParameter("searchWord"));
-       mav.addObject("restaurantes",restaurantes.getContent());
-       mav.addAllObjects(PagingAndSorting.generalPagingAndSorting(restaurantes, request, (String)session.getAttribute("searchWord"), null,"restaurantes"));
-       mav.setViewName("restaurante/restaurante");
-       return mav;
-        
+    public ModelAndView restaurantesList(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException {
+        if(SessionUtils.assertLogin(request)){
+            ModelAndView mav=new ModelAndView();
+            HttpSession session = request.getSession();
+            l.info(request.getParameter("page"));
+           Page<Restaurante> restaurantes = restaService.findBySearchWord(request.getParameter("page")!=null?Integer.parseInt(request.getParameter("page")):0,
+                   request.getParameter("searchWord"));
+           mav.addObject("restaurantes",restaurantes.getContent());
+           mav.addAllObjects(PagingAndSorting.generalPagingAndSorting(restaurantes, request, (String)session.getAttribute("searchWord"), null,"restaurantes"));
+           mav.setViewName("restaurante/restaurante");
+           return mav;
+        }
+        else{
+                response.sendRedirect(request.getContextPath()+"/");
+            }
+            return null;
       
     }
     	@RequestMapping("/saveRestaurante")
-	public ModelAndView saveRestaurante(@ModelAttribute Restaurante restaurante) {
+	public ModelAndView saveRestaurante(@ModelAttribute Restaurante restaurante, HttpServletRequest request, HttpServletResponse response) throws IOException {
+            if(SessionUtils.assertLogin(request)){
 		ModelAndView mav = new ModelAndView();
 
                 
@@ -68,6 +76,11 @@ public class RestauranteController {
 		mav.setViewName("restaurantes/restaurante");
 		
 		return mav;
+            }
+            else{
+                response.sendRedirect(request.getContextPath()+"/");
+            }
+            return null;
 	}
         /*
         //Borrar
