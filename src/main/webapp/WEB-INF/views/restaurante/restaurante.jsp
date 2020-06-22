@@ -237,7 +237,12 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="main-card mb-3 card">
-                                         <div class="card-header" style="font-weight:bold;font-size: 16px;">Restaurantes</div>
+                                         <div class="card-header" style="font-weight:bold;font-size: 16px;">
+                                             Restaurantes
+                                             <div class="btn-actions-pane-right">
+                                                 <a href="${pageContext.request.contextPath}/restaurante/crear"><button type="button" class="btn-success btn">+ Agregar Restaurante</button></a>
+                                             </div>
+                                         </div>
                                     <div class="table-responsive">
                                         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                                             <thead>
