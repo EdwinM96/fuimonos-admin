@@ -84,21 +84,6 @@
                         <div class="header-btn-lg pr-0">
                             <div class="widget-content p-0">
                                 <div class="widget-content-wrapper">
-                                    <div class="widget-content-left">
-                                        <div class="btn-group">
-                                            <img width="42" class="rounded-circle" src="<c:url value="/resources/img/default-profile2.jpg"/>" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="widget-content-left  ml-3 header-user-info">
-                                        <div class="widget-heading">
-                                            ${username}
-                                        </div>
-                                        <div class="widget-subheading">
-                                            Free User
-                                        </div>
-                                    </div>
-                                    <div class="widget-content-right header-user-info ml-3">
-                                    </div>
                                 </div>
                             </div>
                         </div>        </div>
