@@ -264,7 +264,7 @@
                                                 <td>${restaurante.nombre}</td>
                                                 <td>${restaurante.username}</td>
                                                 <td>
-                                                    <a href="${pageContext.request.contextPath}/restaurante?id=${restaurante.restaurante_id}}">
+                                                    <a href="${pageContext.request.contextPath}/restaurante?id=${restaurante.restaurante_id}">
                                                         <button class="btn btn-primary">Ver detalles</button>
                                                     </a>
                                                 </td>
@@ -314,6 +314,7 @@
 
                     </div>
                 </div>
+            </div>
                 <div class="modal fade" id="deleteRestauranteModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">

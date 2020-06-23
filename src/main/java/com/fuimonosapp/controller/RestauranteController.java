@@ -28,7 +28,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -66,13 +68,33 @@ public class RestauranteController {
 
     }
 
-    @RequestMapping("restaurante/crear")
-    public ModelAndView saveRestaurante(@ModelAttribute Restaurante restaurante, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @GetMapping(path = "restaurante/crear")
+    public ModelAndView saveRestaurante( HttpServletRequest request, HttpServletResponse response
+           ) throws IOException {
         if (SessionUtils.assertLogin(request)) {
             ModelAndView mav = new ModelAndView();
 
             List<Departamento> departamentos = depaService.findAll();
-mav.addObject("departamentoss", departamentos);
+            l.info("---Departamentos---- " + departamentos.toString());
+            mav.addObject("departamentos", departamentos);
+            
+            mav.setViewName("restaurante/agregar-restaurante");
+
+            return mav;
+        } else {
+            response.sendRedirect(request.getContextPath() + "/");
+        }
+        return null;
+    }
+    
+    @PostMapping(path = "restaurante/crear")
+    public ModelAndView saveRestaurantePOST(@ModelAttribute Restaurante restaurante, HttpServletRequest request, HttpServletResponse response
+           ) throws IOException {
+        if (SessionUtils.assertLogin(request)) {
+            ModelAndView mav = new ModelAndView();
+
+            List<Departamento> departamentos = depaService.findAll();
+            mav.addObject("departamentoss", departamentos);
             
             restaService.save(restaurante);
             List<Restaurante> restaurantes = null;
@@ -86,6 +108,7 @@ mav.addObject("departamentoss", departamentos);
         }
         return null;
     }
+    
     /*
         //Borrar
         @RequestMapping(value="/busqueda", params="action=borrar")

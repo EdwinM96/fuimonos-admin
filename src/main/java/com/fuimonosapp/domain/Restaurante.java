@@ -64,8 +64,6 @@ public class Restaurante {
     @Column(name = "descuento")
     private Integer descuento;
     
-    @Column (name = "imagen")
-    private String imagen;
     
     @Column(name="representante")
     private String representante;
@@ -186,14 +184,6 @@ public class Restaurante {
         this.nombre = nombre;
     }
 
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-
     public String getRepresentante() {
         return representante;
     }
@@ -210,7 +200,6 @@ public class Restaurante {
         this.numero_de_contacto = numero_de_contacto;
     }
 
-    
 
     public Double getComision() {
         return comision;
