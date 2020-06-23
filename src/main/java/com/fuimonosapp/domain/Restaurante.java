@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -51,10 +52,9 @@ public class Restaurante {
      @DateTimeFormat(pattern="hh:mm")
     private Date horario_de_cierre;
 
+    @Lob
     @Column(name = "imagen_de_portada")
-    private String imagen_de_portada;
-
-   
+    private Byte[] imagen_de_portada;
 
     @Column(name = "tiempo_estimado_de_entrega")
     @Temporal(TemporalType.DATE)
@@ -112,11 +112,11 @@ public class Restaurante {
         this.horario_de_cierre = horario_de_cierre;
     }
 
-    public String getImagen_de_portada() {
+    public Byte[] getImagen_de_portada() {
         return imagen_de_portada;
     }
 
-    public void setImagen_de_portada(String imagen_de_portada) {
+    public void setImagen_de_portada(Byte[] imagen_de_portada) {
         this.imagen_de_portada = imagen_de_portada;
     }
 
