@@ -5,8 +5,10 @@
  */
 package com.fuimonosapp.controller;
 
+import com.fuimonosapp.domain.Departamento;
 import com.fuimonosapp.domain.Restaurante;
 import com.fuimonosapp.repository.RestauranteRepository;
+import com.fuimonosapp.service.DepartamentoService;
 import com.fuimonosapp.service.RestauranteService;
 import com.fuimonosapp.util.PagingAndSorting;
 import com.fuimonosapp.util.SessionUtils;
@@ -35,54 +37,56 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class RestauranteController {
-    
+
     @Autowired
     RestauranteService restaService;
-    
-    
+
+    @Autowired
+    DepartamentoService depaService;
+
     Logger l = Logger.getLogger("restaurante");
-    
+
     @GetMapping("/restaurantes")
     public ModelAndView restaurantesList(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException {
-        if(SessionUtils.assertLogin(request)){
-            ModelAndView mav=new ModelAndView();
+        if (SessionUtils.assertLogin(request)) {
+            ModelAndView mav = new ModelAndView();
             HttpSession session = request.getSession();
             l.info(request.getParameter("page"));
-           Page<Restaurante> restaurantes = restaService.findBySearchWord(request.getParameter("page")!=null?Integer.parseInt(request.getParameter("page")):0,
-                   request.getParameter("searchWord"));
-           mav.addObject("restaurantes",restaurantes.getContent());
-           mav.addAllObjects(PagingAndSorting.generalPagingAndSorting(restaurantes, request, (String)session.getAttribute("searchWord"), null,"restaurantes"));
-           mav.setViewName("restaurante/restaurante");
-           return mav;
+            Page<Restaurante> restaurantes = restaService.findBySearchWord(request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 0,
+                    request.getParameter("searchWord"));
+
+            mav.addObject("restaurantes", restaurantes.getContent());
+            mav.addAllObjects(PagingAndSorting.generalPagingAndSorting(restaurantes, request, (String) session.getAttribute("searchWord"), null, "restaurantes"));
+            mav.setViewName("restaurante/restaurante");
+            return mav;
+        } else {
+            response.sendRedirect(request.getContextPath() + "/");
         }
-        else{
-                response.sendRedirect(request.getContextPath()+"/");
-            }
-            return null;
-      
+        return null;
+
     }
-    	@RequestMapping("restaurante/crear")
-	public ModelAndView saveRestaurante(@ModelAttribute Restaurante restaurante, HttpServletRequest request, HttpServletResponse response) throws IOException {
-            if(SessionUtils.assertLogin(request)){
-		ModelAndView mav = new ModelAndView();
 
-                
-		
+    @RequestMapping("restaurante/crear")
+    public ModelAndView saveRestaurante(@ModelAttribute Restaurante restaurante, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (SessionUtils.assertLogin(request)) {
+            ModelAndView mav = new ModelAndView();
 
-			restaService.save(restaurante);
-			List<Restaurante> restaurantes =null;
-			
-			mav.addObject("restaurantes", restaurantes);
-		mav.setViewName("restaurante/agregar-restaurante");
-		
-		return mav;
-            }
-            else{
-                response.sendRedirect(request.getContextPath()+"/");
-            }
-            return null;
-	}
-        /*
+            List<Departamento> departamentos = depaService.findAll();
+mav.addObject("departamentoss", departamentos);
+            
+            restaService.save(restaurante);
+            List<Restaurante> restaurantes = null;
+            
+            mav.addObject("restaurantes", restaurantes);
+            mav.setViewName("restaurante/agregar-restaurante");
+
+            return mav;
+        } else {
+            response.sendRedirect(request.getContextPath() + "/");
+        }
+        return null;
+    }
+    /*
         //Borrar
         @RequestMapping(value="/busqueda", params="action=borrar")
 	public ModelAndView delete(@RequestParam(value="codigo") int id) {

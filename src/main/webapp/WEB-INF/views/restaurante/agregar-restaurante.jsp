@@ -262,7 +262,7 @@
                                                     </div>
                                                     <div class="form-label-group">
                                                         <label for="imagen_de_portada">Imagen de portada <font color="red">*</font></label>
-                                                        <input type="text" id="imagen_de_portada" class="form-control" placeholder="imagen_de_portada" value="${restaurante.imagen_de_portada}" name="imagen_de_portada" required>
+                                                        <input type="image" src="" id="imagen_de_portada" class="form-control" value="${restaurante.imagen_de_portada}" name="imagen_de_portada" required>
                                                     </div>
                                                     <div class="form-label-group">
                                                         <label for="tiempo_estimado_de_entrega">Tiempo estimado de entrega</label>
@@ -288,14 +288,26 @@
                                                         <label for="comision">Comision</label>
                                                         <input type="number" id="comision" class="form-control" placeholder="Comision" value="${restaurante.comision}" name="comision">
                                                     </div>
-                                                     <div class="form-label-group">
-                                                    <label for="cargosExtras">Cargos extras</label>
-                                                    <input type="number" id="cargosExtras" class="form-control" placeholder="Cargos extras" value="${restaurante.cargosExtras}" name="cargosExtras">
-                                                </div>
+                                                    <div class="form-label-group">
+                                                        <label for="cargosExtras">Cargos extras</label>
+                                                        <input type="number" id="cargosExtras" class="form-control" placeholder="Cargos extras" value="${restaurante.cargosExtras}" name="cargosExtras">
+
+                                                    </div>
+                                                    <div class="form-label-group">
+                                                            <label for="departamento"> Departamento:</label>
+                                                        <select id="restaurante" name="restaurante"  >
+
+                                                            <c:forEach items="${departamentos}" var="departamento">
+                                                                <option value="<${departamento.departamento_id}>"/>${departamento.nombre_departamento}</option>
+                                                            </c:forEach>
+
+                                                        </select> 
+
+                                                    </div>
                                                     <input type="hidden" name="referredOccasionId" value="${restaurante.restaurante_id}">
                                                 </div>
-                                                
-                                                
+
+
                                             </div>
                                             <div class="text-center mb-5 mt-3">
                                                 <button type="submit" class="btn btn-outline-success btn-lg" style="padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;font-size: 18px; margin-right:10px">Save</button>
