@@ -12,14 +12,18 @@ import com.fuimonosapp.service.DepartamentoService;
 import com.fuimonosapp.service.RestauranteService;
 import com.fuimonosapp.util.PagingAndSorting;
 import com.fuimonosapp.util.SessionUtils;
+import java.util.*; 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
+import org.apache.tomcat.util.digester.SetPropertiesRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -72,14 +76,12 @@ public class RestauranteController {
     public ModelAndView saveRestaurante( HttpServletRequest request, HttpServletResponse response
            ) throws IOException {
         if (SessionUtils.assertLogin(request)) {
-            ModelAndView mav = new ModelAndView();
+            ModelAndView mav = new ModelAndView("restaurante/agregar-restaurante");
 
             List<Departamento> departamentos = depaService.findAll();
-            l.info("---Departamentos---- " + departamentos.toString());
-            mav.addObject("departamentos", departamentos);
-            
-            mav.setViewName("restaurante/agregar-restaurante");
 
+            mav.addObject("departamentos", departamentos);
+            if(request.getParameter("success")!=null){ if(Boolean.parseBoolean(request.getParameter("success"))){ mav.addObject("creatingAccountSuccess", true);}}
             return mav;
         } else {
             response.sendRedirect(request.getContextPath() + "/");
@@ -87,26 +89,35 @@ public class RestauranteController {
         return null;
     }
     
-    @PostMapping(path = "restaurante/crear")
-    public ModelAndView saveRestaurantePOST(@ModelAttribute Restaurante restaurante, HttpServletRequest request, HttpServletResponse response
+    @PostMapping(path = "restaurante/crear",headers=("content-type=multipart/*"))
+    public void saveRestaurantePOST(/*@RequestParam("username") String usuario, @RequestParam("nombre") String nombre,
+            @RequestParam("horario_de_apertura")String horarioDeApertura, @RequestParam("horario_de_cierre")String horarioDeCierre,
+            @RequestParam("tiempo_estimado_de_entrega") String tiempoEstimadoDeEntrega, @RequestParam("imagen_de_portada") MultipartFile imagen,
+            @RequestParam(value = "representante", required=false)String representante, @RequestParam(value = "numero_de_contacto", required=false)String numeroDeContacto,
+            @RequestParam("comision")Double comision, @RequestParam(value = "cargosExtra", required=false)Double cargosExtra, 
+            @RequestParam("departamento") Integer departamentoId,*/
+            HttpServletRequest request, HttpServletResponse response
            ) throws IOException {
         if (SessionUtils.assertLogin(request)) {
-            ModelAndView mav = new ModelAndView();
+            Iterator iterator = request.getParameterMap().keySet().iterator();
+            l.info("--------------Variables-------------");
+            while(iterator.hasNext()){
+                l.info((String)iterator.next());
+            }
+            /*
+            Restaurante restaurante = new Restaurante();
+            restaurante.setUsername(usuario);
+            restaurante.setNombre(nombre);*/
 
-            List<Departamento> departamentos = depaService.findAll();
-            mav.addObject("departamentoss", departamentos);
-            
-            restaService.save(restaurante);
+            //restaService.save(restaurante);
             List<Restaurante> restaurantes = null;
             
-            mav.addObject("restaurantes", restaurantes);
-            mav.setViewName("restaurante/agregar-restaurante");
+            response.sendRedirect(request.getContextPath() + "/restaurante/crear?success=true");
 
-            return mav;
         } else {
             response.sendRedirect(request.getContextPath() + "/");
         }
-        return null;
+
     }
     
     /*

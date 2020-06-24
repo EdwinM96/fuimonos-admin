@@ -264,7 +264,7 @@
                                                 <td>${restaurante.nombre}</td>
                                                 <td>${restaurante.username}</td>
                                                 <td>
-                                                    <a href="${pageContext.request.contextPath}/restaurante?id=${restaurante.restaurante_id}">
+                                                    <a href="${pageContext.request.contextPath}/restaurante?id=${restaurante.restauranteId}">
                                                         <button class="btn btn-primary">Ver detalles</button>
                                                     </a>
                                                 </td>
@@ -352,7 +352,7 @@
      
                 <c:forEach items="${restaurantes}" var="restaurante" >
                     <tr>
-                        <td>${restaurante.restaurante_id}</td>
+                        <td>${restaurante.restauranteId}</td>
                         <td>${restaurante.nombre}</td>
                         <td>${restaurante.username}</td>
                         <td>${restaurante.pass}</td>

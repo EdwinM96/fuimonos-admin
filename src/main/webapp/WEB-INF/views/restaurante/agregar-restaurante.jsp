@@ -240,7 +240,7 @@
                                         <div class="card-header">Agregando Nuevo Restaurante
                                             <!-- <p style="color: red">Please note that saving the changes will override all previous information.</p> -->
                                         </div>
-                                        <form method="POST" action="${pageContext.request.contextPath}/restaurante/crear" enctype="multiform/form-data">
+                                        <form method="POST" action="${pageContext.request.contextPath}/restaurante/crear" enctype="multipart/form-data">
                                             <div class="row mt-4 mb-5">
                                                 <div class="col-lg-1"></div> 
                                                 <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
@@ -249,8 +249,8 @@
                                                         <input type="text" id="username" class="form-control" placeholder="Usuario" name="username" value="${restaurante.username}" required>
                                                     </div>
                                                     <div class="form-label-group mt-2">
-                                                        <label for="nombre">Nombre</label>
-                                                        <input type="text" id="nombre" class="form-control" placeholder="Nombre" value="${restaurante.nombre}" name="nombre">
+                                                        <label for="nombre">Nombre <font color="red">*</font></label>
+                                                        <input type="text" id="nombre" class="form-control" placeholder="Nombre" value="${restaurante.nombre}" name="nombre" required>
                                                     </div>
                                                     <div class="form-label-group mt-2">
                                                         <label for="horario_de_apertura">Horario de apertura <font color="red">*</font></label>
@@ -262,12 +262,12 @@
                                                     </div>
                                                     <div class="form-label-group mt-2">
                                                         <label for="tiempo_estimado_de_entrega">Tiempo estimado de entrega <font color="red">*</font></label>
-                                                        <input type="time" id="tiempo_estimado_de_entrega" class="form-control" placeholder="Tiempo estimado de entrega" value="${restaurante.tiempo_estimado_de_entrega}"  name="tiempo_estimado_de_entrega" required patern="((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm]))">
+                                                        <input type="text" id="tiempo_estimado_de_entrega" class="form-control" placeholder="Tiempo estimado de entrega" value="${restaurante.tiempo_estimado_de_entrega}"  name="tiempo_estimado_de_entrega" required patern="/^(0?[1-9]|1[0-2]):[0-5][0-9]\d$/">
                                                     </div>
                                                     
                                                     <div class="form-label-group mt-2">
                                                         <label for="imagen_de_portada">Imagen de portada <font color="red">*</font></label>
-                                                        <input type="file" src="" id="imagen_de_portada" class="form-control" value="${restaurante.imagen_de_portada}" name="imagen_de_portada" required>
+                                                        <input type="file" accept="image/x-png,image/gif,image/jpeg" src="" id="imagen_de_portada" class="form-control" value="${restaurante.imagen_de_portada}" name="imagen_de_portada" required>
                                                     </div>
                                                 </div>                                                                               
                                                     <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
@@ -290,11 +290,10 @@
                                                     <div class="form-label-group mt-2">
                                                         <label for="cargosExtras">Cargos extras</label>
                                                         <input type="number" id="cargosExtras" class="form-control" placeholder="Cargos extras" value="${restaurante.cargosExtras}" name="cargosExtras">
-
                                                     </div>
                                                     <div class="form-label-group mt-2">
                                                         <label for="departamento"> Departamento:</label>
-                                                        <select id="restaurante" name="restaurante"  >
+                                                        <select id="departamento" name="departamento"  >
 
                                                             <c:forEach items="${departamentos}" var="departamento">
                                                                 <option value="<${departamento.departamento_id}>"/>${departamento.nombre_departamento}</option>
@@ -303,7 +302,6 @@
                                                         </select> 
 
                                                     </div>
-                                                    <input type="hidden" name="referredOccasionId" value="${restaurante.restaurante_id}">
                                                 </div>
 
 
