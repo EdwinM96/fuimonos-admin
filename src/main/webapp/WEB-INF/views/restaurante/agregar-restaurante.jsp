@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -240,63 +241,67 @@
                                         <div class="card-header">Agregando Nuevo Restaurante
                                             <!-- <p style="color: red">Please note that saving the changes will override all previous information.</p> -->
                                         </div>
-                                        <form method="POST" action="${pageContext.request.contextPath}/restaurante/crear" enctype="multipart/form-data">
+                                        <form:form method="POST" action="${pageContext.request.contextPath}/restaurante/crear" enctype="multipart/form-data">
                                             <div class="row mt-4 mb-5">
                                                 <div class="col-lg-1"></div> 
                                                 <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
                                                     <div class="form-label-group">
                                                         <label for="username">Usuario <font color="red">*</font></label>
-                                                        <input type="text" id="username" class="form-control" placeholder="Usuario" name="username" value="${restaurante.username}" required>
+                                                        <input type="text" id="username" class="form-control" placeholder="Usuario" name="username"  required>
                                                     </div>
                                                     <div class="form-label-group mt-2">
                                                         <label for="nombre">Nombre <font color="red">*</font></label>
-                                                        <input type="text" id="nombre" class="form-control" placeholder="Nombre" value="${restaurante.nombre}" name="nombre" required>
+                                                        <input type="text" id="nombre" class="form-control" placeholder="Nombre"  name="nombre" required>
                                                     </div>
                                                     <div class="form-label-group mt-2">
                                                         <label for="horario_de_apertura">Horario de apertura <font color="red">*</font></label>
-                                                        <input type="time" id="horario_de_apertura" class="form-control" placeholder="Horario de apertura" value="${restaurante.horario_de_apertura}" pattern="dd-MM-yy" type="date" name="horario_de_apertura" required>
+                                                        <input type="time" id="horario_de_apertura" class="form-control" placeholder="Horario de apertura"  pattern="dd-MM-yy" type="date" name="horario_de_apertura" required>
                                                     </div>
                                                     <div class="form-label-group mt-2">
                                                         <label for="horario_de_cierre">Horario de cierre <font color="red">*</font></label>
-                                                        <input type="time" id="horario_de_cierre" class="form-control" placeholder="Horario de cierre" value="${restaurante.horario_de_cierre}" pattern="dd-MM-yy" type="date" name="horario_de_cierre" required>
+                                                        <input type="time" id="horario_de_cierre" class="form-control" placeholder="Horario de cierre"  pattern="dd-MM-yy" type="date" name="horario_de_cierre" required>
                                                     </div>
                                                     <div class="form-label-group mt-2">
                                                         <label for="tiempo_estimado_de_entrega">Tiempo estimado de entrega <font color="red">*</font></label>
-                                                        <input type="text" id="tiempo_estimado_de_entrega" class="form-control" placeholder="Tiempo estimado de entrega" value="${restaurante.tiempo_estimado_de_entrega}"  name="tiempo_estimado_de_entrega" required patern="/^(0?[1-9]|1[0-2]):[0-5][0-9]\d$/">
+                                                        <input type="text" id="tiempo_estimado_de_entrega" class="form-control"   name="tiempo_estimado_de_entrega" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" required >
                                                     </div>
-                                                    
+
                                                     <div class="form-label-group mt-2">
                                                         <label for="imagen_de_portada">Imagen de portada <font color="red">*</font></label>
-                                                        <input type="file" accept="image/x-png,image/gif,image/jpeg" src="" id="imagen_de_portada" class="form-control" value="${restaurante.imagen_de_portada}" name="imagen_de_portada" required>
+                                                        <input type="file" accept="image/x-png,image/gif,image/jpeg" src="" id="imagen_de_portada" class="form-control"  name="imagen_de_portada" required>
                                                     </div>
                                                 </div>                                                                               
-                                                    <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
+                                                <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
                                                     <!--<div class="form-label-group">
                                                         <label for="descuento">Descuento</label>
-                                                        <input type="number" id="descuento" class="form-control" placeholder="Descuento" value="${restaurante.descuento}" name="descuento">
+                                                        <input type="number" id="descuento" class="form-control" placeholder="Descuento"  name="descuento">
                                                     </div>-->
                                                     <div class="form-label-group">
+                                                        <label for="password">Contraseña <font color="red">*</font></label>
+                                                        <input type="password" id="password" class="form-control" placeholder="Usuario" name="pass"  required>
+                                                    </div>
+                                                    <div class="form-label-group">
                                                         <label for="representante">Representante</label>
-                                                        <input type="text" id="representante" class="form-control" placeholder="representante" value="${restaurante.representante}" name="representante">
+                                                        <input type="text" id="representante" class="form-control" placeholder="Representante"  name="representante">
                                                     </div>
                                                     <div class="form-label-group mt-2">
                                                         <label for="numero_de_contacto">Numero de Contacto</label>
-                                                        <input type="text" id="numero_de_contacto" class="form-control" placeholder="Numero de Contacto" value="${restaurante.numero_de_contacto}" name="numero_de_contacto">
+                                                        <input type="text" id="numero_de_contacto" class="form-control" placeholder="Numero de Contacto"  name="numero_de_contacto">
                                                     </div>
                                                     <div class="form-label-group mt-2">
                                                         <label for="comision">Comision sobre Negocio (%) <font color="red">*</font></label>
-                                                        <input type="number" id="comision" class="form-control" placeholder="Comision" value="${restaurante.comision}" name="comision" required>
+                                                        <input type="number" id="comision" class="form-control" placeholder="Comision"  name="comision" required>
                                                     </div>
                                                     <div class="form-label-group mt-2">
                                                         <label for="cargosExtras">Cargos extras</label>
-                                                        <input type="number" id="cargosExtras" class="form-control" placeholder="Cargos extras" value="${restaurante.cargosExtras}" name="cargosExtras">
+                                                        <input type="number" id="cargosExtras" class="form-control" step="0.01" placeholder="Cargos extras"  name="cargosExtras">
                                                     </div>
                                                     <div class="form-label-group mt-2">
                                                         <label for="departamento"> Departamento:</label>
-                                                        <select id="departamento" name="departamento"  >
+                                                        <select id="departamento" name="departamento" class="form-control" >
 
                                                             <c:forEach items="${departamentos}" var="departamento">
-                                                                <option value="<${departamento.departamento_id}>"/>${departamento.nombre_departamento}</option>
+                                                                <option value="${departamento.departamento_id}"/>${departamento.nombre_departamento}</option>
                                                             </c:forEach>
 
                                                         </select> 
@@ -312,7 +317,7 @@
                                                     <button type="button" class="btn btn-danger btn-lg" style="padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;font-size: 18px; margin-left:10px">Cancelar</button>
                                                 </a>
                                             </div>
-                                        </form>
+                                        </form:form>
                                     </div>
                                 </div>
                             </div>
@@ -328,6 +333,6 @@
                     </div>
                 </div>
             </div>
-                                                    
+            <script type="text/javascript" src="<c:url value="/resources/dashboard.js"/>"></script>   
         </body>
     </html>

@@ -5,7 +5,9 @@
  */
 package com.fuimonosapp.domain;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,13 +46,12 @@ public class Departamento {
     @Column(name = "nombre_departamento")
     private String nombre_departamento;
     
-    @OneToOne(mappedBy = "departamento_id", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-    private Restaurante restaurante;
-    
-    @OneToOne(mappedBy = "departamento_id", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-    private Municipio municipio;
+    @OneToMany(mappedBy = "departamento_id")
+    private Set<Restaurante> restaurante;
+    /*
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "municipio_id")
+    private Municipio municipio;*/
 
     public Integer getPais_id() {
         return pais_id;
@@ -61,22 +62,22 @@ public class Departamento {
     }
     
     
-
+    /*
     public Restaurante getRestaurante() {
         return restaurante;
     }
 
     public void setRestaurante(Restaurante restaurante) {
         this.restaurante = restaurante;
-    }
-
+    }*/
+    /*
     public Municipio getMunicipio() {
         return municipio;
     }
 
     public void setMunicipio(Municipio municipio) {
         this.municipio = municipio;
-    }
+    }*/
 
     
     

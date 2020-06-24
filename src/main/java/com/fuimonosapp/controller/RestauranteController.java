@@ -16,9 +16,12 @@ import java.util.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -41,6 +44,7 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author Javier
  */
+@MultipartConfig
 @Controller
 public class RestauranteController {
 
@@ -49,7 +53,9 @@ public class RestauranteController {
 
     @Autowired
     DepartamentoService depaService;
-
+    
+    SimpleDateFormat format = new SimpleDateFormat("hh:mm");
+    SimpleDateFormat minuteFormat = new SimpleDateFormat("mm:ss");
     Logger l = Logger.getLogger("restaurante");
 
     @GetMapping("/restaurantes")
@@ -64,6 +70,8 @@ public class RestauranteController {
             mav.addObject("restaurantes", restaurantes.getContent());
             mav.addAllObjects(PagingAndSorting.generalPagingAndSorting(restaurantes, request, (String) session.getAttribute("searchWord"), null, "restaurantes"));
             mav.setViewName("restaurante/restaurante");
+            if(request.getParameter("success")!=null){ if(Boolean.parseBoolean(request.getParameter("success"))){ mav.addObject("creatingAccountSuccess", true);}}
+            if(request.getParameter("deleted")!=null){ if(Boolean.parseBoolean(request.getParameter("deleted"))){ mav.addObject("deletingAccountSuccess", true);}}
             return mav;
         } else {
             response.sendRedirect(request.getContextPath() + "/");
@@ -81,7 +89,7 @@ public class RestauranteController {
             List<Departamento> departamentos = depaService.findAll();
 
             mav.addObject("departamentos", departamentos);
-            if(request.getParameter("success")!=null){ if(Boolean.parseBoolean(request.getParameter("success"))){ mav.addObject("creatingAccountSuccess", true);}}
+            
             return mav;
         } else {
             response.sendRedirect(request.getContextPath() + "/");
@@ -89,35 +97,81 @@ public class RestauranteController {
         return null;
     }
     
-    @PostMapping(path = "restaurante/crear",headers=("content-type=multipart/*"))
-    public void saveRestaurantePOST(/*@RequestParam("username") String usuario, @RequestParam("nombre") String nombre,
+    @PostMapping(path = "restaurante/crear")
+    public void saveRestaurantePOST(@RequestParam("username") String usuario, @RequestParam("nombre") String nombre,
             @RequestParam("horario_de_apertura")String horarioDeApertura, @RequestParam("horario_de_cierre")String horarioDeCierre,
             @RequestParam("tiempo_estimado_de_entrega") String tiempoEstimadoDeEntrega, @RequestParam("imagen_de_portada") MultipartFile imagen,
             @RequestParam(value = "representante", required=false)String representante, @RequestParam(value = "numero_de_contacto", required=false)String numeroDeContacto,
-            @RequestParam("comision")Double comision, @RequestParam(value = "cargosExtra", required=false)Double cargosExtra, 
-            @RequestParam("departamento") Integer departamentoId,*/
+            @RequestParam(value = "cargosExtras", required=false)Double cargosExtra, @RequestParam("departamento") Integer departamentoId,
+            @RequestParam("comision") Double comision,
             HttpServletRequest request, HttpServletResponse response
-           ) throws IOException {
+           ) throws IOException, ParseException {
         if (SessionUtils.assertLogin(request)) {
-            Iterator iterator = request.getParameterMap().keySet().iterator();
-            l.info("--------------Variables-------------");
-            while(iterator.hasNext()){
-                l.info((String)iterator.next());
+            Departamento departamento = new Departamento();
+            departamento.setDepartamento_id(departamentoId);
+            Byte[] imageBytes = new Byte[imagen.getBytes().length];
+            for (int i = 0; i < imagen.getBytes().length; i++)
+            {
+                imageBytes[i] = imagen.getBytes()[i];
             }
-            /*
             Restaurante restaurante = new Restaurante();
             restaurante.setUsername(usuario);
-            restaurante.setNombre(nombre);*/
+            restaurante.setNombre(nombre);
+            restaurante.setHorarioDeApertura(format.parse(horarioDeApertura));
+            restaurante.setHorarioDeCierre(format.parse(horarioDeCierre));
+            l.info("Tiempo Estimado de Entrega: "+tiempoEstimadoDeEntrega);
+            restaurante.setTiempoEstimadoDeEntrega(minuteFormat.parse(tiempoEstimadoDeEntrega));
+            restaurante.setImagenDePortada(imageBytes);
+            restaurante.setRepresentante(representante);
+            restaurante.setNumeroDeContacto(numeroDeContacto);
+            restaurante.setCargosExtras(cargosExtra);
+            restaurante.setComision(comision);
+            restaurante.setDepartamento_id(departamento);
 
-            //restaService.save(restaurante);
+            restaService.save(restaurante);
             List<Restaurante> restaurantes = null;
             
-            response.sendRedirect(request.getContextPath() + "/restaurante/crear?success=true");
+            response.sendRedirect(request.getContextPath() + "/restaurantes?success=true");
 
         } else {
             response.sendRedirect(request.getContextPath() + "/");
         }
 
+    }
+    
+    @GetMapping(path = "restaurante/delete")
+    public void eliminarRestaurante(@RequestParam("id")Integer id, HttpServletRequest request, HttpServletResponse response
+           ) throws IOException {
+        if (SessionUtils.assertLogin(request)) {
+            restaService.delete(id);
+            response.sendRedirect(request.getContextPath() + "/restaurantes?deleted=true");
+        }
+        else{
+            response.sendRedirect(request.getContextPath() + "/");
+        }
+    
+    }
+    
+    @GetMapping(path = "restaurante")
+    public ModelAndView verRestaurante(@RequestParam("id")Integer id, HttpServletRequest request, HttpServletResponse response
+           ) throws IOException {
+        if (SessionUtils.assertLogin(request)) {
+            ModelAndView mav = new ModelAndView("restaurante/ver-restaurante");
+            
+             SimpleDateFormat timeFormat = new SimpleDateFormat("mm:ss");
+             SimpleDateFormat timeFormatHour = new SimpleDateFormat("hh:mm"); 
+             
+            Restaurante restaurante = restaService.findOne(id);
+
+            mav.addObject("restaurante", restaurante);
+            mav.addObject("horarioDeApertura", timeFormatHour.format(restaurante.getHorarioDeApertura()));
+            mav.addObject("horarioDeCierre", timeFormatHour.format(restaurante.getHorarioDeCierre()));
+            mav.addObject("tiempoDeEntrega", timeFormat.format(restaurante.getTiempoEstimadoDeEntrega()));
+            return mav;
+        } else {
+            response.sendRedirect(request.getContextPath() + "/");
+        }
+        return null;
     }
     
     /*

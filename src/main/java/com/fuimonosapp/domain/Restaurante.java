@@ -52,7 +52,6 @@ public class Restaurante {
      @DateTimeFormat(pattern="hh:mm")
     private Date horarioDeCierre;
 
-    @Lob
     @Column(name = "imagen_de_portada")
     private Byte[] imagenDePortada;
 
@@ -77,7 +76,7 @@ public class Restaurante {
     @Column(name="cargos_extras")
     private Double cargosExtras;
     
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "departamento_id")
     private Departamento departamento_id;
 
@@ -198,11 +197,11 @@ public class Restaurante {
         this.cargosExtras = cargosExtras;
     }
 
-    public Departamento getDepartamento() {
+    public Departamento getDepartamento_id() {
         return departamento_id;
     }
 
-    public void setDepartamento(Departamento departamento) {
+    public void setDepartamento_id(Departamento departamento) {
         this.departamento_id = departamento;
     }
 

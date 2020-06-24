@@ -41,14 +41,17 @@ public class RestauranteService {
     public List<Restaurante> findAll() {
         return restaRepository.findAll();
     }
+    
+    
+    
     @Transactional
     public Page<Restaurante> findBySearchWord(Integer currentPage,String searchWord) {
         
         if(searchWord!=null){
-            return restaRepository.findByNombreContains(searchWord, PageRequest.of(currentPage, PAGESIZE));
+            return restaRepository.findByNombreContainsOrderByRestauranteIdDesc(searchWord, PageRequest.of(currentPage, PAGESIZE));
         }
         else{
-            return restaRepository.findAll(PageRequest.of(currentPage, PAGESIZE));
+            return restaRepository.findAllByOrderByRestauranteIdDesc(PageRequest.of(currentPage, PAGESIZE));
         }
     }
     @Transactional

@@ -1,9 +1,12 @@
 <%-- 
-    Document   : restaurantes
-    Created on : 14/06/2020, 04:11:29 PM
+    Document   : ver-restaurante
+    Created on : 24/06/2020, 12:47:23 AM
     Author     : HP PC
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -177,7 +180,7 @@
                     </div>    <div class="app-header__content">
                         <div class="app-header-left">
                         </div>
-                        
+
                     </div>
                 </div>               <div class="app-main">
                     <div class="app-sidebar sidebar-shadow">
@@ -233,164 +236,85 @@
                     <div class="app-main__outer">
 
                         <div class="app-main__inner">
-                            <c:if test="${creatingAccountSuccess}">
-                            <div class="alert alert-success" role="alert">
-                                Restaurante creado!
-                            </div>
-                        </c:if>
-                            <c:if test="${deletingAccountSuccess}">
-                            <div class="alert alert-success" role="alert">
-                                Restaurante eliminado!
-                            </div>
-                        </c:if>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="main-card mb-3 card">
-                                         <div class="card-header" style="font-weight:bold;font-size: 16px;">
-                                             Restaurantes
-                                             <div class="btn-actions-pane-right">
-                                                 <a href="${pageContext.request.contextPath}/restaurante/crear"><button type="button" class="btn-success btn">+ Agregar Restaurante</button></a>
-                                             </div>
-                                         </div>
-                                    <div class="table-responsive">
-                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width:8%"></th>
-                                                    <th>Nombre</th>
-                                                    <th>Representante</th>
-                                                    <th style="width:13%"></th>
-                                                    <th style="width:5%"></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${restaurantes}" var="restaurante" varStatus="index">
-                                                    <tr>
-                                                        <td class="text-center" style="font-weight: bold">
-     
-                                                       ${(index.index + 1)}.
-                                                        </td>
-                                                <td>${restaurante.nombre}</td>
-                                                <td>${restaurante.representante}</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/restaurante?id=${restaurante.restauranteId}">
-                                                        <button class="btn btn-primary">Ver detalles</button>
-                                                    </a>
-                                                </td>
-                                                <td class="justify-content-end">
-                                                    <a>
-                                                        <button type="button" class="btn btn-danger" onclick="llenarModalEliminar(${restaurante.restauranteId},'${restaurante.nombre}')">&times;</button>
-                                                    </a>
-                                                </td>
-                                                    </tr>
-                                            </c:forEach>
-                                            </tbody>
-                                        </table>
+                                        <div class="card-header">${restaurante.nombre}
+                                            <!-- <p style="color: red">Please note that saving the changes will override all previous information.</p> -->
+                                        </div>
+                                            <div class="row mt-4 mb-5">
+                                                <div class="col-lg-1"></div> 
+                                                <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
+                                                    <div class="form-label-group">
+                                                        <label for="username">Usuario:</label>
+                                                        <div id="username" class="form-control" >${restaurante.username}</div>
+                                                    </div>
+                                                    <div class="form-label-group mt-2">
+                                                        <label for="nombre">Nombre:</label>
+                                                        <div class="form-control" id="nombre">${restaurante.nombre}</div>
+                                                    </div>
+                                                    <div class="form-label-group mt-2">
+                                                        <label for="horario_de_apertura">Horario de apertura:</label>
+                                                        <div class="form-control" id="horario_de_apertura">${horarioDeApertura}</div>
+                                                    </div>
+                                                    <div class="form-label-group mt-2">
+                                                        <label for="horario_de_cierre">Horario de cierre:</label>
+                                                        <div class="form-control" id="horario_de_cierre">${horarioDeCierre}</div>
+                                                    </div>
+                                                    <div class="form-label-group mt-2">
+                                                        <label for="tiempo_estimado_de_entrega">Tiempo estimado de entrega:</label>
+                                                        <div class="form-control" id="tiempo_estimado_de_entrega">${tiempoDeEntrega}</div>
+                                                    </div>
 
-                                    </div>
-                                         <div class="d-block text-center card-footer">
-                                        <nav aria-label="...">
-                                            <ul class="pagination justify-content-center">
-                                                <li class="page-item ${firstPage?'disabled':''}">
-                                                    <a class="page-link" href="${lastPageUrl}" tabindex="-1">Previous</a>
-                                                </li>
-                                                <li class="page-item ${firstPage?'active':''}"><a class="page-link" href="${firstPageUrl}">${firstPageNumber!=null?firstPageNumber:1}</a></li>
-                                                <c:if test="${secondPageExist}">
-                                                    <li class="page-item ${secondPage?'active':''}">
-                                                        <a class="page-link" href="${secondPageUrl}">${secondPageNumber}</a>
-                                                    </li>
-                                                </c:if>
-                                                <c:if test="${thirdPageExist}">
-                                                    <li class="page-item ${thirdPage?'active':''}"><a class="page-link" href="${thirdPageUrl}">${thirdPageNumber}</a></li>
-                                                    </c:if>
-                                                <li class="page-item ${nextPageExist?'':'disabled'}">
-                                                    <a class="page-link" href="${nextPageUrl}">Next</a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
+                                                </div>                                                                               
+                                                <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
+                                                    <!--<div class="form-label-group">
+                                                        <label for="descuento">Descuento</label>
+                                                        <input type="number" id="descuento" class="form-control" placeholder="Descuento" value="${restaurante.descuento}" name="descuento">
+                                                    </div>-->
+                                                    <div class="form-label-group">
+                                                        <label for="representante">Representante:</label>
+                                                        <div class="form-control" id="representante">${restaurante.representante}</div>
+                                                    </div>
+                                                    <div class="form-label-group mt-2">
+                                                        <label for="numero_de_contacto">Numero de Contacto</label>
+                                                        <div class="form-control" id="numero_de_contacto">${restaurante.numeroDeContacto}</div>
+                                                    </div>
+                                                    <div class="form-label-group mt-2">
+                                                        <label for="comision">Comision sobre Negocio (%):</label>
+                                                        <div class="form-control" id="comision">${restaurante.comision}</div>
+                                                    </div>
+                                                    <div class="form-label-group mt-2">
+                                                        <label for="cargosExtras">Cargos extras</label>
+                                                        <div class="form-control" id="cargosExtras">${restaurante.cargosExtras}</div>
+                                                    </div>
+                                                    <div class="form-label-group mt-2">
+                                                        <label for="departamento"> Departamento:</label>
+                                                        <div class="form-control" id="departamento">${restaurante.departamento_id.nombre_departamento}</div>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="text-center mb-5 mt-3">
+                                            </div>
+
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="app-wrapper-footer">
+                        </div>                        
+
+                    </div>
+                                                    <div class="app-wrapper-footer">
                             <div class="app-footer">
                                 <div class="app-footer__inner">
-                                   
+
                                 </div>
                             </div>
                         </div>
-
-                    </div>
                 </div>
             </div>
-                <div class="modal fade" id="deleteRestauranteModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Desea eliminar este restaurante?</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="text-center" id="nombreRestauranteModal" style="font-weight: bold; font-size:24px"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <a href="" id="modalDeleteLink"><button type="button" class="btn btn-danger">Eliminar</button></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <script type="text/javascript">
-                    function llenarModalEliminar(id,nombreRestaurante){
-                        document.getElementById("modalDeleteLink").href = "${pageContext.request.contextPath}/restaurante/delete?id="+id;
-                         var labelDiv = document.getElementById("nombreRestauranteModal");
-                         while (labelDiv.firstChild) {
-                            labelDiv.removeChild(labelDiv.firstChild);
-                         }
-                        var labelContent = document.createTextNode(nombreRestaurante);
-                        labelDiv.appendChild(labelContent);
-                        $('#deleteRestauranteModal').modal('toggle')
-                    }
-
-                </script>
-                <!-- <table>
-                     <tr>
-                         <th>Id</th>
-                         <th>Nombre</th>
-                         <th>Usuario</th>
-                         <th>Pass</th>
-                     </tr>
-     
-                <c:forEach items="${restaurantes}" var="restaurante" >
-                    <tr>
-                        <td>${restaurante.restauranteId}</td>
-                        <td>${restaurante.nombre}</td>
-                        <td>${restaurante.username}</td>
-                        <td>${restaurante.pass}</td>
-                    </tr>
-                </c:forEach>
-            </table>
-
-            <form class="form1" action="${pageContext.request.contextPath}/saveRestaurante" method="POST">
-                <input class="name " type="text" align="center" placeholder="Usua"name="nombre">
-                <input class="pass" type="password" align="center" placeholder="Contraseña" name="pass">
-                <input class="username" type="text" align="center" placeholder="username" name="username">
-
-                <button type="submit" class="submit">Ingresar</button>
-            </form>
-
-             <form class="form1" action="${pageContext.request.contextPath}/busqueda" method="POST">
-                <label>Ingresar codigo de restaurante: </label>
-                <input type="number" name="codigo">
-                <br>
-                <button type="submit" name="action" value="borrar">Borrar</button><br>
-                <button type="submit" name="action" value="actualizar">Actualizar</button><br>
-
-            </form>-->
-                <script type="text/javascript" src="<c:url value="/resources/dashboard.js"/>"></script>
+            <script type="text/javascript" src="<c:url value="/resources/dashboard.js"/>"></script>   
         </body>
     </html>

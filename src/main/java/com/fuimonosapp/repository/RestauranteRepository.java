@@ -20,6 +20,8 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Intege
     
     public Page<Restaurante> findAll(Pageable pageable);
     
-    public Page<Restaurante> findByNombreContains(String nombre, Pageable pageable);
+    public Page<Restaurante> findAllByOrderByRestauranteIdDesc(Pageable pageable);
+    
+    public Page<Restaurante> findByNombreContainsOrderByRestauranteIdDesc(String nombre, Pageable pageable);
     
 }
