@@ -278,7 +278,7 @@
                                                     </div>-->
                                                     <div class="form-label-group">
                                                         <label for="password">Contraseña <font color="red">*</font></label>
-                                                        <input type="password" id="password" class="form-control" placeholder="Usuario" name="pass"  required>
+                                                        <input type="password" id="password" class="form-control" placeholder="Contraseña" name="pass"  required>
                                                     </div>
                                                     <div class="form-label-group">
                                                         <label for="representante">Representante</label>
