@@ -6,11 +6,16 @@
 package com.fuimonosapp.controller;
 
 import com.fuimonosapp.domain.Menu;
+import com.fuimonosapp.domain.Categoria;
 import com.fuimonosapp.domain.Restaurante;
+import com.fuimonosapp.domain.MenuXCategoria;
+import com.fuimonosapp.service.CategoriaService;
 import com.fuimonosapp.service.MenuService;
+import com.fuimonosapp.service.MenuXCategoriaService;
 import com.fuimonosapp.service.RestauranteService;
 import com.fuimonosapp.util.SessionUtils;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -34,85 +39,66 @@ public class MenuController {
 
     @Autowired
     MenuService menuService;
+    
     @Autowired
     RestauranteService restaService;
+    
+    @Autowired
+    CategoriaService cateService;        
+    
+    @Autowired
+    MenuXCategoriaService mxcService;
+    
 
-    Logger logger = Logger.getLogger("restaurante");
+    Logger l = Logger.getLogger("menu");
 
-    @GetMapping("/menus")
-    public ModelAndView findAllMenus(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @GetMapping("/menu/crear")
+    public ModelAndView agregarMenu(@RequestParam("restauranteId")Integer restauranteId,
+            HttpServletRequest request, HttpServletResponse response) throws IOException{
         if(SessionUtils.assertLogin(request)){
-        ModelAndView mav = new ModelAndView();
-        List<Restaurante> restaurantes = restaService.findAll();
-
-        List<Menu> menus = menuService.findAll();
-        logger.info("Menus list size " + menus.size());
-        mav.addObject("restaurantes", restaurantes);
-        mav.addObject("menus", menus);
-        mav.setViewName("/menus/menu");
-        return mav;
+            ModelAndView mv = new ModelAndView("/menus/agregar-menu");
+            mv.addObject("categorias",cateService.getAllCategorias() );
+            mv.addObject("restaurante",restaService.findOne(restauranteId));
+            return mv;
         }
         else{
-                response.sendRedirect(request.getContextPath()+"/");
-            }
-            return null;
-
-    }
-
-    @RequestMapping("/saveMenu")
-    public void saveMenu(@RequestParam(value="nombre_menu",required=true)String nombre_menu,@RequestParam(value="restaurante_id",required=true)Integer restaurante_id,HttpServletResponse response, HttpServletRequest request) throws IOException{
-        if(SessionUtils.assertLogin(request)){
-  
-
-        //  List<Restaurante> restaurantes  =null;
-        //  restaurantes=restaService.findAll();
-        Menu menu = new Menu();
-            
-            menu.setNombre_menu(nombre_menu);
-            menu.setRestaurante_id(restaurante_id);
-        menuService.save(menu);
-        List<Menu> menus = null;
-        try {
-            menus = menuService.findAll();
-        } catch (Exception e) {
-            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/");
         }
-        //  menu = new Menu();
-        //mav.addObject("restaurantes",restaurantes);
-        
+        return null;
+    }
+    
+    @PostMapping("/menu/crear")
+    public void anadirMenu(@RequestParam("restauranteId")Integer restauranteId, @RequestParam("categoriaId") Integer categoriaId,
+            @RequestParam("nombre") String nombre,
+            HttpServletRequest request, HttpServletResponse response) throws IOException{
+        if(SessionUtils.assertLogin(request)){
+            Categoria cate = cateService.findOne(categoriaId);
+            Menu menu = new Menu();
+            Restaurante restaurante = new Restaurante();
+            restaurante.setRestauranteId(restauranteId);
+            menu.setRestaurante(restaurante);
+            menu.setNombreMenu(nombre);
+            menu = menuService.save(menu);
+            MenuXCategoria mxc = new MenuXCategoria();
+            mxc.setMenu_id(menu);
+            mxc.setCategoria_id(cate);
+            mxcService.save(mxc);
+           response.sendRedirect(request.getContextPath() + "/restaurante?id="+restauranteId+"&creation=true"); 
         }
         else{
-                response.sendRedirect(request.getContextPath()+"/");
-            }
-            //return null;
-    }
-
-    //Borrar
-    @RequestMapping(value = "/busquedaMenu", params = "action=borrarMenu")
-    public ModelAndView deleteMenu(@RequestParam(value = "codigo") int id) {
-        ModelAndView mav = new ModelAndView();
-        List<Menu> menus = null;
-
-        try {
-            menuService.delete(id);
-            menus = menuService.findAll();
-        } catch (Exception e) {
-            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/");
         }
-        mav.addObject("menus", menus);
-        mav.setViewName("menus/menu");
-
-        return mav;
     }
-
-    //actualizar
-    @RequestMapping(value = "/busquedaMenu", params = "action=actualizarMenu")
-    public ModelAndView updateMenu(@RequestParam(value = "codigo") int id) {
-        ModelAndView mav = new ModelAndView();
-        Menu menus = menuService.findOne(id);
-        mav.addObject("menus", menus);
-        mav.setViewName("menus/actualizarMenu");
-
-        return mav;
+    
+    @GetMapping("/menu/delete")
+    public void eliminarMenu(@RequestParam("id")Integer menuId, HttpServletRequest request, HttpServletResponse response) throws IOException{
+        if(SessionUtils.assertLogin(request)){
+            Integer restauranteId = menuService.findOne(menuId).getRestaurante().getRestauranteId();
+            menuService.delete(menuId);           
+            response.sendRedirect(request.getContextPath() + "/restaurante?id="+restauranteId+"&delete=true");
+        }
+        else{
+            response.sendRedirect(request.getContextPath() + "/");
+        }
     }
 }

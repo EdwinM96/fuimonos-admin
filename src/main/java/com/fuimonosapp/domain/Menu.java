@@ -1,6 +1,7 @@
 package com.fuimonosapp.domain;
 
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
@@ -13,8 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import org.hibernate.annotations.GenericGenerator;
 
 
 @Entity
@@ -24,9 +27,10 @@ public class Menu {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="menu_id")
-	private Integer menu_id;
+	private Integer menuId;
+        
 	@Column(name="nombre_menu")
-	private String nombre_menu;
+	private String nombreMenu;
         
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="restaurante_id")
@@ -35,68 +39,77 @@ public class Menu {
 	@OneToMany(mappedBy="menu")
 	private List<Platillo> platillos ;
 	
-        @Transient
-	@OneToOne(mappedBy = "menu_id", cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY, optional = false)
-        private MenuXCategoria menuxcategorias;
+        @OneToMany(mappedBy = "menu_id")
+        private List<MenuXCategoria> menuxcategorias;
+        
+        /*@GeneratedValue(generator = "menu_orden_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "menu_orden_seq", sequenceName = "public.menu_orden_seq", allocationSize = 1)*/
+        @Column(name="orden")
+        private Integer orden;
         
         @Transient
-        private Integer restaurante_id;
+        private Integer restauranteId;
 
-    public Integer getRestaurante_id() {
-        return restaurante_id;
-    }
-
-    public void setRestaurante_id(Integer restaurante_id) {
-        this.restaurante_id = restaurante_id;
-    }
-        
-        
-
-    public MenuXCategoria getMenuxcategorias() {
-        return menuxcategorias;
-    }
-
-    public void setMenuxcategorias(MenuXCategoria menuxcategorias) {
-        this.menuxcategorias = menuxcategorias;
-    }
-        
-        
-
-	public List<Platillo> getPlatillos() {
-		return platillos;
-	}
-
-	public void setPlatillos(List<Platillo> platillos) {
-		this.platillos = platillos;
-	}
-
-	public Restaurante getRestaurante() {
-		return restaurante;
-	}
-
-	public void setRestaurante(Restaurante restaurante) {
-		this.restaurante = restaurante;
-	}
-	public Integer getMenu_id() {
-		return menu_id;
-	}
-
-	public void setMenu_id(Integer menu_id) {
-		this.menu_id = menu_id;
-	}
-
-	public String getNombre_menu() {
-		return nombre_menu;
-	}
-
-	public void setNombre_menu(String nombre_menu) {
-		this.nombre_menu = nombre_menu;
-	}
-
-	
 	public Menu() {
 		
 	}
+
+    public Integer getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(Integer menuId) {
+        this.menuId = menuId;
+    }
+
+    public String getNombreMenu() {
+        return nombreMenu;
+    }
+
+    public void setNombreMenu(String nombreMenu) {
+        this.nombreMenu = nombreMenu;
+    }
+
+    public Restaurante getRestaurante() {
+        return restaurante;
+    }
+
+    public void setRestaurante(Restaurante restaurante) {
+        this.restaurante = restaurante;
+    }
+
+    public List<Platillo> getPlatillos() {
+        return platillos;
+    }
+
+    public void setPlatillos(List<Platillo> platillos) {
+        this.platillos = platillos;
+    }
+
+    public List<MenuXCategoria> getMenuxcategorias() {
+        return menuxcategorias;
+    }
+
+    public void setMenuxcategorias(List<MenuXCategoria> menuxcategorias) {
+        this.menuxcategorias = menuxcategorias;
+    }
+
+    public Integer getRestauranteId() {
+        return restauranteId;
+    }
+
+    public void setRestauranteId(Integer restauranteId) {
+        this.restauranteId = restauranteId;
+    }
+
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
+    }
+        
+        
 
 }

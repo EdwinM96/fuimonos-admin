@@ -242,79 +242,162 @@
                                         <div class="card-header">${restaurante.nombre}
                                             <!-- <p style="color: red">Please note that saving the changes will override all previous information.</p> -->
                                         </div>
-                                            <div class="row mt-4 mb-5">
-                                                <div class="col-lg-1"></div> 
-                                                <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
-                                                    <div class="form-label-group">
-                                                        <label for="username">Usuario:</label>
-                                                        <div id="username" class="form-control" >${restaurante.username}</div>
-                                                    </div>
-                                                    <div class="form-label-group mt-2">
-                                                        <label for="nombre">Nombre:</label>
-                                                        <div class="form-control" id="nombre">${restaurante.nombre}</div>
-                                                    </div>
-                                                    <div class="form-label-group mt-2">
-                                                        <label for="horario_de_apertura">Horario de apertura:</label>
-                                                        <div class="form-control" id="horario_de_apertura">${horarioDeApertura}</div>
-                                                    </div>
-                                                    <div class="form-label-group mt-2">
-                                                        <label for="horario_de_cierre">Horario de cierre:</label>
-                                                        <div class="form-control" id="horario_de_cierre">${horarioDeCierre}</div>
-                                                    </div>
-                                                    <div class="form-label-group mt-2">
-                                                        <label for="tiempo_estimado_de_entrega">Tiempo estimado de entrega:</label>
-                                                        <div class="form-control" id="tiempo_estimado_de_entrega">${tiempoDeEntrega}</div>
-                                                    </div>
-
-                                                </div>                                                                               
-                                                <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
-                                                    <!--<div class="form-label-group">
-                                                        <label for="descuento">Descuento</label>
-                                                        <input type="number" id="descuento" class="form-control" placeholder="Descuento" value="${restaurante.descuento}" name="descuento">
-                                                    </div>-->
-                                                    <div class="form-label-group">
-                                                        <label for="representante">Representante:</label>
-                                                        <div class="form-control" id="representante">${restaurante.representante}</div>
-                                                    </div>
-                                                    <div class="form-label-group mt-2">
-                                                        <label for="numero_de_contacto">Numero de Contacto</label>
-                                                        <div class="form-control" id="numero_de_contacto">${restaurante.numeroDeContacto}</div>
-                                                    </div>
-                                                    <div class="form-label-group mt-2">
-                                                        <label for="comision">Comision sobre Negocio (%):</label>
-                                                        <div class="form-control" id="comision">${restaurante.comision}</div>
-                                                    </div>
-                                                    <div class="form-label-group mt-2">
-                                                        <label for="cargosExtras">Cargos extras</label>
-                                                        <div class="form-control" id="cargosExtras">${restaurante.cargosExtras}</div>
-                                                    </div>
-                                                    <div class="form-label-group mt-2">
-                                                        <label for="departamento"> Departamento:</label>
-                                                        <div class="form-control" id="departamento">${restaurante.departamento_id.nombre_departamento}</div>
-
-                                                    </div>
+                                        <div class="row mt-4 mb-5">
+                                            <div class="col-lg-1"></div> 
+                                            <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
+                                                <div class="form-label-group">
+                                                    <label for="username">Usuario:</label>
+                                                    <div id="username" class="form-control" >${restaurante.username}</div>
+                                                </div>
+                                                <div class="form-label-group mt-2">
+                                                    <label for="nombre">Nombre:</label>
+                                                    <div class="form-control" id="nombre">${restaurante.nombre}</div>
+                                                </div>
+                                                <div class="form-label-group mt-2">
+                                                    <label for="horario_de_apertura">Horario de apertura:</label>
+                                                    <div class="form-control" id="horario_de_apertura">${horarioDeApertura}</div>
+                                                </div>
+                                                <div class="form-label-group mt-2">
+                                                    <label for="horario_de_cierre">Horario de cierre:</label>
+                                                    <div class="form-control" id="horario_de_cierre">${horarioDeCierre}</div>
+                                                </div>
+                                                <div class="form-label-group mt-2">
+                                                    <label for="tiempo_estimado_de_entrega">Tiempo estimado de entrega:</label>
+                                                    <div class="form-control" id="tiempo_estimado_de_entrega">${tiempoDeEntrega}</div>
                                                 </div>
 
+                                            </div>                                                                               
+                                            <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
+                                                <!--<div class="form-label-group">
+                                                    <label for="descuento">Descuento</label>
+                                                    <input type="number" id="descuento" class="form-control" placeholder="Descuento" value="${restaurante.descuento}" name="descuento">
+                                                </div>-->
+                                                <div class="form-label-group">
+                                                    <label for="representante">Representante:</label>
+                                                    <div class="form-control" id="representante">${restaurante.representante}</div>
+                                                </div>
+                                                <div class="form-label-group mt-2">
+                                                    <label for="numero_de_contacto">Numero de Contacto</label>
+                                                    <div class="form-control" id="numero_de_contacto">${restaurante.numeroDeContacto}</div>
+                                                </div>
+                                                <div class="form-label-group mt-2">
+                                                    <label for="comision">Comision sobre Negocio (%):</label>
+                                                    <div class="form-control" id="comision">${restaurante.comision}</div>
+                                                </div>
+                                                <div class="form-label-group mt-2">
+                                                    <label for="cargosExtras">Cargos extras</label>
+                                                    <div class="form-control" id="cargosExtras">${restaurante.cargosExtras}</div>
+                                                </div>
+                                                <div class="form-label-group mt-2">
+                                                    <label for="departamento"> Departamento:</label>
+                                                    <div class="form-control" id="departamento">${restaurante.departamento_id.nombre_departamento}</div>
 
+                                                </div>
                                             </div>
-                                            <div class="text-center mb-5 mt-3">
-                                            </div>
+
+
+                                        </div>
 
                                     </div>
                                 </div>
                             </div>
-                        </div>                        
+                           <!------------------------------------------------------------------------>
+                           <div class="row">
+                               <div class="col-md-12">
+                                   <div class="main-card mb-3 card">
+                                       <div class="card-header" style="font-weight:bold;font-size: 16px;">
+                                            Menus de&nbsp;<strong>${restaurante.nombre} </strong>
+                                            <div class="btn-actions-pane-right">
+                                                <a href="${pageContext.request.contextPath}/menu/crear?restauranteId=${restaurante.restauranteId}">
+                                                    <button type="button" class="btn-success btn">+ Agregar Menu</button>
+                                                </a>
+                                            </div>
+                                       </div>
+                                                    <div class="table-responsive">
+                                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width:8%"></th>
+                                                        <th>Menu</th>
+                                                        <th>Categorias</th>
+                                                        <th style="width:13%"></th>
+                                                        <th style="width:5%"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${menus}" var="menu" varStatus="index">
+                                                        <tr>
+                                                    <td class="text-center" style="font-weight: bold">
 
-                    </div>
-                                                    <div class="app-wrapper-footer">
+                                                                ${(index.index + 1)}.
+                                                            </td>
+                                                    <td>${menu.nombreMenu}</td>
+                                                    <td><c:forEach items="${menu.menuxcategorias}" var="menuxcategoria" >
+                                                                    ${menuxcategoria.categoria_id.nombreCategoria}
+                                                                </c:forEach></td>
+                                                    <td>
+                                                    <a href="${pageContext.request.contextPath}/menu?id=${menu.menuId}">
+                                                                    <button class="btn btn-primary">Ver detalles</button>
+                                                                </a>
+                                                    </td>
+                                                    <td class="justify-content-end">
+                                                                <a>
+                                                                    <button type="button" class="btn btn-danger" onclick="llenarModalEliminar(${menu.menuId}, '${menu.nombreMenu}')">&times;</button>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                                        </table>
+                                                    </div>
+                                   </div>
+                               </div>
+                           </div>
+                        </div> 
+                        <div class="app-wrapper-footer">
                             <div class="app-footer">
                                 <div class="app-footer__inner">
 
                                 </div>
                             </div>
                         </div>
+
+                    </div>
                 </div>
             </div>
+                                                    <div class="modal fade" id="deleteMenuModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Desea eliminar este menú?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center" id="nombreMenuModal" style="font-weight: bold; font-size:24px"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <a href="" id="modalDeleteLink"><button type="button" class="btn btn-danger">Eliminar</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                function llenarModalEliminar(id, nombreMenu) {
+                    document.getElementById("modalDeleteLink").href = "${pageContext.request.contextPath}/menu/delete?id=" + id;
+                    var labelDiv = document.getElementById("nombreMenuModal");
+                    while (labelDiv.firstChild) {
+                        labelDiv.removeChild(labelDiv.firstChild);
+                    }
+                    var labelContent = document.createTextNode(nombreMenu);
+                    labelDiv.appendChild(labelContent);
+                    $('#deleteMenuModal').modal('toggle')
+                }
+
+            </script>
+            <!----------------------------------->
             <script type="text/javascript" src="<c:url value="/resources/dashboard.js"/>"></script>   
         </body>
     </html>

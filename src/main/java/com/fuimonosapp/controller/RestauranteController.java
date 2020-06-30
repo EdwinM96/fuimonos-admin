@@ -7,8 +7,10 @@ package com.fuimonosapp.controller;
 
 import com.fuimonosapp.domain.Departamento;
 import com.fuimonosapp.domain.Restaurante;
+import com.fuimonosapp.domain.Menu;
 import com.fuimonosapp.repository.RestauranteRepository;
 import com.fuimonosapp.service.DepartamentoService;
+import com.fuimonosapp.service.MenuService;
 import com.fuimonosapp.service.RestauranteService;
 import com.fuimonosapp.util.PagingAndSorting;
 import com.fuimonosapp.util.SessionUtils;
@@ -54,6 +56,9 @@ public class RestauranteController {
     @Autowired
     DepartamentoService depaService;
     
+    @Autowired
+    MenuService menuService;
+    
     SimpleDateFormat format = new SimpleDateFormat("hh:mm");
     SimpleDateFormat minuteFormat = new SimpleDateFormat("mm:ss");
     Logger l = Logger.getLogger("restaurante");
@@ -69,7 +74,7 @@ public class RestauranteController {
 
             mav.addObject("restaurantes", restaurantes.getContent());
             mav.addAllObjects(PagingAndSorting.generalPagingAndSorting(restaurantes, request, (String) session.getAttribute("searchWord"), null, "restaurantes"));
-            mav.setViewName("restaurante/restaurante");
+            mav.setViewName("restaurante/restaurantes");
             if(request.getParameter("success")!=null){ if(Boolean.parseBoolean(request.getParameter("success"))){ mav.addObject("creatingAccountSuccess", true);}}
             if(request.getParameter("deleted")!=null){ if(Boolean.parseBoolean(request.getParameter("deleted"))){ mav.addObject("deletingAccountSuccess", true);}}
             return mav;
@@ -162,11 +167,14 @@ public class RestauranteController {
              SimpleDateFormat timeFormatHour = new SimpleDateFormat("hh:mm"); 
              
             Restaurante restaurante = restaService.findOne(id);
-
+            Page<Menu> menus = menuService.findAllByRestaurante(id, request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 0,
+                    request.getParameter("searchWord"));
             mav.addObject("restaurante", restaurante);
             mav.addObject("horarioDeApertura", timeFormatHour.format(restaurante.getHorarioDeApertura()));
             mav.addObject("horarioDeCierre", timeFormatHour.format(restaurante.getHorarioDeCierre()));
             mav.addObject("tiempoDeEntrega", timeFormat.format(restaurante.getTiempoEstimadoDeEntrega()));
+            mav.addObject("menus", menus.getContent());
+            mav.addAllObjects(PagingAndSorting.generalPagingAndSorting(menus, request, (String) request.getSession().getAttribute("searchWord"), null, "restaurante"));
             return mav;
         } else {
             response.sendRedirect(request.getContextPath() + "/");
@@ -174,33 +182,4 @@ public class RestauranteController {
         return null;
     }
     
-    /*
-        //Borrar
-        @RequestMapping(value="/busqueda", params="action=borrar")
-	public ModelAndView delete(@RequestParam(value="codigo") int id) {
-		ModelAndView mav = new ModelAndView();
-		List<Restaurante> restaurantes = null;
-		
-		try {
-			restaService.delete(id);
-			restaurantes = restaService.findAll();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		mav.addObject("restaurantes", restaurantes);
-		mav.setViewName("restaurantes/restaurante");
-		
-		return mav;
-	}
-        
-        //actualizar
-        @RequestMapping(value="/busqueda", params="action=actualizar")
-	public ModelAndView update(@RequestParam(value="codigo") int id) {
-		ModelAndView mav = new ModelAndView();
-		Restaurante restaurante = restaService.findOne(id);
-		mav.addObject("restaurante", restaurante);
-		mav.setViewName("restaurantes/actualizarResta");
-		
-		return mav;
-	}*/
 }

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,11 +19,11 @@ public class MenuXCategoria {
 	@Column(name="menuxcategoria_id")
 	private Integer menuxcategoria_id;
         
-        @OneToOne(fetch = FetchType.LAZY)
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "menu_id")
 	private Menu menu_id;
 	
-        @OneToOne(fetch = FetchType.LAZY)
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "categoria_id")
 	private Categoria categoria_id;
         

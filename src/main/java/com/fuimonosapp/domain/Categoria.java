@@ -1,5 +1,6 @@
 package com.fuimonosapp.domain;
 
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -17,39 +21,41 @@ public class Categoria {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="categoria_id")
-	private Integer categoria_id;
+	private Integer categoriaId;
 	
 	@Column(name="nombre_categoria")
-	private String nombre_categoria;
+	private String nombreCategoria;
 
-        @OneToOne(mappedBy = "categoria_id", cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY, optional = false)
-        private MenuXCategoria menuxcategorias;
+        @OneToMany(mappedBy = "categoria_id")
+        private List<MenuXCategoria> menuxcategorias;
 
-    public MenuXCategoria getMenuxcategorias() {
+    public List<MenuXCategoria> getMenuxcategorias() {
         return menuxcategorias;
     }
 
-    public void setMenuxcategorias(MenuXCategoria menuxcategorias) {
+    public void setMenuxcategorias(List<MenuXCategoria> menuxcategorias) {
         this.menuxcategorias = menuxcategorias;
+    }
+
+
+
+    public Integer getCategoriaId() {
+        return categoriaId;
+    }
+
+    public void setCategoriaId(Integer categoriaId) {
+        this.categoriaId = categoriaId;
+    }
+
+    public String getNombreCategoria() {
+        return nombreCategoria;
+    }
+
+    public void setNombreCategoria(String nombreCategoria) {
+        this.nombreCategoria = nombreCategoria;
     }
         
         
-	public Integer getCategoria_id() {
-		return categoria_id;
-	}
-
-	public void setCategoria_id(Integer categoria_id) {
-		this.categoria_id = categoria_id;
-	}
-
-	public String getNombre_categoria() {
-		return nombre_categoria;
-	}
-
-	public void setNombre_categoria(String nombre_categoria) {
-		this.nombre_categoria = nombre_categoria;
-	}
 	
 	public Categoria() {
 		
