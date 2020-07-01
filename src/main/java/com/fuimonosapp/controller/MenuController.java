@@ -8,11 +8,14 @@ package com.fuimonosapp.controller;
 import com.fuimonosapp.domain.Menu;
 import com.fuimonosapp.domain.Categoria;
 import com.fuimonosapp.domain.Restaurante;
+import com.fuimonosapp.domain.Platillo;
 import com.fuimonosapp.domain.MenuXCategoria;
 import com.fuimonosapp.service.CategoriaService;
 import com.fuimonosapp.service.MenuService;
 import com.fuimonosapp.service.MenuXCategoriaService;
+import com.fuimonosapp.service.PlatilloService;
 import com.fuimonosapp.service.RestauranteService;
+import com.fuimonosapp.util.PagingAndSorting;
 import com.fuimonosapp.util.SessionUtils;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,8 +23,10 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -48,6 +53,10 @@ public class MenuController {
     
     @Autowired
     MenuXCategoriaService mxcService;
+    
+    @Autowired
+    PlatilloService platService;
+    
     
 
     Logger l = Logger.getLogger("menu");
@@ -93,12 +102,45 @@ public class MenuController {
     @GetMapping("/menu/delete")
     public void eliminarMenu(@RequestParam("id")Integer menuId, HttpServletRequest request, HttpServletResponse response) throws IOException{
         if(SessionUtils.assertLogin(request)){
-            Integer restauranteId = menuService.findOne(menuId).getRestaurante().getRestauranteId();
+            Integer restauranteId = 0;
+            try{
+            restauranteId = menuService.findOne(menuId).getRestaurante().getRestauranteId();
+            }
+            catch(Exception e){
+                response.sendRedirect(request.getContextPath() + "/dashboard");
+            }
             menuService.delete(menuId);           
             response.sendRedirect(request.getContextPath() + "/restaurante?id="+restauranteId+"&delete=true");
         }
         else{
             response.sendRedirect(request.getContextPath() + "/");
         }
+    }
+    
+    @GetMapping("/menu")
+    public ModelAndView verMenu(@RequestParam("id")Integer menuId, HttpServletRequest request, HttpServletResponse response) throws IOException{
+        if(SessionUtils.assertLogin(request)){
+            Menu menu = new Menu();
+            try{
+                menu = menuService.findOne(menuId);
+            }
+            catch(Exception e){
+                response.sendRedirect(request.getContextPath() + "/dashboard");
+                return null;
+            }       
+            HttpSession session = request.getSession();
+            ModelAndView mv = new ModelAndView("menus/ver-menu");
+            Page<Platillo> platillos = platService.findAllByMenu(menuId, request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 0, 
+                    request.getParameter("searchWord"));
+            mv.addObject("menu", menu);
+            mv.addObject("platillos",platillos.getContent() );
+            mv.addAllObjects(PagingAndSorting.generalPagingAndSorting(platillos, request, (String) session.getAttribute("searchWord"), null, "menu"));
+            return mv;
+        }
+        else{
+            response.sendRedirect(request.getContextPath() + "/");
+        }
+        
+        return null;
     }
 }

@@ -31,6 +31,10 @@ public class Platillo {
 
     @Column(name = "precio_base")
     private Integer precio_base;
+    
+    @Column(name = "orden")
+    private Integer orden;
+    
     @OneToMany(mappedBy = "platillo")
     private List<Submenu> submenus;
     
@@ -109,6 +113,16 @@ public class Platillo {
     public void setPrecio_base(Integer precio_base) {
         this.precio_base = precio_base;
     }
+
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
+    }
+    
+    
 
     public Platillo() {
 

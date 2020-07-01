@@ -6,6 +6,10 @@
 package com.fuimonosapp.repository;
 
 import com.fuimonosapp.domain.Platillo;
+import com.fuimonosapp.domain.Menu;
+import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +20,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PlatilloRepository extends JpaRepository<Platillo, Integer> {
     
+    public Page<Platillo> findByMenuOrderByOrden(Menu menu, Pageable pageable);
+    
+    public List<Platillo> findByMenuOrderByOrden(Menu menu);
 }

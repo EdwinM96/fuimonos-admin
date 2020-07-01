@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Inicio</title>
+        <title>Fuimonos</title>
         <!-- CSS only -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -158,40 +158,37 @@
                         <div class="row">
                         <div class="col-md-12">
                             <div class="main-card mb-3 card">
-                                <div class="card-header">Agregando Nuevo Menu para&nbsp;<strong>${restaurante.nombre}</strong>
+                                <div class="card-header">Menu&nbsp;<strong>${menu.nombreMenu}</strong>&nbsp;de&nbsp;<strong>${menu.restaurante.nombre}</strong>
                                     <!-- <p style="color: red">Please note that saving the changes will override all previous information.</p> -->
                                 </div>
-                                <form method="POST" action="${pageContext.request.contextPath}/menu/crear" enctype="multipart/form-data">
                                     <div class="row mt-4 mb-5">
                                         <div class="col-lg-1"></div> 
+                                        
                                         <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
                                             <div class="form-label-group">
-                                                <label for="nombre">Nombre <font color="red">*</font></label>
-                                                <input type="text" id="nombre" class="form-control" placeholder="Nombre" name="nombre"  required>
-                                            </div>
+                                                    <label for="nombre">Nombre: </label>
+                                                    <div id="nombre" class="form-control" >${menu.nombreMenu}</div>
+                                                </div>
                                         </div>                                                                               
                                         <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
                                             <div class="form-label-group mt-2">
-                                                <label for="categoria"> Categoria: <font color="red">*</font></label>
-                                                <select id="categoria" name="categoriaId" data-live-search="true" class="form-control" required>
-                                                    <c:forEach items="${categorias}" var="categoria">
-                                                        <option value="${categoria.categoriaId}"/>${categoria.nombreCategoria}</option>
+                                                <label for="categoria">Categoria: </label>
+                                                    <div id="categoria" class="form-control" >
+                                                    <c:forEach items="${menu.menuxcategorias}" var="catalogo">
+                                                        ${catalogo.categoria_id.nombreCategoria} &nbsp;
                                                     </c:forEach>
-
-                                                </select> 
-
+                                                    </div>
                                             </div>
                                         </div>
                                         <input type="hidden"  name="restauranteId" value="${restaurante.restauranteId}">
 
                                     </div>
-                                    <div class="text-center mb-5 mt-3">
+                                    <!--<div class="text-center mb-5 mt-3">
                                         <button type="submit" class="btn btn-success btn-lg" style="padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;font-size: 18px; margin-right:10px">Guardar</button>
                                         <a href="${pageContext.request.contextPath}/restaurante?id=${restaurante.restauranteId}">
                                             <button type="button" class="btn btn-danger btn-lg" style="padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;font-size: 18px; margin-left:10px">Cancelar</button>
                                         </a>
-                                    </div>
-                                </form>
+                                    </div>-->
                             </div>
                         </div>
                         
@@ -204,6 +201,78 @@
                             </div>
                         </div>
                     </div>
+                                            <div class="row">
+                               <div class="col-md-12">
+                                   <div class="main-card mb-3 card">
+                                       <div class="card-header" style="font-weight:bold;font-size: 16px;">
+                                            Platillos de&nbsp;<strong>${menu.nombreMenu} </strong>
+                                            <div class="btn-actions-pane-right">
+                                                <a href="${pageContext.request.contextPath}/platillo/crear?menuId=${menu.menuId}">
+                                                    <button type="button" class="btn-success btn">+ Agregar Platillo</button>
+                                                </a>
+                                            </div>
+                                       </div>
+                                                    <div class="table-responsive">
+                                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width:8%"></th>
+                                                        <th>Platillo</th>
+                                                        <th>Precio</th>
+                                                        <th style="width:13%"></th>
+                                                        <th style="width:5%"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${platillos}" var="platillo" varStatus="index">
+                                                        <tr>
+                                                    <td class="text-center" style="font-weight: bold">
+
+                                                                ${(index.index + 1)}.
+                                                            </td>
+                                                    <td>${platillo.nombre}</td>
+                                                    <td>
+                                                        ${platillo.precio_base}
+                                                    </td>
+                                                    <td>
+                                                    <a href="${pageContext.request.contextPath}/platillo?id=${platillo.platilloId}">
+                                                                    <button class="btn btn-primary">Ver detalles</button>
+                                                                </a>
+                                                    </td>
+                                                    <td class="justify-content-end">
+                                                                <a>
+                                                                    <button type="button" class="btn btn-danger" onclick="llenarModalEliminar(${platillo.platilloId}, '${platillo.nombre}')">&times;</button>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="d-block text-center card-footer">
+                                        <nav aria-label="...">
+                                            <ul class="pagination justify-content-center">
+                                                <li class="page-item ${firstPage?'disabled':''}">
+                                                    <a class="page-link" href="${lastPageUrl}" tabindex="-1">Previous</a>
+                                                </li>
+                                                <li class="page-item ${firstPage?'active':''}"><a class="page-link" href="${firstPageUrl}">${firstPageNumber!=null?firstPageNumber:1}</a></li>
+                                                <c:if test="${secondPageExist}">
+                                                    <li class="page-item ${secondPage?'active':''}">
+                                                        <a class="page-link" href="${secondPageUrl}">${secondPageNumber}</a>
+                                                    </li>
+                                                </c:if>
+                                                <c:if test="${thirdPageExist}">
+                                                    <li class="page-item ${thirdPage?'active':''}"><a class="page-link" href="${thirdPageUrl}">${thirdPageNumber}</a></li>
+                                                    </c:if>
+                                                <li class="page-item ${nextPageExist?'':'disabled'}">
+                                                    <a class="page-link" href="${nextPageUrl}">Next</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                   </div>
+                               </div>
+                           </div>
                 </div>
 
 
