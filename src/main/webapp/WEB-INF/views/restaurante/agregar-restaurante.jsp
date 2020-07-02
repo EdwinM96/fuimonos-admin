@@ -246,23 +246,23 @@
                                                 <div class="col-lg-1"></div> 
                                                 <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
                                                     <div class="form-label-group">
-                                                        <label for="username">Usuario <font color="red">*</font></label>
+                                                        <label for="username">Usuario: <font color="red">*</font></label>
                                                         <input type="text" id="username" class="form-control" placeholder="Usuario" name="username"  required>
                                                     </div>
                                                     <div class="form-label-group mt-2">
-                                                        <label for="nombre">Nombre <font color="red">*</font></label>
+                                                        <label for="nombre">Nombre: <font color="red">*</font></label>
                                                         <input type="text" id="nombre" class="form-control" placeholder="Nombre"  name="nombre" required>
                                                     </div>
                                                     <div class="form-label-group mt-2">
-                                                        <label for="horario_de_apertura">Horario de apertura <font color="red">*</font></label>
+                                                        <label for="horario_de_apertura">Horario de apertura: <font color="red">*</font></label>
                                                         <input type="time" id="horario_de_apertura" class="form-control" placeholder="Horario de apertura"  pattern="dd-MM-yy" type="date" name="horario_de_apertura" required>
                                                     </div>
                                                     <div class="form-label-group mt-2">
-                                                        <label for="horario_de_cierre">Horario de cierre <font color="red">*</font></label>
+                                                        <label for="horario_de_cierre">Horario de cierre: <font color="red">*</font></label>
                                                         <input type="time" id="horario_de_cierre" class="form-control" placeholder="Horario de cierre"  pattern="dd-MM-yy" type="date" name="horario_de_cierre" required>
                                                     </div>
                                                     <div class="form-label-group mt-2">
-                                                        <label for="tiempo_estimado_de_entrega">Tiempo estimado de entrega <font color="red">*</font></label>
+                                                        <label for="tiempo_estimado_de_entrega">Tiempo estimado de entrega: <font color="red">*</font></label>
                                                         <input type="text" id="tiempo_estimado_de_entrega" class="form-control"   name="tiempo_estimado_de_entrega" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" required >
                                                     </div>
 
@@ -270,32 +270,7 @@
                                                         <label for="imagen_de_portada">Imagen de portada <font color="red">*</font></label>
                                                         <input type="file" accept="image/x-png,image/gif,image/jpeg" src="" id="imagen_de_portada" class="form-control"  name="imagen_de_portada" required>
                                                     </div>
-                                                </div>                                                                               
-                                                <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
-                                                    <!--<div class="form-label-group">
-                                                        <label for="descuento">Descuento</label>
-                                                        <input type="number" id="descuento" class="form-control" placeholder="Descuento"  name="descuento">
-                                                    </div>-->
-                                                    <div class="form-label-group">
-                                                        <label for="password">Contraseña <font color="red">*</font></label>
-                                                        <input type="password" id="password" class="form-control" placeholder="Contraseña" name="pass"  required>
-                                                    </div>
-                                                    <div class="form-label-group">
-                                                        <label for="representante">Representante</label>
-                                                        <input type="text" id="representante" class="form-control" placeholder="Representante"  name="representante">
-                                                    </div>
-                                                    <div class="form-label-group mt-2">
-                                                        <label for="numero_de_contacto">Numero de Contacto</label>
-                                                        <input type="text" id="numero_de_contacto" class="form-control" placeholder="Numero de Contacto"  name="numero_de_contacto">
-                                                    </div>
-                                                    <div class="form-label-group mt-2">
-                                                        <label for="comision">Comision sobre Negocio (%) <font color="red">*</font></label>
-                                                        <input type="number" id="comision" class="form-control" placeholder="Comision"  name="comision" required>
-                                                    </div>
-                                                    <div class="form-label-group mt-2">
-                                                        <label for="cargosExtras">Cargos extras</label>
-                                                        <input type="number" id="cargosExtras" class="form-control" step="0.01" placeholder="Cargos extras"  name="cargosExtras">
-                                                    </div>
+
                                                     <div class="form-label-group mt-2">
                                                         <label for="departamento"> Departamento:</label>
                                                         <select id="departamento" name="departamento" class="form-control" >
@@ -307,6 +282,41 @@
                                                         </select> 
 
                                                     </div>
+                                                </div>                                                                               
+                                                <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
+                                                    <!--<div class="form-label-group">
+                                                        <label for="descuento">Descuento</label>
+                                                        <input type="number" id="descuento" class="form-control" placeholder="Descuento"  name="descuento">
+                                                    </div>-->
+                                                    <div class="form-label-group">
+                                                        <label for="password">Contraseña: <font color="red">*</font></label>
+                                                        <input type="password" id="password" class="form-control" placeholder="Contraseña" name="pass"  required>
+                                                    </div>
+                                                    <div class="form-label-group">
+                                                        <label for="nit">NIT: </label>
+                                                        <input type="text" id="nit" class="form-control" placeholder="NIT"  name="nit">
+                                                    </div>
+                                                    <div class="form-label-group">
+                                                        <label for="representante">Correo electrónico: <font color="red">*</font></label>
+                                                        <input type="text" id="representante" class="form-control" placeholder="Correo eletrónico"  name="correo" required>
+                                                    </div>
+                                                    <div class="form-label-group">
+                                                        <label for="representante">Representante:</label>
+                                                        <input type="text" id="representante" class="form-control" placeholder="Representante"  name="representante">
+                                                    </div>
+                                                    <div class="form-label-group mt-2">
+                                                        <label for="numero_de_contacto">Numero de Contacto:</label>
+                                                        <input type="text" id="numero_de_contacto" class="form-control" placeholder="Numero de Contacto"  name="numero_de_contacto">
+                                                    </div>
+                                                    <div class="form-label-group mt-2">
+                                                        <label for="comision">Comision sobre Negocio (%) <font color="red">*</font></label>
+                                                        <input type="number" id="comision" class="form-control" placeholder="Comision"  name="comision" required>
+                                                    </div>
+                                                    <div class="form-label-group mt-2">
+                                                        <label for="cargosExtras">Cargos extras:</label>
+                                                        <input type="number" id="cargosExtras" class="form-control" step="0.01" placeholder="Cargos extras"  name="cargosExtras">
+                                                    </div>
+
                                                 </div>
 
 

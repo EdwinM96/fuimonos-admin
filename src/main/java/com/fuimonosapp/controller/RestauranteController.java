@@ -86,7 +86,7 @@ public class RestauranteController {
     }
 
     @GetMapping(path = "restaurante/crear")
-    public ModelAndView saveRestaurante( HttpServletRequest request, HttpServletResponse response
+    public ModelAndView agregarRestaurante( HttpServletRequest request, HttpServletResponse response
            ) throws IOException {
         if (SessionUtils.assertLogin(request)) {
             ModelAndView mav = new ModelAndView("restaurante/agregar-restaurante");
@@ -103,12 +103,12 @@ public class RestauranteController {
     }
     
     @PostMapping(path = "restaurante/crear")
-    public void saveRestaurantePOST(@RequestParam("username") String usuario, @RequestParam("nombre") String nombre,
+    public void agregarRestaurantePOST(@RequestParam("username") String usuario, @RequestParam("nombre") String nombre,
             @RequestParam("horario_de_apertura")String horarioDeApertura, @RequestParam("horario_de_cierre")String horarioDeCierre,
             @RequestParam("tiempo_estimado_de_entrega") String tiempoEstimadoDeEntrega, @RequestParam("imagen_de_portada") MultipartFile imagen,
             @RequestParam(value = "representante", required=false)String representante, @RequestParam(value = "numero_de_contacto", required=false)String numeroDeContacto,
             @RequestParam(value = "cargosExtras", required=false)Double cargosExtra, @RequestParam("departamento") Integer departamentoId,
-            @RequestParam("comision") Double comision,
+            @RequestParam("comision") Double comision, @RequestParam(value="nit", required=false) String nit, @RequestParam("correo") String correo,
             HttpServletRequest request, HttpServletResponse response
            ) throws IOException, ParseException {
         if (SessionUtils.assertLogin(request)) {
@@ -124,7 +124,6 @@ public class RestauranteController {
             restaurante.setNombre(nombre);
             restaurante.setHorarioDeApertura(format.parse(horarioDeApertura));
             restaurante.setHorarioDeCierre(format.parse(horarioDeCierre));
-            l.info("Tiempo Estimado de Entrega: "+tiempoEstimadoDeEntrega);
             restaurante.setTiempoEstimadoDeEntrega(minuteFormat.parse(tiempoEstimadoDeEntrega));
             restaurante.setImagenDePortada(imageBytes);
             restaurante.setRepresentante(representante);

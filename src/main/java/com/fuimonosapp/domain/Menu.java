@@ -42,8 +42,6 @@ public class Menu {
         @OneToMany(mappedBy = "menu_id")
         private List<MenuXCategoria> menuxcategorias;
         
-        /*@GeneratedValue(generator = "menu_orden_seq", strategy = GenerationType.AUTO)
-	@SequenceGenerator(name = "menu_orden_seq", sequenceName = "public.menu_orden_seq", allocationSize = 1)*/
         @Column(name="orden")
         private Integer orden;
         

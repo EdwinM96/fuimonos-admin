@@ -1,11 +1,13 @@
 <%-- 
-    Document   : agregar-platillo
-    Created on : 1/07/2020, 04:06:35 PM
+    Document   : ver-platillo
+    Created on : 2/07/2020, 11:39:42 AM
     Author     : HP PC
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -147,10 +149,11 @@
                 <div class="app-main__outer">
                     
                     <div class="app-main__inner">
+                        <a href="${pageContext.request.contextPath}/menu?id=${platillo.menu.menuId}" > <i class="fas fa-arrow-left fa-2x mb-2"></i></a>
                         <div class="row">
                         <div class="col-md-12">
                             <div class="main-card mb-3 card">
-                                <div class="card-header">Agregando Nuevo Platillo para&nbsp;<strong>${menu.nombreMenu}</strong>&nbsp;de&nbsp;<strong>${menu.restaurante.nombre}</strong>
+                                <div class="card-header">Platillo&nbsp;<strong>${platillo.nombre}</strong>&nbsp;de&nbsp;<strong>${platillo.menu.nombreMenu}</strong>&nbsp;para restuarante&nbsp;<strong>${menu.restaurante.nombre}</strong>
                                     <!-- <p style="color: red">Please note that saving the changes will override all previous information.</p> -->
                                 </div>
                                 <form method="POST" action="${pageContext.request.contextPath}/platillo/crear" enctype="multipart/form-data">
@@ -158,29 +161,20 @@
                                         <div class="col-lg-1"></div> 
                                         <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
                                             <div class="form-label-group">
-                                                <label for="nombre">Nombre: <font color="red">*</font></label>
-                                                <input type="text" id="nombre" class="form-control" placeholder="Nombre" name="nombre"  required>
-                                            </div>
-                                            <div class="form-label-group mt-2">
-                                                <label for="imagen">Imagen: <font color="red">*</font></label>
-                                                <input type="file" accept="image/x-png,image/gif,image/jpeg" src="" id="imagen" class="form-control"  name="imagen" required>
+                                                <label for="nombre">Nombre: </label>
+                                                <div id="nombre" class="form-control" >${platillo.nombre}</div>
                                             </div>
                                         </div>                                                                               
                                         <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
                                             <div class="form-label-group mt-2">
-                                                <label for="precio">Precio ($): <font color="red">*</font></label>
-                                                <input type="number" id="precio" class="form-control" step="0.01" placeholder="Precio"  name="precioBase">
+                                                <label for="precio">Precio: </label>
+                                                <div id="nombre" class="form-control" >
+                                                    <fmt:formatNumber  value="${platillo.precioBase}" type="currency" pattern="$####.##" minFractionDigits="2" />
+                                                </div>
                                             </div>
                                         </div>
-                                        <input type="hidden"  name="menuId" value="${menu.menuId}">
-
                                     </div>
-                                    <div class="text-center mb-5 mt-3">
-                                        <button type="submit" class="btn btn-success btn-lg" style="padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;font-size: 18px; margin-right:10px">Guardar</button>
-                                        <a href="${pageContext.request.contextPath}/menu?id=${menu.menuId}">
-                                            <button type="button" class="btn btn-danger btn-lg" style="padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;font-size: 18px; margin-left:10px">Cancelar</button>
-                                        </a>
-                                    </div>
+                                    
                                 </form>
                             </div>
                         </div>

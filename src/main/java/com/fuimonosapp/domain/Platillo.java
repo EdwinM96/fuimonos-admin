@@ -20,7 +20,7 @@ public class Platillo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "platillo_id")
-    private Integer platillo_id;
+    private Integer platilloId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id")
@@ -30,7 +30,7 @@ public class Platillo {
     private String nombre;
 
     @Column(name = "precio_base")
-    private Integer precio_base;
+    private Double precioBase;
     
     @Column(name = "orden")
     private Integer orden;
@@ -38,14 +38,14 @@ public class Platillo {
     @OneToMany(mappedBy = "platillo")
     private List<Submenu> submenus;
     
-     @OneToMany(mappedBy = "platillo", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "platillo", fetch = FetchType.EAGER)
     private List<PlatilloFavorito> platillosFavoritos;
      
-      @OneToMany(mappedBy = "platillo")
+    @OneToMany(mappedBy = "platillo")
     private List<PlatilloSeleccionado> platillosSeleccionados;
 
     @Column(name = "imagen")
-    private String imagen;
+    private Byte[] imagen;
 
     public List<PlatilloSeleccionado> getPlatillosSeleccionados() {
         return platillosSeleccionados;
@@ -64,16 +64,14 @@ public class Platillo {
         this.platillosFavoritos = platillosFavoritos;
     }
 
-    public String getImagen() {
+    public Byte[] getImagen() {
         return imagen;
     }
 
-    public void setImagen(String imagen) {
+    public void setImagen(Byte[] imagen) {
         this.imagen = imagen;
     }
     
-    
-
     public List<Submenu> getSubmenus() {
         return submenus;
     }
@@ -82,13 +80,15 @@ public class Platillo {
         this.submenus = submenus;
     }
 
-    public Integer getPlatillo_id() {
-        return platillo_id;
+    public Integer getPlatilloId() {
+        return platilloId;
     }
 
-    public void setPlatillo_id(Integer platillo_id) {
-        this.platillo_id = platillo_id;
+    public void setPlatilloId(Integer platilloId) {
+        this.platilloId = platilloId;
     }
+
+    
 
     public Menu getMenu() {
         return menu;
@@ -106,13 +106,14 @@ public class Platillo {
         this.nombre = nombre;
     }
 
-    public Integer getPrecio_base() {
-        return precio_base;
+    public Double getPrecioBase() {
+        return precioBase;
     }
 
-    public void setPrecio_base(Integer precio_base) {
-        this.precio_base = precio_base;
+    public void setPrecioBase(Double precioBase) {
+        this.precioBase = precioBase;
     }
+
 
     public Integer getOrden() {
         return orden;

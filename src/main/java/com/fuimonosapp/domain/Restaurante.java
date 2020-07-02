@@ -76,6 +76,12 @@ public class Restaurante {
     @Column(name="cargos_extras")
     private Double cargosExtras;
     
+    @Column(name="nit")
+    private String nit;
+    
+    @Column(name="correo")
+    private String correo;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "departamento_id")
     private Departamento departamento_id;
@@ -211,6 +217,22 @@ public class Restaurante {
 
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
+    }
+
+    public String getNit() {
+        return nit;
+    }
+
+    public void setNit(String nit) {
+        this.nit = nit;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
     
     

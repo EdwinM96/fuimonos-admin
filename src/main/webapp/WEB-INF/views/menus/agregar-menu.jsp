@@ -155,7 +155,7 @@
                                         <div class="col-lg-1"></div> 
                                         <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
                                             <div class="form-label-group">
-                                                <label for="nombre">Nombre <font color="red">*</font></label>
+                                                <label for="nombre">Nombre: <font color="red">*</font></label>
                                                 <input type="text" id="nombre" class="form-control" placeholder="Nombre" name="nombre"  required>
                                             </div>
                                         </div>                                                                               

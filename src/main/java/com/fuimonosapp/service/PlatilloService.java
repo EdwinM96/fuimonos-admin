@@ -8,11 +8,13 @@ package com.fuimonosapp.service;
 import com.fuimonosapp.repository.PlatilloRepository;
 import com.fuimonosapp.domain.Platillo;
 import com.fuimonosapp.repository.MenuRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -49,6 +51,21 @@ public class PlatilloService {
         }
         platillo.setOrden(i);
         return platRepo.saveAndFlush(platillo);
+    }
+
+    @Transactional
+    public void eliminarPlatillo(Integer platilloId) {
+        Platillo platillo = platRepo.findById(platilloId).get();
+        List<Platillo> platillos = platRepo.findByMenuOrderByOrden(platillo.getMenu());
+        List<Platillo> platilloSave = new ArrayList<Platillo>();
+        for(Platillo platilloItr : platillos){
+            if(platilloItr.getOrden()>platillo.getOrden()){
+                platilloItr.setOrden(platilloItr.getOrden()-1);
+                platilloSave.add(platilloItr);
+            }
+        }
+        platRepo.saveAll(platillos);
+        platRepo.delete(platillo);
     }
     
 }

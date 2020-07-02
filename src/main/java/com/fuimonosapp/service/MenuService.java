@@ -53,7 +53,7 @@ public class MenuService {
     @Transactional
     public Menu save(Menu menu) throws DataAccessException {
         Restaurante restaurante = restaService.findOne(menu.getRestaurante().getRestauranteId());  
-        List<Menu> menus = menuRepository.findByRestaurante(restaurante);
+        List<Menu> menus = menuRepository.findByRestauranteOrderByOrden(restaurante);
         Integer index = 1;
         for(Menu menuIter : menus){
            index++; 
@@ -70,7 +70,7 @@ public class MenuService {
     @Transactional
     public void delete(Integer menuId) throws DataAccessException {
         Menu menu = menuRepository.getOne(menuId);
-        List<Menu> menus = menuRepository.findByRestaurante(restaService.findOne(menu.getRestaurante().getRestauranteId()));
+        List<Menu> menus = menuRepository.findByRestauranteOrderByOrden(restaService.findOne(menu.getRestaurante().getRestauranteId()));
         List<Menu> menusSave = new ArrayList();
         for(Menu menuIter: menus){
             if(menuIter.getOrden()>menu.getOrden()){
@@ -85,5 +85,46 @@ public class MenuService {
             menuRepository.saveAll(menusSave);
         }
 
+    }
+    
+    @Transactional
+    public void posicionarMenuArriba(Integer menuId){
+        Menu menu = menuRepository.getOne(menuId);
+        List<Menu> menus = menuRepository.findByRestauranteOrderByOrden(restaService.findOne(menu.getRestaurante().getRestauranteId()));
+        Integer posicionMenu = menu.getOrden() - 1;
+        if(posicionMenu == 0){return;}
+        Menu menuOrderToReplace = new Menu();
+        for(Menu menuIter: menus){
+            if(menuIter.getOrden().equals(posicionMenu)){
+                menuOrderToReplace = menuIter;
+            }
+        }
+        menuOrderToReplace.setOrden(menu.getOrden());
+        menu.setOrden(posicionMenu);
+       menuRepository.save(menuOrderToReplace);
+       menuRepository.save(menu);
+    }
+    
+    @Transactional
+    public void posicionarMenuAbajo(Integer menuId){
+        Menu menu = menuRepository.getOne(menuId);
+        List<Menu> menus = menuRepository.findByRestauranteOrderByOrden(restaService.findOne(menu.getRestaurante().getRestauranteId()));
+        Integer posicionMenu = menu.getOrden() + 1;
+        if(posicionMenu == 0){return;}
+        Menu menuOrderToReplace = new Menu();
+        Integer lastOrden = 1;
+        for(Menu menuIter: menus){
+            if(menuIter.getOrden().equals(posicionMenu)){
+                menuOrderToReplace = menuIter;
+            }
+           lastOrden = menuIter.getOrden();
+        }
+        if(lastOrden<posicionMenu){
+            return;
+        }
+        menuOrderToReplace.setOrden(menu.getOrden());
+        menu.setOrden(posicionMenu);
+       menuRepository.save(menuOrderToReplace);
+       menuRepository.save(menu);
     }
 }

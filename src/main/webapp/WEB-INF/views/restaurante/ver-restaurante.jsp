@@ -236,6 +236,7 @@
                     <div class="app-main__outer">
 
                         <div class="app-main__inner">
+                            <a href="${pageContext.request.contextPath}/restaurantes" > <i class="fas fa-arrow-left fa-2x mb-2"></i></a>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="main-card mb-3 card">
@@ -320,6 +321,8 @@
                                                         <th style="width:8%"></th>
                                                         <th>Menu</th>
                                                         <th>Categorias</th>
+                                                        <th style="width:8%"></th>
+                                                        <th style="width:8%"></th>
                                                         <th style="width:13%"></th>
                                                         <th style="width:5%"></th>
                                                     </tr>
@@ -334,7 +337,10 @@
                                                     <td>${menu.nombreMenu}</td>
                                                     <td><c:forEach items="${menu.menuxcategorias}" var="menuxcategoria" >
                                                                     ${menuxcategoria.categoria_id.nombreCategoria}
-                                                                </c:forEach></td>
+                                                                </c:forEach>
+                                                    </td>
+                                                    <td><a href="${pageContext.request.contextPath}/menu/top?id=${menu.menuId}"><i class="fas fa-arrow-up"></i></a></td>
+                                                    <td><a href="${pageContext.request.contextPath}/menu/bot?id=${menu.menuId}"><i class="fas fa-arrow-down"></i></a></td>
                                                     <td>
                                                     <a href="${pageContext.request.contextPath}/menu?id=${menu.menuId}">
                                                                     <button class="btn btn-primary">Ver detalles</button>
@@ -350,6 +356,27 @@
                                                 </tbody>
                                                         </table>
                                                     </div>
+                                                    <div class="d-block text-center card-footer">
+                                        <nav aria-label="...">
+                                            <ul class="pagination justify-content-center">
+                                                <li class="page-item ${firstPage?'disabled':''}">
+                                                    <a class="page-link" href="${lastPageUrl}" tabindex="-1">Previous</a>
+                                                </li>
+                                                <li class="page-item ${firstPage?'active':''}"><a class="page-link" href="${firstPageUrl}">${firstPageNumber!=null?firstPageNumber:1}</a></li>
+                                                <c:if test="${secondPageExist}">
+                                                    <li class="page-item ${secondPage?'active':''}">
+                                                        <a class="page-link" href="${secondPageUrl}">${secondPageNumber}</a>
+                                                    </li>
+                                                </c:if>
+                                                <c:if test="${thirdPageExist}">
+                                                    <li class="page-item ${thirdPage?'active':''}"><a class="page-link" href="${thirdPageUrl}">${thirdPageNumber}</a></li>
+                                                    </c:if>
+                                                <li class="page-item ${nextPageExist?'':'disabled'}">
+                                                    <a class="page-link" href="${nextPageUrl}">Next</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
                                    </div>
                                </div>
                            </div>

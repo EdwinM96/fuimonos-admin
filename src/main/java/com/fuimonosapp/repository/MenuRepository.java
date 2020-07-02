@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MenuRepository extends JpaRepository<Menu, Integer> {
     
-    public List<Menu> findByRestaurante(Restaurante restaurante);
+    public List<Menu> findByRestauranteOrderByOrden(Restaurante restaurante);
     
     public Page<Menu> findByRestauranteOrderByOrden(Restaurante restaurante, Pageable pageable);
     

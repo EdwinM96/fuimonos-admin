@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,6 +42,7 @@
         </style>
     </head>
     <body>
+        
         <!-- <h1>Hello World from dashboard!</h1>
          <a href="${pageContext.request.contextPath}/logout"><button type="button" class="btn btn-primary">Logout</button></a>
      
@@ -144,40 +146,40 @@
                 <div class="app-main__outer">
 
                     <div class="app-main__inner">
-                        <c:if test="${creatingAccountSuccess}">
+                        <c:if test="${platilloCreado}">
                             <div class="alert alert-success" role="alert">
-                                Restaurante creado!
+                                Platillo creado!
                             </div>
                         </c:if>
-                        <c:if test="${deletingAccountSuccess}">
+                        <c:if test="${platilloEliminado}">
                             <div class="alert alert-success" role="alert">
-                                Restaurante eliminado!
+                                Platillo eliminado!
                             </div>
                         </c:if>
-                        
+                        <a href="${pageContext.request.contextPath}/restaurante?id=${menu.restaurante.restauranteId}" > <i class="fas fa-arrow-left fa-2x mb-2"></i></a>
                         <div class="row">
-                        <div class="col-md-12">
-                            <div class="main-card mb-3 card">
-                                <div class="card-header">Menu&nbsp;<strong>${menu.nombreMenu}</strong>&nbsp;de&nbsp;<strong>${menu.restaurante.nombre}</strong>
-                                    <!-- <p style="color: red">Please note that saving the changes will override all previous information.</p> -->
-                                </div>
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-header">Menu&nbsp;<strong>${menu.nombreMenu}</strong>&nbsp;de&nbsp;<strong>${menu.restaurante.nombre}</strong>
+                                        <!-- <p style="color: red">Please note that saving the changes will override all previous information.</p> -->
+                                    </div>
                                     <div class="row mt-4 mb-5">
                                         <div class="col-lg-1"></div> 
-                                        
+
                                         <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
                                             <div class="form-label-group">
-                                                    <label for="nombre">Nombre: </label>
-                                                    <div id="nombre" class="form-control" >${menu.nombreMenu}</div>
-                                                </div>
+                                                <label for="nombre">Nombre: </label>
+                                                <div id="nombre" class="form-control" >${menu.nombreMenu}</div>
+                                            </div>
                                         </div>                                                                               
                                         <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
                                             <div class="form-label-group mt-2">
                                                 <label for="categoria">Categoria: </label>
-                                                    <div id="categoria" class="form-control" >
+                                                <div id="categoria" class="form-control" >
                                                     <c:forEach items="${menu.menuxcategorias}" var="catalogo">
                                                         ${catalogo.categoria_id.nombreCategoria} &nbsp;
                                                     </c:forEach>
-                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <input type="hidden"  name="restauranteId" value="${restaurante.restauranteId}">
@@ -189,74 +191,67 @@
                                             <button type="button" class="btn btn-danger btn-lg" style="padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;font-size: 18px; margin-left:10px">Cancelar</button>
                                         </a>
                                     </div>-->
+                                </div>
                             </div>
-                        </div>
-                        
 
-                    </div>
-                    <div class="app-wrapper-footer">
-                        <div class="app-footer">
-                            <div class="app-footer__inner">
 
-                            </div>
                         </div>
-                    </div>
-                                            <div class="row">
-                               <div class="col-md-12">
-                                   <div class="main-card mb-3 card">
-                                       <div class="card-header" style="font-weight:bold;font-size: 16px;">
-                                            Platillos de&nbsp;<strong>${menu.nombreMenu} </strong>
-                                            <div class="btn-actions-pane-right">
-                                                <a href="${pageContext.request.contextPath}/platillo/crear?menuId=${menu.menuId}">
-                                                    <button type="button" class="btn-success btn">+ Agregar Platillo</button>
-                                                </a>
-                                            </div>
-                                       </div>
-                                                    <div class="table-responsive">
-                                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
-                                                <thead>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-header" style="font-weight:bold;font-size: 16px;">
+                                        Platillos de&nbsp;<strong>${menu.nombreMenu} </strong>
+                                        <div class="btn-actions-pane-right">
+                                            <a href="${pageContext.request.contextPath}/platillo/crear?menuId=${menu.menuId}">
+                                                <button type="button" class="btn-success btn">+ Agregar Platillo</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:8%"></th>
+                                                    <th>Platillo</th>
+                                                    <th>Precio</th>
+                                                    <th style="width:13%"></th>
+                                                    <th style="width:5%"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${platillos}" var="platillo" varStatus="index">
                                                     <tr>
-                                                        <th style="width:8%"></th>
-                                                        <th>Platillo</th>
-                                                        <th>Precio</th>
-                                                        <th style="width:13%"></th>
-                                                        <th style="width:5%"></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <c:forEach items="${platillos}" var="platillo" varStatus="index">
-                                                        <tr>
-                                                    <td class="text-center" style="font-weight: bold">
+                                                        <td class="text-center" style="font-weight: bold">
 
-                                                                ${(index.index + 1)}.
-                                                            </td>
-                                                    <td>${platillo.nombre}</td>
-                                                    <td>
-                                                        ${platillo.precio_base}
-                                                    </td>
-                                                    <td>
-                                                    <a href="${pageContext.request.contextPath}/platillo?id=${platillo.platilloId}">
-                                                                    <button class="btn btn-primary">Ver detalles</button>
-                                                                </a>
-                                                    </td>
-                                                    <td class="justify-content-end">
-                                                                <a>
-                                                                    <button type="button" class="btn btn-danger" onclick="llenarModalEliminar(${platillo.platilloId}, '${platillo.nombre}')">&times;</button>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="d-block text-center card-footer">
+                                                            ${(index.index + 1)}.
+                                                        </td>
+                                                        <td>${platillo.nombre}</td>
+                                                        <td>
+                                                            <fmt:formatNumber  value="${platillo.precioBase}" type="currency" pattern="$#####.##" minFractionDigits="2" />
+                                                        </td>
+                                                        <td>
+                                                            <a href="${pageContext.request.contextPath}/platillo?id=${platillo.platilloId}">
+                                                                <button class="btn btn-primary">Ver detalles</button>
+                                                            </a>
+                                                        </td>
+                                                        <td class="justify-content-end">
+                                                            <a>
+                                                                <button type="button" class="btn btn-danger" onclick="llenarModalEliminar(${platillo.platilloId}, '${platillo.nombre}')">&times;</button>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="d-block text-center card-footer">
                                         <nav aria-label="...">
                                             <ul class="pagination justify-content-center">
                                                 <li class="page-item ${firstPage?'disabled':''}">
                                                     <a class="page-link" href="${lastPageUrl}" tabindex="-1">Previous</a>
                                                 </li>
                                                 <li class="page-item ${firstPage?'active':''}"><a class="page-link" href="${firstPageUrl}">${firstPageNumber!=null?firstPageNumber:1}</a></li>
-                                                <c:if test="${secondPageExist}">
+                                                    <c:if test="${secondPageExist}">
                                                     <li class="page-item ${secondPage?'active':''}">
                                                         <a class="page-link" href="${secondPageUrl}">${secondPageNumber}</a>
                                                     </li>
@@ -270,15 +265,53 @@
                                             </ul>
                                         </nav>
                                     </div>
-                                   </div>
-                               </div>
-                           </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-wrapper-footer">
+                        <div class="app-footer">
+                            <div class="app-footer__inner">
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-
-
             </div>
-        </div>
-        <script src="<c:url value="/resources/font-awesome/js/all.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/dashboard.js"/>"></script>
+                                                <div class="modal fade" id="deletePlatilloModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Desea eliminar este platillo?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center" id="nombrePlatilloModal" style="font-weight: bold; font-size:24px"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <a href="" id="modalDeleteLink"><button type="button" class="btn btn-danger">Eliminar</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                function llenarModalEliminar(id, nombrePlatillo) {
+                    document.getElementById("modalDeleteLink").href = "${pageContext.request.contextPath}/platillo/delete?id=" + id;
+                    var labelDiv = document.getElementById("nombrePlatilloModal");
+                    while (labelDiv.firstChild) {
+                        labelDiv.removeChild(labelDiv.firstChild);
+                    }
+                    var labelContent = document.createTextNode(nombrePlatillo);
+                    labelDiv.appendChild(labelContent);
+                    $('#deletePlatilloModal').modal('toggle')
+                }
+
+            </script>
+            <script src="<c:url value="/resources/font-awesome/js/all.js"/>"></script>
+            <script type="text/javascript" src="<c:url value="/resources/dashboard.js"/>"></script>
     </body>
 </html>

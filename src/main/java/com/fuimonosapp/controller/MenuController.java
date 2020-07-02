@@ -117,6 +117,46 @@ public class MenuController {
         }
     }
     
+    @GetMapping("/menu/top")
+    public void posicionarMenuArriba(@RequestParam("id")Integer menuId, HttpServletRequest request, HttpServletResponse response) throws IOException{
+        if(SessionUtils.assertLogin(request)){
+            Integer restauranteId = 0;
+            try{
+             restauranteId = menuService.findOne(menuId).getRestaurante().getRestauranteId();
+             menuService.posicionarMenuArriba(menuId);
+            }
+            catch(Exception e){
+                l.info(e.getMessage());
+                response.sendRedirect(request.getContextPath() + "/restaurantes");
+            }
+            
+            response.sendRedirect(request.getContextPath() + "/restaurante?id="+restauranteId);
+        }
+        else{
+            response.sendRedirect(request.getContextPath() + "/");
+        }
+    }
+    
+    @GetMapping("/menu/bot")
+    public void posicionarMenuAbajo(@RequestParam("id")Integer menuId, HttpServletRequest request, HttpServletResponse response) throws IOException{
+        if(SessionUtils.assertLogin(request)){
+            Integer restauranteId = 0;
+            try{
+             restauranteId = menuService.findOne(menuId).getRestaurante().getRestauranteId();
+             menuService.posicionarMenuAbajo(menuId);
+            }
+            catch(Exception e){
+                l.info(e.getMessage());
+                response.sendRedirect(request.getContextPath() + "/restaurantes");
+            }
+            
+            response.sendRedirect(request.getContextPath() + "/restaurante?id="+restauranteId);
+        }
+        else{
+            response.sendRedirect(request.getContextPath() + "/");
+        }
+    }
+    
     @GetMapping("/menu")
     public ModelAndView verMenu(@RequestParam("id")Integer menuId, HttpServletRequest request, HttpServletResponse response) throws IOException{
         if(SessionUtils.assertLogin(request)){
@@ -125,7 +165,7 @@ public class MenuController {
                 menu = menuService.findOne(menuId);
             }
             catch(Exception e){
-                response.sendRedirect(request.getContextPath() + "/dashboard");
+                response.sendRedirect(request.getContextPath() + "/restaurantes");
                 return null;
             }       
             HttpSession session = request.getSession();
