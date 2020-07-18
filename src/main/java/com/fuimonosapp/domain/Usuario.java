@@ -75,7 +75,7 @@ public class Usuario {
     private Date fechaCreacion;
     
     @OneToOne(mappedBy = "usuario_id", cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY, optional = false)
+        fetch = FetchType.LAZY)
      private Pedido pedido;
     
     @Column(name = "imagen_perfil")
