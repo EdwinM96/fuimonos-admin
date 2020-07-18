@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fuimonosapp.controller;
+package com.fuimonosapp.controller.api;
 
 import com.fuimonosapp.domain.*;
 import com.fuimonosapp.service.UsuarioService;
@@ -35,7 +35,7 @@ public class UsuarioControllerAPI {
     
     DateFormat dFormat = new SimpleDateFormat("dd/MM/yyyy");
     
-    @PostMapping(value = "/registro", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/registro", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> register(@RequestParam("email") String email, @RequestParam("username") String username,
             @RequestParam("password") String password, @RequestParam("nombre") String nombre, 
             @RequestParam("apellido") String apellido, @RequestParam(value = "fecha_de_nacimiento", required=false)String fechaDeNacimiento, 
