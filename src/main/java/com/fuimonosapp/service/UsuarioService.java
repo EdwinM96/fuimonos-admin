@@ -35,4 +35,8 @@ public class UsuarioService {
         return uRepo.findOneByEmail(email) == null;
     }
     
+    public boolean celularIsAvailable(String celular){
+        return uRepo.findOneByCelular(celular) == null;
+    }
+    
 }
