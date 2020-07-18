@@ -35,12 +35,12 @@ public class OpcionSubMenu {
 
     @Column(name = "seleccionado_por_defecto")
     private Boolean seleccionado_por_defecto;
-    
+
     @OneToOne(mappedBy = "opcionsubmenu_id", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, optional = false)
     private OpcionDeSubMenuSeleccionado opcionDeSubMenuSeleccionado;
-     
-     @OneToMany(mappedBy = "opcionsubmenu", fetch = FetchType.EAGER)
+
+    @OneToMany(mappedBy = "opcionsubmenu", fetch = FetchType.EAGER)
     private List<SeleccionSubMenuPlatilloFavorito> seleccionSubMenuPlatilloFavoritos;
 
     public OpcionDeSubMenuSeleccionado getOpcionDeSubMenuSeleccionado() {
@@ -51,8 +51,6 @@ public class OpcionSubMenu {
         this.opcionDeSubMenuSeleccionado = opcionDeSubMenuSeleccionado;
     }
 
- 
-
     public List<SeleccionSubMenuPlatilloFavorito> getSeleccionSubMenuPlatilloFavoritos() {
         return seleccionSubMenuPlatilloFavoritos;
     }
@@ -60,8 +58,6 @@ public class OpcionSubMenu {
     public void setSeleccionSubMenuPlatilloFavoritos(List<SeleccionSubMenuPlatilloFavorito> seleccionSubMenuPlatilloFavoritos) {
         this.seleccionSubMenuPlatilloFavoritos = seleccionSubMenuPlatilloFavoritos;
     }
-     
-     
 
     public Integer getPrecio() {
         return precio;
@@ -78,11 +74,7 @@ public class OpcionSubMenu {
     public void setSeleccionado_por_defecto(Boolean seleccionado_por_defecto) {
         this.seleccionado_por_defecto = seleccionado_por_defecto;
     }
-    
-    
-    
-    
-    
+
     public Submenu getSubmenu() {
         return submenu;
     }
@@ -106,8 +98,6 @@ public class OpcionSubMenu {
     public void setNombre_opcion(String nombre_opcion) {
         this.nombre_opcion = nombre_opcion;
     }
-
-  
 
     public OpcionSubMenu() {
 

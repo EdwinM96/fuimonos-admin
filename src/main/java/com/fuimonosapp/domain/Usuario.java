@@ -6,7 +6,6 @@
 package com.fuimonosapp.domain;
 
 import java.util.Date;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +13,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -48,20 +46,40 @@ public class Usuario {
 
     @Column(name = "direccion")
     private String direccion;
+    
+    @Column(name = "correo_electronico")
+    private String email;
+    
+    @Column(name = "celular")
+    private String celular;
+    
+    @Column(name = "nombre")
+    private String nombre;
+    
+    @Column(name = "apellido")
+    private String apellido;
+    
+    @Column(name = "fecha_de_nacimiento")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date fechaNacimiento;
 
     @Column(name = "ultimo_inicio")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date ultimo_inicio;
+    private Date ultimoInicio;
 
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date fecha_creacion;
+    private Date fechaCreacion;
     
     @OneToOne(mappedBy = "usuario_id", cascade = CascadeType.ALL,
         fetch = FetchType.LAZY, optional = false)
      private Pedido pedido;
+    
+    @Column(name = "imagen_perfil")
+    private Byte[] imagenPerfil;
 
     public Pedido getPedido() {
         return pedido;
@@ -122,22 +140,72 @@ public class Usuario {
         this.direccion = direccion;
     }
 
-    public Date getUltimo_inicio() {
-        return ultimo_inicio;
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setUltimo_inicio(Date ultimo_inicio) {
-        this.ultimo_inicio = ultimo_inicio;
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Date getFecha_creacion() {
-        return fecha_creacion;
+    public Date getUltimoInicio() {
+        return ultimoInicio;
     }
 
-    public void setFecha_creacion(Date fecha_creacion) {
-        this.fecha_creacion = fecha_creacion;
+    public void setUltimoInicio(Date ultimoInicio) {
+        this.ultimoInicio = ultimoInicio;
     }
 
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Byte[] getImagenPerfil() {
+        return imagenPerfil;
+    }
+
+    public void setImagenPerfil(Byte[] imagenPerfil) {
+        this.imagenPerfil = imagenPerfil;
+    }
+    
+    
     public Usuario(){
         
     }

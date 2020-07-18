@@ -173,12 +173,90 @@
                                                 </div>
                                             </div>
                                         </div>
+                                                <div class="col-11 mx-auto col-lg-4">
+                                                    <div class="form-label-group mt-2">
+                                                <label for="descripcion">Descripción: <font color="red">*</font></label>
+                                                <textarea id="descripcion" class="form-control" readonly>${platillo.descripcion}</textarea>
+                                            </div>
+                                                </div>
                                     </div>
                                     
                                 </form>
                             </div>
                         </div>
                     </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-header" style="font-weight:bold;font-size: 16px;">
+                                        Submenu de&nbsp;<strong>${platillo.nombre} </strong>
+                                        <div class="btn-actions-pane-right">
+                                            <a href="${pageContext.request.contextPath}/submenu/crear?platilloId=${platillo.platilloId}">
+                                                <button type="button" class="btn-success btn">+ Agregar Submenu</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:8%"></th>
+                                                    <th>Submenu</th>
+                                                    <th style="width:8%"></th>
+                                                    <th style="width:8%"></th>
+                                                    <th style="width:13%"></th>
+                                                    <th style="width:5%"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${submenus}" var="submenu" varStatus="index">
+                                                    <tr>
+                                                        <td class="text-center" style="font-weight: bold">
+
+                                                            ${(index.index + 1)}.
+                                                        </td>
+                                                        <td>${submenu.titulo}</td>
+                                                        <td><a href="${pageContext.request.contextPath}/submenu/top?id=${submenu.submenuId}"><i class="fas fa-arrow-up"></i></a></td>
+                                                        <td><a href="${pageContext.request.contextPath}/submenu/bot?id=${submenu.submenuId}"><i class="fas fa-arrow-down"></i></a></td>
+                                                        <td>
+                                                            <a href="${pageContext.request.contextPath}/submenu?id=${submenu.submenuId}">
+                                                                <button class="btn btn-primary">Ver detalles</button>
+                                                            </a>
+                                                        </td>
+                                                        <td class="justify-content-end">
+                                                            <a>
+                                                                <button type="button" class="btn btn-danger" onclick="llenarModalEliminar(${platillo.platilloId}, '${platillo.nombre}')">&times;</button>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="d-block text-center card-footer">
+                                        <nav aria-label="...">
+                                            <ul class="pagination justify-content-center">
+                                                <li class="page-item ${firstPage?'disabled':''}">
+                                                    <a class="page-link" href="${lastPageUrl}" tabindex="-1">Previous</a>
+                                                </li>
+                                                <li class="page-item ${firstPage?'active':''}"><a class="page-link" href="${firstPageUrl}">${firstPageNumber!=null?firstPageNumber:1}</a></li>
+                                                    <c:if test="${secondPageExist}">
+                                                    <li class="page-item ${secondPage?'active':''}">
+                                                        <a class="page-link" href="${secondPageUrl}">${secondPageNumber}</a>
+                                                    </li>
+                                                </c:if>
+                                                <c:if test="${thirdPageExist}">
+                                                    <li class="page-item ${thirdPage?'active':''}"><a class="page-link" href="${thirdPageUrl}">${thirdPageNumber}</a></li>
+                                                    </c:if>
+                                                <li class="page-item ${nextPageExist?'':'disabled'}">
+                                                    <a class="page-link" href="${nextPageUrl}">Next</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="app-wrapper-footer">
                         <div class="app-footer">
@@ -191,7 +269,37 @@
 
             </div>
         </div>
-                      
+                 <div class="modal fade" id="deleteSubmenuModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Desea eliminar este submenu?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center" id="tituloSubmenuModal" style="font-weight: bold; font-size:24px"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <a href="" id="modalDeleteLink"><button type="button" class="btn btn-danger">Eliminar</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                function llenarModalEliminar(id, tituloSubmenu) {
+                    document.getElementById("modalDeleteLink").href = "${pageContext.request.contextPath}/submenu/delete?id=" + id;
+                    var labelDiv = document.getElementById("tituloSubmenuModal");
+                    while (labelDiv.firstChild) {
+                        labelDiv.removeChild(labelDiv.firstChild);
+                    }
+                    var labelContent = document.createTextNode(tituloSubmenu);
+                    labelDiv.appendChild(labelContent);
+                    $('#deleteSubmenuModal').modal('toggle')
+                }
+            </script>     
         <script src="<c:url value="/resources/font-awesome/js/all.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/dashboard.js"/>"></script>
     </body>

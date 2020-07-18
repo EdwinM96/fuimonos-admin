@@ -5,6 +5,7 @@
  */
 package com.fuimonosapp.service;
 
+import com.fuimonosapp.domain.Menu;
 import com.fuimonosapp.repository.PlatilloRepository;
 import com.fuimonosapp.domain.Platillo;
 import com.fuimonosapp.repository.MenuRepository;
@@ -30,6 +31,10 @@ public class PlatilloService {
     
     @Autowired
     MenuRepository menuRepo;
+    
+    @Autowired
+    MenuService menuService;
+    
     
     Integer PAGE_SIZE = 10;
     
@@ -66,6 +71,48 @@ public class PlatilloService {
         }
         platRepo.saveAll(platillos);
         platRepo.delete(platillo);
+    }
+
+    @Transactional
+    public void posicionarPlatilloArriba(Integer platilloId) {
+        Platillo platillo = platRepo.findById(platilloId).get();
+        List<Platillo> platillos = platRepo.findByMenuOrderByOrden(platillo.getMenu());
+        Integer posicionPlatillo = platillo.getOrden() - 1;
+        if(posicionPlatillo == 0){return;}
+        Platillo platilloOrderToReplace = new Platillo();
+        for(Platillo platilloIter: platillos){
+            if(platilloIter.getOrden().equals(posicionPlatillo)){
+                platilloOrderToReplace = platilloIter;
+            }
+        }
+        platilloOrderToReplace.setOrden(platillo.getOrden());
+        platillo.setOrden(posicionPlatillo);
+        platRepo.save(platillo);
+        platRepo.save(platilloOrderToReplace);
+    }
+    
+    @Transactional
+    public void posicionarPlatilloAbajo(Integer platilloId){
+        Platillo platillo = platRepo.findById(platilloId).get();
+        List<Platillo> platillos = platRepo.findByMenuOrderByOrden(platillo.getMenu());
+        Integer posicionPlatillo = platillo.getOrden() + 1;
+        if(posicionPlatillo == 0){return;}
+        Platillo platilloOrderToReplace = new Platillo();
+        Integer lastItemOrden = 1;
+        for(Platillo platilloIter: platillos){
+            if(platilloIter.getOrden().equals(posicionPlatillo)){
+                platilloOrderToReplace = platilloIter;
+            }
+        
+           lastItemOrden = platilloIter.getOrden();
+        }
+        if(lastItemOrden<posicionPlatillo){
+            return;
+        }
+        platilloOrderToReplace.setOrden(platillo.getOrden());
+        platillo.setOrden(posicionPlatillo);
+        platRepo.save(platillo);
+        platRepo.save(platilloOrderToReplace);
     }
     
 }

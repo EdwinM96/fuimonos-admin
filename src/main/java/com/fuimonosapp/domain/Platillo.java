@@ -46,6 +46,9 @@ public class Platillo {
 
     @Column(name = "imagen")
     private Byte[] imagen;
+    
+    @Column(name = "descripcion")
+    private String descripcion;
 
     public List<PlatilloSeleccionado> getPlatillosSeleccionados() {
         return platillosSeleccionados;
@@ -122,9 +125,17 @@ public class Platillo {
     public void setOrden(Integer orden) {
         this.orden = orden;
     }
-    
-    
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
+    
+    
     public Platillo() {
 
     }

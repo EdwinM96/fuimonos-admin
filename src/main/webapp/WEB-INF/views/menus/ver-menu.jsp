@@ -42,7 +42,7 @@
         </style>
     </head>
     <body>
-        
+
         <!-- <h1>Hello World from dashboard!</h1>
          <a href="${pageContext.request.contextPath}/logout"><button type="button" class="btn btn-primary">Logout</button></a>
      
@@ -214,6 +214,8 @@
                                                     <th style="width:8%"></th>
                                                     <th>Platillo</th>
                                                     <th>Precio</th>
+                                                    <th style="width:8%"></th>
+                                                    <th style="width:8%"></th>
                                                     <th style="width:13%"></th>
                                                     <th style="width:5%"></th>
                                                 </tr>
@@ -229,6 +231,8 @@
                                                         <td>
                                                             <fmt:formatNumber  value="${platillo.precioBase}" type="currency" pattern="$#####.##" minFractionDigits="2" />
                                                         </td>
+                                                        <td><a href="${pageContext.request.contextPath}/platillo/top?id=${platillo.platilloId}"><i class="fas fa-arrow-up"></i></a></td>
+                                                        <td><a href="${pageContext.request.contextPath}/platillo/bot?id=${platillo.platilloId}"><i class="fas fa-arrow-down"></i></a></td>
                                                         <td>
                                                             <a href="${pageContext.request.contextPath}/platillo?id=${platillo.platilloId}">
                                                                 <button class="btn btn-primary">Ver detalles</button>
@@ -279,7 +283,7 @@
 
                 </div>
             </div>
-                                                <div class="modal fade" id="deletePlatilloModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal fade" id="deletePlatilloModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
