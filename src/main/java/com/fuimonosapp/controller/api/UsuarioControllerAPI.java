@@ -42,7 +42,7 @@ public class UsuarioControllerAPI {
     
     APIAuthentication auth = new APIAuthentication();
     
-    @GetMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> login(@RequestBody(required = false) String usuario, @RequestBody(required = false) String contrasena){
         ResponseEntity re = auth.authenticateRequest(usuario, contrasena);
         if(re!=null){return re;}
