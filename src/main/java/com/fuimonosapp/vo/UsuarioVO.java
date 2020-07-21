@@ -32,7 +32,7 @@ public class UsuarioVO {
     @JsonProperty(value = "imagen", required = false)
     MultipartFile imagen;
     
-    @JsonProperty(value = "username", required = false)
+    @JsonProperty(value = "usuario", required = false)
     String username;
     
     @JsonProperty(value = "fechaDeNacimiento", required = false)

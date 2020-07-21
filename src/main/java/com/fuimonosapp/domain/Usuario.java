@@ -5,6 +5,7 @@
  */
 package com.fuimonosapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,6 +36,7 @@ public class Usuario {
     @Column(name = "username")
     private String username;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "pass")
     private String pass;
 

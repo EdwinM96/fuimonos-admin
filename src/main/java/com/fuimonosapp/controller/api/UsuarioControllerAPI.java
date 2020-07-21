@@ -5,8 +5,11 @@
  */
 package com.fuimonosapp.controller.api;
 
+import com.fuimonosapp.commons.APIResponseBody;
 import com.fuimonosapp.domain.*;
+import com.fuimonosapp.dto.UsuarioDTO;
 import com.fuimonosapp.service.UsuarioService;
+import com.fuimonosapp.util.APIAuthentication;
 import com.fuimonosapp.vo.UsuarioVO;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -16,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,9 +39,24 @@ public class UsuarioControllerAPI {
     UsuarioService uService;
 
     DateFormat dFormat = new SimpleDateFormat("dd/MM/yyyy");
+    
+    APIAuthentication auth = new APIAuthentication();
+    
+    @GetMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> login(@RequestBody(required = false) String usuario, @RequestBody(required = false) String contrasena){
+        ResponseEntity re = auth.authenticateRequest(usuario, contrasena);
+        if(re!=null){return re;}
+        Usuario user = uService.findByUsername(usuario);
+        UsuarioDTO uDTO = new UsuarioDTO();
+        uDTO.setImagenDePerfil(user.getImagenPerfil());
+        uDTO.setApellido(uDTO.getApellido());
+        uDTO.setNombre(user.getNombre());
+        uDTO.setCelular(user.getCelular());
+        uDTO.setUsuario(user.getUsername());
+        return new ResponseEntity(uDTO, HttpStatus.OK);
+    }
 
-    //agregar validacion de celular
-    //cambiar requestparam a requestbody
+
     @PostMapping(value = "/registro", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> register(@RequestBody UsuarioVO usuarioVO) throws IOException {
         Date fechaNacimiento = null;

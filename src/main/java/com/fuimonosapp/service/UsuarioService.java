@@ -27,6 +27,10 @@ public class UsuarioService {
         return uRepo.saveAndFlush(usuario);
     }
     
+    public Usuario updateUsuario(Usuario usuario){
+        return uRepo.saveAndFlush(usuario);
+    }
+    
     public boolean usernameIsAvailable(String username){
         return uRepo.findOneByUsername(username) == null;
     }
@@ -37,6 +41,14 @@ public class UsuarioService {
     
     public boolean celularIsAvailable(String celular){
         return uRepo.findOneByCelular(celular) == null;
+    }
+
+    public boolean authenticate(String username, String password) {
+        return !(uRepo.findByUsernameAndPassword(username, password)==null);
+    }
+
+    public Usuario findByUsername(String username) {
+        return uRepo.findOneByUsername(username);
     }
     
 }
