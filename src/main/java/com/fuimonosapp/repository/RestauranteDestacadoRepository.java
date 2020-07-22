@@ -17,5 +17,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface RestauranteDestacadoRepository extends JpaRepository<RestauranteDestacado, Integer> {
-    public Page<RestauranteDestacado> findOrderByOrden(Pageable p);
+    public Page<RestauranteDestacado> findAllByOrderByOrden(Pageable p);
 }
