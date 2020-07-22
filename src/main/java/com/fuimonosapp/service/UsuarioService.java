@@ -44,7 +44,7 @@ public class UsuarioService {
     }
 
     public boolean authenticate(String username, String password) {
-        return !(uRepo.findByUsernameAndPassword(username, password)==null);
+        return !(uRepo.findByUsernameAndPass(username, password)==null);
     }
 
     public Usuario findByUsername(String username) {
