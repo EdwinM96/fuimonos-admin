@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,6 +56,8 @@ public class UsuarioControllerAPI {
         uDTO.setUsuario(user.getUsername());
         return new ResponseEntity(uDTO, HttpStatus.OK);
     }
+    
+   
 
 
     @PostMapping(value = "/registro", produces = MediaType.APPLICATION_JSON_VALUE)
