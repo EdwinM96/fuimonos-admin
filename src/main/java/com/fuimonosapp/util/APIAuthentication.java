@@ -42,7 +42,8 @@ public class APIAuthentication {
     
     public ResponseEntity<Object> authenticateRequest(HttpServletRequest req){
         //TODO: Authenticate through correct encryption
-        String authentication = req.getHeader("authentication");
+        String authentication = req.getHeader("Authentication");
+        if(authentication==null){return new ResponseEntity(APIResponseBody.MISSING_BASIC, HttpStatus.UNAUTHORIZED);}
         if(!authentication.contains("Basic ")){
             return new ResponseEntity(APIResponseBody.MISSING_BASIC, HttpStatus.UNAUTHORIZED);
         }
