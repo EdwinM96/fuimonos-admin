@@ -44,6 +44,7 @@ public class APIAuthentication {
         //TODO: Authenticate through correct encryption
         String authentication = req.getHeader("Authentication");
         if(authentication==null){return new ResponseEntity(APIResponseBody.MISSING_BASIC, HttpStatus.UNAUTHORIZED);}
+        l.info("Authentication token:      " + authentication);
         if(!authentication.contains("Basic ")){
             return new ResponseEntity(APIResponseBody.MISSING_BASIC, HttpStatus.UNAUTHORIZED);
         }
