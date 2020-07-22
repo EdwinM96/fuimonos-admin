@@ -29,7 +29,7 @@ public class RestauranteDestacadoService {
     }
     
     public List<RestauranteDestacado> findByOrden(){
-        return rdRepo.findAllOrderByOrden(PageRequest.of(0, 10)).getContent();
+        return rdRepo.findOrderByOrden(PageRequest.of(0, 10)).getContent();
     }
     
 }
