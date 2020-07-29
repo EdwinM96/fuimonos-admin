@@ -69,7 +69,7 @@ public class PlatilloService {
                 platilloSave.add(platilloItr);
             }
         }
-        platRepo.saveAll(platillos);
+        platRepo.saveAll(platilloSave);
         platRepo.delete(platillo);
     }
 

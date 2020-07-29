@@ -41,7 +41,7 @@ public class Submenu {
     @Column(name = "minimo_opciones_a_escoger")
     private Integer minimoopcionesaescoger;
 
-    @OneToMany(mappedBy = "opcionsubmenu_id", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "opcionsubmenuId", fetch = FetchType.LAZY)
     private List<OpcionSubMenu> opcionesSubMenus;
     
     @Column(name = "orden")

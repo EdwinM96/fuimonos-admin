@@ -21,27 +21,30 @@ public class OpcionSubMenu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "opcionsubmenu_id")
-    private Integer opcionsubmenu_id;
+    private Integer opcionsubmenuId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "submenu_id")
     private Submenu submenu;
 
     @Column(name = "nombre")
-    private String nombre_opcion;
+    private String nombre;
 
     @Column(name = "precio")
-    private Integer precio;
+    private Double precio;
 
     @Column(name = "seleccionado_por_defecto")
-    private Boolean seleccionado_por_defecto;
+    private Boolean seleccionadoPorDefecto;
 
-    @OneToOne(mappedBy = "opcionsubmenu_id", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
+    @OneToOne(mappedBy = "opcionsubmenuId", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
     private OpcionDeSubMenuSeleccionado opcionDeSubMenuSeleccionado;
 
-    @OneToMany(mappedBy = "opcionsubmenu", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "opcionsubmenu", fetch = FetchType.LAZY)
     private List<SeleccionSubMenuPlatilloFavorito> seleccionSubMenuPlatilloFavoritos;
+    
+    @Column(name = "orden")
+    private Integer orden;
 
     public OpcionDeSubMenuSeleccionado getOpcionDeSubMenuSeleccionado() {
         return opcionDeSubMenuSeleccionado;
@@ -59,21 +62,15 @@ public class OpcionSubMenu {
         this.seleccionSubMenuPlatilloFavoritos = seleccionSubMenuPlatilloFavoritos;
     }
 
-    public Integer getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Integer precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
-    public Boolean getSeleccionado_por_defecto() {
-        return seleccionado_por_defecto;
-    }
-
-    public void setSeleccionado_por_defecto(Boolean seleccionado_por_defecto) {
-        this.seleccionado_por_defecto = seleccionado_por_defecto;
-    }
+    
 
     public Submenu getSubmenu() {
         return submenu;
@@ -83,23 +80,43 @@ public class OpcionSubMenu {
         this.submenu = submenu;
     }
 
-    public Integer getOpcionsubmenu_id() {
-        return opcionsubmenu_id;
+    public Integer getOpcionsubmenuId() {
+        return opcionsubmenuId;
     }
 
-    public void setOpcionsubmenu_id(Integer opcionsubmenu_id) {
-        this.opcionsubmenu_id = opcionsubmenu_id;
+    public void setOpcionsubmenuId(Integer opcionsubmenuId) {
+        this.opcionsubmenuId = opcionsubmenuId;
     }
 
-    public String getNombre_opcion() {
-        return nombre_opcion;
+    
+
+    public Integer getOrden() {
+        return orden;
     }
 
-    public void setNombre_opcion(String nombre_opcion) {
-        this.nombre_opcion = nombre_opcion;
-    }
+    public void setOrden(Integer orden) {
+        this.orden = orden;
+    }    
 
     public OpcionSubMenu() {
 
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Boolean getSeleccionadoPorDefecto() {
+        return seleccionadoPorDefecto;
+    }
+
+    public void setSeleccionadoPorDefecto(Boolean seleccionadoPorDefecto) {
+        this.seleccionadoPorDefecto = seleccionadoPorDefecto;
+    }
+    
+    
 }

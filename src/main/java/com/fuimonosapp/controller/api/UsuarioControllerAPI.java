@@ -7,7 +7,9 @@ package com.fuimonosapp.controller.api;
 
 import com.fuimonosapp.commons.APIResponseBody;
 import com.fuimonosapp.domain.*;
+import com.fuimonosapp.dto.RestauranteDestacadoDTO;
 import com.fuimonosapp.dto.UsuarioDTO;
+import com.fuimonosapp.service.RestauranteDestacadoService;
 import com.fuimonosapp.service.UsuarioService;
 import com.fuimonosapp.util.APIAuthentication;
 import com.fuimonosapp.vo.UsuarioVO;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,6 +41,9 @@ public class UsuarioControllerAPI {
 
     @Autowired
     UsuarioService uService;
+    
+    @Autowired
+    RestauranteDestacadoService rdService;
 
     DateFormat dFormat = new SimpleDateFormat("dd/MM/yyyy");
     
@@ -113,5 +119,7 @@ public class UsuarioControllerAPI {
 
         return new ResponseEntity(usuario, HttpStatus.OK);
     }
+    
+    
 
 }

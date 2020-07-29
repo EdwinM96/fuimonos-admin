@@ -27,42 +27,48 @@ public class APIAuthentication {
     Logger l = Logger.getLogger("log");
     
     public ResponseEntity<Object> authenticateRequest(String username, String password){
-        if(username == null || password == null){
-            if(uService.authenticate(username, password)){
+        if(username != null && password != null){
+            if(uService.authenticate(username, password) != null){
                 return null;
             }
             else{
+                l.info("Authentication credentials were present");
                 return new ResponseEntity(APIResponseBody.MISSING_AUTHORIZATION, HttpStatus.UNAUTHORIZED);
             }
         }
         else{
+            l.info("Username: "+ username + "   Password: "+password);
+            l.info("Authentication credentials were not present");
             return new ResponseEntity(APIResponseBody.MISSING_AUTHORIZATION, HttpStatus.UNAUTHORIZED);
         }
     }
     
+   
+    //TODO: Authenticate through correct encryption
     public ResponseEntity<Object> authenticateRequest(HttpServletRequest req){
-        //TODO: Authenticate through correct encryption
-        String authentication = req.getHeader("Authentication");
-        if(authentication==null){return new ResponseEntity(APIResponseBody.MISSING_BASIC, HttpStatus.UNAUTHORIZED);}
-        l.info("Authentication token:      " + authentication);
-        if(!authentication.contains("Basic ")){
+        
+        String authorization = req.getHeader("Authorization");
+        if(authorization==null){return new ResponseEntity(APIResponseBody.MISSING_AUTHORIZATION, HttpStatus.UNAUTHORIZED);}
+        l.info("Authentication token:      " + authorization);
+        if(!authorization.contains("Basic ")){
             return new ResponseEntity(APIResponseBody.MISSING_BASIC, HttpStatus.UNAUTHORIZED);
         }
-        authentication = authentication.replace("Basic ", "");
+        authorization = authorization.replace("Basic ", "");
         try{
-            authentication = new String(Base64.getDecoder().decode(authentication), StandardCharsets.UTF_8);
+            authorization = new String(Base64.getDecoder().decode(authorization), StandardCharsets.UTF_8);
         }
         catch(Exception e){
             return new ResponseEntity(APIResponseBody.INCORRECT_ENCODE, HttpStatus.UNAUTHORIZED);
         }
-        if(!authentication.contains(":")){
+        if(!authorization.contains(":")){
             return new ResponseEntity(APIResponseBody.INCORRECT_USER_PASSWORD_CONCATE, HttpStatus.UNAUTHORIZED);
         }
-        String username = authentication.substring(0, authentication.indexOf(":"));
-        l.info("-------------------------------Username-------------------'"+username+"'");
-        String password = authentication.substring(authentication.indexOf(":"));
-        l.info("-------------------------------Password-------------------'"+password+"'");
-        if(uService.authenticate(username, password)){
+        String username = authorization.substring(0, authorization.indexOf(":"));
+        String password = authorization.substring(authorization.indexOf(":")+1);
+        if(password == null || username == null){return new ResponseEntity(APIResponseBody.MISSING_AUTHORIZATION, HttpStatus.UNAUTHORIZED);}
+        l.info("Password: "+password);
+        l.info("User: "+ username);
+        if(authenticateRequest(username, password) == null){
             return null;
         }
         else{

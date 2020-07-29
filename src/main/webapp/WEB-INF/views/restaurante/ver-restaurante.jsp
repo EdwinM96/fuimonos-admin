@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Restaurantes</title>
+        <title>Fuimonos</title>
         <!-- JS, Popper.js, and jQuery -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -302,20 +302,20 @@
                                     </div>
                                 </div>
                             </div>
-                           <!------------------------------------------------------------------------>
-                           <div class="row">
-                               <div class="col-md-12">
-                                   <div class="main-card mb-3 card">
-                                       <div class="card-header" style="font-weight:bold;font-size: 16px;">
+                            <!------------------------------------------------------------------------>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="main-card mb-3 card">
+                                        <div class="card-header" style="font-weight:bold;font-size: 16px;">
                                             Menus de&nbsp;<strong>${restaurante.nombre} </strong>
                                             <div class="btn-actions-pane-right">
                                                 <a href="${pageContext.request.contextPath}/menu/crear?restauranteId=${restaurante.restauranteId}">
                                                     <button type="button" class="btn-success btn">+ Agregar Menu</button>
                                                 </a>
                                             </div>
-                                       </div>
-                                                    <div class="table-responsive">
-                                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                                                 <thead>
                                                     <tr>
                                                         <th style="width:8%"></th>
@@ -330,23 +330,23 @@
                                                 <tbody>
                                                     <c:forEach items="${menus}" var="menu" varStatus="index">
                                                         <tr>
-                                                    <td class="text-center" style="font-weight: bold">
+                                                            <td class="text-center" style="font-weight: bold">
 
                                                                 ${(index.index + 1)}.
                                                             </td>
-                                                    <td>${menu.nombreMenu}</td>
-                                                    <td><c:forEach items="${menu.menuxcategorias}" var="menuxcategoria" >
+                                                            <td>${menu.nombreMenu}</td>
+                                                            <td><c:forEach items="${menu.menuxcategorias}" var="menuxcategoria" >
                                                                     ${menuxcategoria.categoria_id.nombreCategoria}
                                                                 </c:forEach>
-                                                    </td>
-                                                    <td><a href="${pageContext.request.contextPath}/menu/top?id=${menu.menuId}"><i class="fas fa-arrow-up"></i></a></td>
-                                                    <td><a href="${pageContext.request.contextPath}/menu/bot?id=${menu.menuId}"><i class="fas fa-arrow-down"></i></a></td>
-                                                    <td>
-                                                    <a href="${pageContext.request.contextPath}/menu?id=${menu.menuId}">
+                                                            </td>
+                                                            <td><a href="${pageContext.request.contextPath}/menu/top?id=${menu.menuId}"><i class="fas fa-arrow-up"></i></a></td>
+                                                            <td><a href="${pageContext.request.contextPath}/menu/bot?id=${menu.menuId}"><i class="fas fa-arrow-down"></i></a></td>
+                                                            <td>
+                                                                <a href="${pageContext.request.contextPath}/menu?id=${menu.menuId}">
                                                                     <button class="btn btn-primary">Ver detalles</button>
                                                                 </a>
-                                                    </td>
-                                                    <td class="justify-content-end">
+                                                            </td>
+                                                            <td class="justify-content-end">
                                                                 <a>
                                                                     <button type="button" class="btn btn-danger" onclick="llenarModalEliminar(${menu.menuId}, '${menu.nombreMenu}')">&times;</button>
                                                                 </a>
@@ -354,32 +354,32 @@
                                                         </tr>
                                                     </c:forEach>
                                                 </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="d-block text-center card-footer">
-                                        <nav aria-label="...">
-                                            <ul class="pagination justify-content-center">
-                                                <li class="page-item ${firstPage?'disabled':''}">
-                                                    <a class="page-link" href="${lastPageUrl}" tabindex="-1">Previous</a>
-                                                </li>
-                                                <li class="page-item ${firstPage?'active':''}"><a class="page-link" href="${firstPageUrl}">${firstPageNumber!=null?firstPageNumber:1}</a></li>
-                                                <c:if test="${secondPageExist}">
-                                                    <li class="page-item ${secondPage?'active':''}">
-                                                        <a class="page-link" href="${secondPageUrl}">${secondPageNumber}</a>
+                                            </table>
+                                        </div>
+                                        <div class="d-block text-center card-footer">
+                                            <nav aria-label="...">
+                                                <ul class="pagination justify-content-center">
+                                                    <li class="page-item ${firstPage?'disabled':''}">
+                                                        <a class="page-link" href="${lastPageUrl}" tabindex="-1">Previous</a>
                                                     </li>
-                                                </c:if>
-                                                <c:if test="${thirdPageExist}">
-                                                    <li class="page-item ${thirdPage?'active':''}"><a class="page-link" href="${thirdPageUrl}">${thirdPageNumber}</a></li>
+                                                    <li class="page-item ${firstPage?'active':''}"><a class="page-link" href="${firstPageUrl}">${firstPageNumber!=null?firstPageNumber:1}</a></li>
+                                                        <c:if test="${secondPageExist}">
+                                                        <li class="page-item ${secondPage?'active':''}">
+                                                            <a class="page-link" href="${secondPageUrl}">${secondPageNumber}</a>
+                                                        </li>
                                                     </c:if>
-                                                <li class="page-item ${nextPageExist?'':'disabled'}">
-                                                    <a class="page-link" href="${nextPageUrl}">Next</a>
-                                                </li>
-                                            </ul>
-                                        </nav>
+                                                    <c:if test="${thirdPageExist}">
+                                                        <li class="page-item ${thirdPage?'active':''}"><a class="page-link" href="${thirdPageUrl}">${thirdPageNumber}</a></li>
+                                                        </c:if>
+                                                    <li class="page-item ${nextPageExist?'':'disabled'}">
+                                                        <a class="page-link" href="${nextPageUrl}">Next</a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
                                     </div>
-                                   </div>
-                               </div>
-                           </div>
+                                </div>
+                            </div>
                         </div> 
                         <div class="app-wrapper-footer">
                             <div class="app-footer">
@@ -392,7 +392,7 @@
                     </div>
                 </div>
             </div>
-                                                    <div class="modal fade" id="deleteMenuModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal fade" id="deleteMenuModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">

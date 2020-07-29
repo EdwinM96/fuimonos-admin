@@ -8,6 +8,7 @@ package com.fuimonosapp.service;
 import com.fuimonosapp.repository.UsuarioRepository;
 import com.fuimonosapp.domain.*;
 import java.util.Date;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioService {
+    
+    Logger l = Logger.getLogger("aaaa");
     
     @Autowired
     UsuarioRepository uRepo;
@@ -43,7 +46,13 @@ public class UsuarioService {
         return uRepo.findOneByCelular(celular) == null;
     }
 
-    public boolean authenticate(String username, String password) {
+    public Usuario authenticate(String username, String password) {
+        l.info("Entre a authenticate de Usuario Service");
+        Usuario usuario = uRepo.findByUsername(username);
+        return usuario;
+    }
+    
+    public Boolean authentication (String username, String password){
         return !(uRepo.findByUsernameAndPass(username, password)==null);
     }
 

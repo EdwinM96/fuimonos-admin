@@ -9,6 +9,7 @@ import com.fuimonosapp.service.RestauranteDestacadoService;
 import com.fuimonosapp.util.APIAuthentication;
 import com.fuimonosapp.domain.*;
 import com.fuimonosapp.dto.RestauranteDestacadoDTO;
+import com.fuimonosapp.service.UsuarioService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +26,19 @@ import org.springframework.web.bind.annotation.RestController;
  * @author HP PC
  */
 
-@RestController
 @RequestMapping("/api")
+@RestController
 public class RestauranteControllerAPI {
     
     @Autowired
     RestauranteDestacadoService rdService;
     
+    @Autowired
+    UsuarioService uService;
+    
     APIAuthentication auth = new APIAuthentication();
     
-    @GetMapping(value = "/restaurantes/destacados", produces = MediaType.APPLICATION_JSON_VALUE)
+   @GetMapping(value = "/restaurantes/destacados", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> restaurantesDestacados(HttpServletRequest request){
         ResponseEntity re = auth.authenticateRequest(request);
         if(re!=null){return re;}

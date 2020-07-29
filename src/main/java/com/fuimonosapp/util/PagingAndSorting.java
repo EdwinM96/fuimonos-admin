@@ -18,7 +18,7 @@ import org.springframework.data.domain.Page;
  * @author HP PC
  */
 public class PagingAndSorting {
-    
+    /* The urlKeyword is the target path you want the final URL to have for ex. localhost/restaurante?page=2 would translate into a urlKeyword of "restaurante"*/
     public static Map<String,Object> generalPagingAndSorting(Page objectPage, HttpServletRequest request, String searchWord, String sorting, String urlKeyword) throws UnsupportedEncodingException{
         Map<String,Object> valuesMap = new HashMap();
         Integer resultsPage = objectPage.getNumber();

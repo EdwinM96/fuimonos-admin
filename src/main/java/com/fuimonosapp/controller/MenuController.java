@@ -174,7 +174,7 @@ public class MenuController {
                     request.getParameter("searchWord"));
             mv.addObject("menu", menu);
             mv.addObject("platillos",platillos.getContent() );
-            mv.addAllObjects(PagingAndSorting.generalPagingAndSorting(platillos, request, (String) session.getAttribute("searchWord"), null, "menu"));
+            mv.addAllObjects(PagingAndSorting.generalPagingAndSorting(platillos, request, (String) request.getParameter("searchWord"), null, "menu"));
             return mv;
         }
         else{

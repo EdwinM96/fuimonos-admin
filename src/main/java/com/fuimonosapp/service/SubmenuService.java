@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.fuimonosapp.domain.*;
 import com.fuimonosapp.repository.PlatilloRepository;
 import com.fuimonosapp.repository.SubmenuRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -85,6 +86,25 @@ public class SubmenuService {
         submenu.setOrden(posicionSubmenu);
         smRepo.save(submenu);
         smRepo.save(submenuOrderToReplace);
+    }
+
+    public Submenu findOne(Integer submenuId) {
+        return smRepo.getOne(submenuId);
+    }
+
+    @Transactional
+    public void delete(Integer subemnuId) {
+        Submenu submenu = smRepo.findById(subemnuId).get();
+        List<Submenu> submenus = smRepo.findByPlatilloOrderByOrden(submenu.getPlatillo());
+        List<Submenu> submenusSave = new ArrayList();
+        for(Submenu submenuItr : submenus){
+            if(submenuItr.getOrden()>submenu.getOrden()){
+                submenuItr.setOrden(submenuItr.getOrden()-1);
+                submenusSave.add(submenuItr);
+            }
+        }
+        smRepo.saveAll(submenusSave);
+        smRepo.delete(submenu);
     }
 
 }

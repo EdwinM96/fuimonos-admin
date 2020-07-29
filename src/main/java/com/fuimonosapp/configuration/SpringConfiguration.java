@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.fuimonosapp","com.fuimonosapp.controller"})
+@ComponentScan(basePackages = {"com.fuimonosapp","com.fuimonosapp.controller","com.fuimonosapp.controller.api"})
 public class SpringConfiguration implements WebMvcConfigurer {
 
 	

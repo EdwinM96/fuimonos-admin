@@ -1,6 +1,6 @@
 <%-- 
-    Document   : agregar_submenu
-    Created on : 13/07/2020, 02:58:03 PM
+    Document   : agregar-opcionsubmenu
+    Created on : 24/07/2020, 02:22:45 PM
     Author     : HP PC
 --%>
 
@@ -154,81 +154,58 @@
                 <div class="app-main__outer">
 
                     <div class="app-main__inner">
-                        <a href="${pageContext.request.contextPath}/platillo?id=${platillo.platilloId}" > <i class="fas fa-arrow-left fa-2x mb-2"></i></a>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="main-card mb-3 card">
-                                    <div class="card-header">
-                                        Creando&nbsp;<strong>Submenu</strong>&nbsp;de Platillo&nbsp;<strong>${platillo.nombre}</strong>&nbsp;de&nbsp;<strong>${platillo.menu.nombreMenu}</strong>&nbsp;para restuarante&nbsp;<strong>${platillo.menu.restaurante.nombre}</strong>
-                                        <!-- <p style="color: red">Please note that saving the changes will override all previous information.</p> -->
+                                    <div class="card-header">Creando opción de submenu: ${submenu.platillo.menu.restaurante.nombre}&nbsp;<strong>></strong>&nbsp;${submenu.platillo.menu.nombreMenu}&nbsp;<strong>></strong>&nbsp;${submenu.platillo.nombre}&nbsp;<strong>></strong>&nbsp;${submenu.titulo}
+                                    <!-- <p style="color: red">Please note that saving the changes will override all previous information.</p> -->
                                     </div>
-                                    <form method="POST" action="${pageContext.request.contextPath}/submenu/crear">
-                                        <div class="row mt-4 mb-5">
-                                            <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
-                                                <div class="form-label-group">
-                                                    <label for="titulo">Titulo: <font color="red">*</font></label>
-                                                    <input type="text" id="titulo" class="form-control" placeholder="Titulo" name="titulo"  required>
-                                                </div>
+                                <form method="POST" action="${pageContext.request.contextPath}/opcionSubMenu/crear" enctype="multipart/form-data">
+                                    <div class="row mt-4 mb-5">
+                                        <div class="col-lg-1"></div> 
+                                        <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
+                                            <div class="form-label-group">
+                                                <label for="nombre">Nombre: <font color="red">*</font></label>
+                                                <input type="text" id="nombre" class="form-control" placeholder="Nombre" name="nombre"  required/>
                                             </div>
-                                            <div class="col-lg-1"></div> 
-                                            <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
-                                                <div class="form-group">
-                                                    <div class="custom-control custom-checkbox checkbox-lg">
-                                                        <input type="checkbox" id="menuCobrado" class="custom-control-input" name="menucobrado" onclick="changeReadOnly(this)" >
-                                                        <label class="custom-control-label" for="menuCobrado">Menu cobrado</label>
-
-                                                    </div>
-                                                </div>
-                                                <div class="form-label-group mt-2">
-                                                    <label for="cobrarAPartir">Cobrar a partir de:</label>
-                                                    <input type="number" id="cobrarAPartir" class="form-control" value="0"  name="cobrarapartirde" readonly required>
-                                                </div>
-                                            </div>                                                                               
-                                            <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
-                                                <div class="form-label-group mt-2">
-                                                    <label for="minimo">Mínimo de Opciones a escoger: <font color="red">*</font></label>
-                                                    <input type="number" id="minimo" class="form-control" value="0" placeholder="Titulo" name="minimoopciones"  required>
-                                                </div>
-                                                <div class="form-label-group mt-2">
-                                                    <label for="maximo">Máximo de Opciones a escoger: <font color="red">*</font></label>
-                                                    <input type="number" id="maximo" class="form-control" value="0" placeholder="Titulo" name="maximoopciones" required>
-                                                </div>
-                                                <input type="hidden"  value="${platillo.platilloId}" name="platilloId" >
+                                        </div>                                                                               
+                                        <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
+                                            <div class="form-label-group mt-2">
+                                                <label for="imagen">Precio: ($) <font color="red">*</font></label>
+                                                <input type="number" id="precio" class="form-control" step="0.01" placeholder="Precio"  name="precio" value="0.00" ${submenu.menucobrado?"":"readonly"} required/>
                                             </div>
                                         </div>
-                                        <div class="text-center mb-5 mt-3">
-                                            <button type="submit" class="btn btn-success btn-lg" style="padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;font-size: 18px; margin-right:10px">Guardar</button>
-                                            <a href="${pageContext.request.contextPath}/platillo?id=${platillo.platilloId}">
-                                                <button type="button" class="btn btn-danger btn-lg" style="padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;font-size: 18px; margin-left:10px">Cancelar</button>
-                                            </a>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="app-wrapper-footer">
-                        <div class="app-footer">
-                            <div class="app-footer__inner">
-
+                                            <div class="col-11 text-center mx-auto">
+                                        <div class="form-label-group mt-2">
+                                            <input type="checkbox" id="menuCobrado" class="custom-control-input" name="seleccionadopordefecto" >
+                                            <label class="custom-control-label" for="menuCobrado">Seleccionado por defecto</label>
+                                        </div>               
+                                            </div>
+                                            <input type="hidden" name="submenuId" value="${submenu.submenuId}">
+                                    </div>
+                                    <div class="text-center mb-5 mt-3">
+                                        <button type="submit" class="btn btn-success btn-lg" style="padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;font-size: 18px; margin-right:10px">Guardar</button>
+                                        <a href="${pageContext.request.contextPath}/submenu?id=${submenu.submenuId}">
+                                            <button type="button" class="btn btn-danger btn-lg" style="padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;font-size: 18px; margin-left:10px">Cancelar</button>
+                                        </a>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="app-wrapper-footer">
+                    <div class="app-footer">
+                        <div class="app-footer__inner">
 
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
-        <script>
-            function changeReadOnly(checkbox) {
-                if (checkbox.checked) {
-                    document.getElementById("cobrarAPartir").readOnly = false;
-                } else {
-                    document.getElementById("cobrarAPartir").readOnly = true;
-                }
-            }
-        </script>
-        <script src="<c:url value="/resources/font-awesome/js/all.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/dashboard.js"/>"></script>
-    </body>
+    </div>
+    <script src="<c:url value="/resources/font-awesome/js/all.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/dashboard.js"/>"></script>
+</body>
 </html>

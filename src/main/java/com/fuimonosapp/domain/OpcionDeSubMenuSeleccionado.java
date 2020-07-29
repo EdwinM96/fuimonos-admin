@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -26,12 +26,12 @@ public class OpcionDeSubMenuSeleccionado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "opciondesubmenuseleccionado_id") 
-    private Integer opciondesubmenuseleccionado_id;
+    @Column(name = "opciondesubmenuseleccionado_id")
+    private Integer opciondesubmenuseleccionadoId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "opcionsubmenu_id")
-    private OpcionSubMenu opcionsubmenu_id;
+    @JoinColumn(name = "opcionsubmenuId")
+    private OpcionSubMenu opcionsubmenuId;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "platilloseleccionado_id")
@@ -40,25 +40,27 @@ public class OpcionDeSubMenuSeleccionado {
     @Column(name = "nombre")
     private String nombre;
 
-  @Column(name = "precio")
+    @Column(name = "precio")
     private Integer precio;
 
-    public Integer getOpciondesubmenuseleccionado_id() {
-        return opciondesubmenuseleccionado_id;
+    public Integer getOpciondesubmenuseleccionadoId() {
+        return opciondesubmenuseleccionadoId;
     }
 
-    public void setOpciondesubmenuseleccionado_id(Integer opciondesubmenuseleccionado_id) {
-        this.opciondesubmenuseleccionado_id = opciondesubmenuseleccionado_id;
+    public void setOpciondesubmenuseleccionadoId(Integer opciondesubmenuseleccionadoId) {
+        this.opciondesubmenuseleccionadoId = opciondesubmenuseleccionadoId;
     }
 
-    public OpcionSubMenu getOpcionsubmenu_id() {
-        return opcionsubmenu_id;
+    public OpcionSubMenu getOpcionsubmenuId() {
+        return opcionsubmenuId;
     }
 
-    public void setOpcionsubmenu_id(OpcionSubMenu opcionsubmenu_id) {
-        this.opcionsubmenu_id = opcionsubmenu_id;
+    public void setOpcionsubmenuId(OpcionSubMenu opcionsubmenuId) {
+        this.opcionsubmenuId = opcionsubmenuId;
     }
+    
 
+    
     public PlatilloSeleccionado getPlatilloseleccionado_id() {
         return platilloseleccionado_id;
     }
@@ -66,8 +68,6 @@ public class OpcionDeSubMenuSeleccionado {
     public void setPlatilloseleccionado_id(PlatilloSeleccionado platilloseleccionado_id) {
         this.platilloseleccionado_id = platilloseleccionado_id;
     }
-
-   
 
     public String getNombre() {
         return nombre;
@@ -85,7 +85,8 @@ public class OpcionDeSubMenuSeleccionado {
         this.precio = precio;
     }
 
-    public OpcionDeSubMenuSeleccionado(){
-        
+
+    public OpcionDeSubMenuSeleccionado() {
+
     }
 }

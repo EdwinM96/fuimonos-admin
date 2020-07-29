@@ -120,6 +120,7 @@ public class PlatilloController {
                     request.getParameter("searchWord"));
             mv.addObject("submenus", submenus.getContent());
             mv.addAllObjects(PagingAndSorting.generalPagingAndSorting(submenus, request, (String) request.getSession().getAttribute("searchWord"), null, "menu"));
+            mv.addObject("deleted",request.getParameter("deleted"));
             return mv;
         }
         else{
