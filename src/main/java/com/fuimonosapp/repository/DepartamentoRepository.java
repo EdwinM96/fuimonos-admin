@@ -5,7 +5,9 @@
  */
 package com.fuimonosapp.repository;
 
-import com.fuimonosapp.domain.Departamento;
+import com.fuimonosapp.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +17,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface DepartamentoRepository extends JpaRepository<Departamento, Integer> {
+    
+    public Page<Departamento> findByPais(Pais pais, Pageable pageable);
     
 }

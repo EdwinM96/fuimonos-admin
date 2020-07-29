@@ -32,7 +32,7 @@ public class Pais {
     @Column(name = "nombre_pais")
     private String nombre_pais;
     
-    @OneToMany(mappedBy = "pais", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "pais", fetch = FetchType.LAZY)
     private List<Departamento> departamentos;
 
     public Integer getPais_id() {

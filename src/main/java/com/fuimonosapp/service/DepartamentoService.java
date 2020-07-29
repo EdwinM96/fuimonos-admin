@@ -5,12 +5,13 @@
  */
 package com.fuimonosapp.service;
 
-import com.fuimonosapp.domain.Departamento;
-import com.fuimonosapp.domain.Menu;
+import com.fuimonosapp.domain.*;
 import com.fuimonosapp.repository.DepartamentoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,8 @@ public class DepartamentoService {
     
     @Autowired
     PaisService paisService;
+    
+    Integer PAGE_SIZE = 10;
     
     @Transactional
     public List<Departamento> findAll() {
@@ -43,6 +46,14 @@ public class DepartamentoService {
     public void delete(Integer departamento_id) throws DataAccessException {
         depaRepository.deleteById(departamento_id);
 
+    }
+    
+    public Page<Departamento> buscarDepartPorPais(Integer paisId, Integer currentPage ){
+        
+        Pais pais = paisService.findOne(paisId);
+        
+        return depaRepository.findByPais(pais, PageRequest.of(currentPage, PAGE_SIZE));
+        
     }
     
 }
