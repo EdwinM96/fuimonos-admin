@@ -78,6 +78,9 @@ public class Pedido {
 
     @Column(name = "tiempo_extra", columnDefinition = "TIME")
     private LocalTime tiempoExtra;
+    
+    @Column(name = "status")
+    private String status;
 
     public Integer getPedido_id() {
         return pedido_id;
@@ -178,6 +181,16 @@ public class Pedido {
     public void setTiempoExtra(LocalTime tiempoExtra) {
         this.tiempoExtra = tiempoExtra;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    
 
     public Pedido() {
 

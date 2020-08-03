@@ -164,7 +164,7 @@
                                                     <th>Resatuante</th>
                                                     <th>Driver</th>
                                                     <th>Total</th>
-                                                    <th style="width:13%"></th>
+                                                    <th style="width:13%">Status</th>
                                                     <th style="width:5%"></th>
                                                 </tr>
                                             </thead>
@@ -179,9 +179,9 @@
                                                         <td>${pedido.restaurante_id.nombre}</td>
                                                         <td>${pedido.driver_asignado.nombreDriver}</td>
                                                         <td>
-                                                            ${pedido.total_de_pedido}
+                                                           <fmt:formatNumber  value="${pedido.total_de_pedido}" type="currency" pattern="$####.##" minFractionDigits="2" /> 
                                                         </td>
-                                                        <td></td>
+                                                        <td style="color:green">${pedido.status}</td>
                                                         <td></td>
                                                     </tr>
                                                 </c:forEach>
