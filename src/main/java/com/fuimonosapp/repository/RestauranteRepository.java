@@ -18,7 +18,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RestauranteRepository extends JpaRepository<Restaurante, Integer> {
     
-    public Page<Restaurante> findAllByRestauranteId(Integer restauranteId);
     
     public Page<Restaurante> findAll(Pageable pageable);
     

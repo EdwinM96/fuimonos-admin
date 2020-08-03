@@ -10,6 +10,8 @@ import com.fuimonosapp.domain.*;
 import java.util.Date;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,10 +27,13 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository uRepo;
     
+    int PAGESIZE = 10;
+    
     public Usuario saveUsuario(Usuario usuario){
         usuario.setFechaCreacion(new Date());
         return uRepo.saveAndFlush(usuario);
     }
+    
     
     public Usuario updateUsuario(Usuario usuario){
         return uRepo.saveAndFlush(usuario);
@@ -58,6 +63,18 @@ public class UsuarioService {
 
     public Usuario findByUsername(String username) {
         return uRepo.findOneByUsername(username);
+    }
+    
+    public Page<Usuario> findUsuarios(Integer page){
+        return uRepo.findAll(PageRequest.of(page, PAGESIZE));
+    } 
+
+    public Page<Usuario> findUsuarioBySearchWord(Integer page, String searchWord) {
+        return uRepo.findAllBySearchWord(searchWord,PageRequest.of(page, PAGESIZE));
+    }
+
+    public Usuario findById(Integer idUsuario) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
