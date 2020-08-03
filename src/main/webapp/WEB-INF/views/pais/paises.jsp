@@ -183,8 +183,7 @@
                                             <td class="text-center" style="font-weight: bold">${(index.index + 1)}.</td>
                                             <td>${pais.nombre_pais}</td>
                                             <td>
-                                                <%--${pageContext.request.contextPath}/restaurante?id=${restaurante.restauranteId}--%>
-                                                <a href="#">
+                                                <a href="${pageContext.request.contextPath}/departamento/porPais?paisId=${pais.pais_id}">
                                                     <button class="btn btn-primary">Ver departamentos</button>
                                                 </a>
                                             </td>

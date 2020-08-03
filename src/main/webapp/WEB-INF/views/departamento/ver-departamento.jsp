@@ -163,6 +163,73 @@
         <div class="app-main__outer">
 
             <div class="app-main__inner">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="main-card mb-3 card">
+                            <div class="card-header" style="font-weight:bold;font-size: 16px;">
+                                Departamentos de ${pais.nombre_pais}
+                                <div class="btn-actions-pane-right">
+                                    <button type="button" class="btn-success btn" data-toggle="modal" data-target="#agregarPaisModal">Agregar Departamento</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:8%"></th>
+                                        <th>Nombre</th>
+                                        <th style="width:13%"></th>
+                                        <th style="width:5%"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${departamentos}" var="departamento" varStatus="index">
+                                        <tr>
+                                            <td class="text-center" style="font-weight: bold">${(index.index + 1)}.</td>
+                                            <td>${departamento.nombre_departamento}</td>
+                                            <td>
+                                                <a href="#">
+                                                    <button class="btn btn-primary">Ver municipios</button>
+                                                </a>
+                                            </td>
+                                            <td class="justify-content-end">
+                                                <a>
+                                                        <%--llenarModalEliminar(${restaurante.restauranteId},'${restaurante.nombre}')--%>
+                                                    <button type="button" class="btn btn-danger" onclick="">&times;</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="d-block text-center card-footer">
+                                <nav aria-label="...">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item ${firstPage?'disabled':''}">
+                                            <a class="page-link" href="${lastPageUrl}" tabindex="-1">Previous</a>
+                                        </li>
+                                        <li class="page-item ${firstPage?'active':''}"><a class="page-link" href="${firstPageUrl}">${firstPageNumber!=null?firstPageNumber:1}</a></li>
+                                        <c:if test="${secondPageExist}">
+                                            <li class="page-item ${secondPage?'active':''}">
+                                                <a class="page-link" href="${secondPageUrl}">${secondPageNumber}</a>
+                                            </li>
+                                        </c:if>
+                                        <c:if test="${thirdPageExist}">
+                                            <li class="page-item ${thirdPage?'active':''}"><a class="page-link" href="${thirdPageUrl}">${thirdPageNumber}</a></li>
+                                        </c:if>
+                                        <li class="page-item ${nextPageExist?'':'disabled'}">
+                                            <a class="page-link" href="${nextPageUrl}">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="app-wrapper-footer">
                 <div class="app-footer">
