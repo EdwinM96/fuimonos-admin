@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -170,7 +171,7 @@
                             <div class="card-header" style="font-weight:bold;font-size: 16px;">
                                 Departamentos de ${pais.nombre_pais}
                                 <div class="btn-actions-pane-right">
-                                    <button type="button" class="btn-success btn" data-toggle="modal" data-target="#agregarPaisModal">Agregar Departamento</button>
+                                    <button type="button" class="btn-success btn" data-toggle="modal" data-target="#agregarDepartamentoModal">Agregar Departamento</button>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -240,6 +241,33 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+<div class="modal fade" id="agregarDepartamentoModal" tabindex="-1" role="dialog" aria-labelledby="modalLabelTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabelTitle">Agregar Departamento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form:form method="POST" action="porPais?paisId=${pais.pais_id}" modelAttribute="departamentoModel">
+                    <div class="row mt-4 mb-4 ml-4">
+                        <div class="form-label-group">
+                            <label>Nombre del departamento: <span style="color:red">*</span></label>
+                            <form:input path="nombre_departamento" cssClass="form-control"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </div>
+                </form:form>
+            </div>
+        </div>
     </div>
 </div>
 
