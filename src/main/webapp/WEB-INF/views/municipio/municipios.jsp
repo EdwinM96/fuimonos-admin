@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : Template
     Created on : 28/06/2020, 02:38:41 PM
     Author     : HP PC
@@ -169,9 +169,9 @@
                     <div class="col-md-12">
                         <div class="main-card mb-3 card">
                             <div class="card-header" style="font-weight:bold;font-size: 16px;">
-                                Departamentos de ${pais.nombre_pais}
+                                Municipios de ${departamento.nombre_departamento}
                                 <div class="btn-actions-pane-right">
-                                    <button type="button" class="btn-success btn" data-toggle="modal" data-target="#agregarDepartamentoModal">Agregar Departamento</button>
+                                    <button type="button" class="btn-success btn" data-toggle="modal" data-target="#agregarMunicipioModal">Agregar Municipio</button>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -180,23 +180,17 @@
                                     <tr>
                                         <th style="width:8%"></th>
                                         <th>Nombre</th>
-                                        <th style="width:13%"></th>
                                         <th style="width:5%"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${departamentos}" var="departamento" varStatus="index">
+                                    <c:forEach items="${municipios}" var="municipio" varStatus="index">
                                         <tr>
                                             <td class="text-center" style="font-weight: bold">${(index.index + 1)}.</td>
-                                            <td>${departamento.nombre_departamento}</td>
-                                            <td>
-                                                <a href="${pageContext.request.contextPath}/municipios?departamentoId=${departamento.departamento_id}">
-                                                    <button class="btn btn-primary">Ver municipios</button>
-                                                </a>
-                                            </td>
+                                            <td>${municipio.nombre_municipio}</td>
                                             <td class="justify-content-end">
                                                 <a>
-                                                    <button type="button" class="btn btn-danger" onclick="presentarModalEliminar(${departamento.departamento_id}, '${departamento.nombre_departamento}', ${pais.pais_id})">&times;</button>
+                                                    <button type="button" class="btn btn-danger" onclick="presentarModalEliminar(${municipio.municipio_id}, '${municipio.nombre_municipio}', ${departamento.departamento_id})">&times;</button>
                                                 </a>
                                             </td>
                                         </tr>
@@ -243,21 +237,21 @@
     </div>
 </div>
 
-<div class="modal fade" id="agregarDepartamentoModal" tabindex="-1" role="dialog" aria-labelledby="modalLabelTitle" aria-hidden="true">
+<div class="modal fade" id="agregarMunicipioModal" tabindex="-1" role="dialog" aria-labelledby="modalLabelTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalLabelTitle">Agregar Departamento</h5>
+                <h5 class="modal-title" id="modalLabelTitle">Agregar Municipio</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form:form method="POST" action="porPais?paisId=${pais.pais_id}" modelAttribute="departamentoModel">
+                <form:form method="POST" action="municipios?departamentoId=${departamento.departamento_id}" modelAttribute="municipioNewModel">
                     <div class="row mt-4 mb-4 ml-4">
                         <div class="form-label-group">
                             <label>Nombre del departamento: <span style="color:red">*</span></label>
-                            <form:input path="nombre_departamento" cssClass="form-control"/>
+                            <form:input path="nombre_municipio" cssClass="form-control"/>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -270,17 +264,17 @@
     </div>
 </div>
 
-<div class="modal fade" id="deleteDepartamentoModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteMunicipioModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Desea eliminar este Departamento?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Desea eliminar este Municipio?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="text-center" id="nombreDepartamentoModal" style="font-weight: bold; font-size:24px"></div>
+                <div class="text-center" id="nombreMunicipioModal" style="font-weight: bold; font-size:24px"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -291,18 +285,18 @@
 </div>
 
 <script type="text/javascript">
-    function presentarModalEliminar(departamentoId, nombreDepartamento, paisId) {
+    function presentarModalEliminar(municipioId, nombreMunicipio, departamentoId) {
 
-        document.getElementById("modalDeleteLink").href = "${pageContext.request.contextPath}/departamento/delete?departamentoId=" + departamentoId + "&paisId=" + paisId;
+        document.getElementById("modalDeleteLink").href = "${pageContext.request.contextPath}/municipios/delete?municipioId=" + municipioId + "&departamentoId=" + departamentoId;
 
-        let labelDiv = document.getElementById("nombreDepartamentoModal");
+        let labelDiv = document.getElementById("nombreMunicipioModal");
 
         while (labelDiv.firstChild) {
             labelDiv.removeChild(labelDiv.firstChild);
         }
-        let labelContent = document.createTextNode("Al eliminar " + nombreDepartamento + " también se eliminarán todos sus municipios vinculados");
+        let labelContent = document.createTextNode(nombreMunicipio);
         labelDiv.appendChild(labelContent);
-        $('#deleteDepartamentoModal').modal('toggle')
+        $('#deleteMunicipioModal').modal('toggle')
     }
 </script>
 
