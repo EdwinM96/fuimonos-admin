@@ -24,12 +24,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+
 /**
  * @author HP PC
  */
 
 @Controller
-@RequestMapping("/departamento/porPais")
+@RequestMapping("/departamento")
 public class DepartamentoController {
 
     private final DepartamentoService departmentService;
@@ -42,9 +43,9 @@ public class DepartamentoController {
         this.paisService = paisService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/porPais", method = RequestMethod.GET)
     public ModelAndView verDepartamentoPorPais(@RequestParam("paisId")
-                                               Integer paisId,
+                                                       Integer paisId,
                                                HttpServletRequest request,
                                                HttpServletResponse response) throws IOException {
 
@@ -68,11 +69,11 @@ public class DepartamentoController {
 
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/porPais", method = RequestMethod.POST)
     public void agregarDepartamento(@RequestParam("paisId")
-                                    Integer paisId,
+                                            Integer paisId,
                                     @ModelAttribute("departamentoModel")
-                                    Departamento departamentoModel,
+                                            Departamento departamentoModel,
                                     HttpServletRequest request,
                                     HttpServletResponse response) throws IOException {
 
@@ -81,6 +82,17 @@ public class DepartamentoController {
         departmentService.save(departamentoModel);
 
         response.sendRedirect(request.getContextPath() + "/departamento/porPais?paisId=" + paisId);
+
+    }
+
+    @RequestMapping(value = "/delete")
+    public String eliminarDepartamento(@RequestParam("paisId")
+                                       Integer paisId,
+                                       @RequestParam("departamentoId")
+                                       Integer departamentoId) {
+
+        departmentService.delete(departamentoId);
+        return "redirect:/departamento/porPais?paisId=" + paisId;
 
     }
 

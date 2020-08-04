@@ -196,8 +196,7 @@
                                             </td>
                                             <td class="justify-content-end">
                                                 <a>
-                                                        <%--llenarModalEliminar(${restaurante.restauranteId},'${restaurante.nombre}')--%>
-                                                    <button type="button" class="btn btn-danger" onclick="">&times;</button>
+                                                    <button type="button" class="btn btn-danger" onclick="presentarModalEliminar(${departamento.departamento_id}, '${departamento.nombre_departamento}', ${pais.pais_id})">&times;</button>
                                                 </a>
                                             </td>
                                         </tr>
@@ -270,6 +269,42 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="deleteDepartamentoModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Desea eliminar este Departamento?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center" id="nombreDepartamentoModal" style="font-weight: bold; font-size:24px"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <a href="" id="modalDeleteLink"><button type="button" class="btn btn-danger">Eliminar</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function presentarModalEliminar(departamentoId, nombreDepartamento, paisId) {
+
+        document.getElementById("modalDeleteLink").href = "${pageContext.request.contextPath}/departamento/delete?departamentoId=" + departamentoId + "&paisId=" + paisId;
+
+        let labelDiv = document.getElementById("nombreDepartamentoModal");
+
+        while (labelDiv.firstChild) {
+            labelDiv.removeChild(labelDiv.firstChild);
+        }
+        let labelContent = document.createTextNode("Al eliminar " + nombreDepartamento + " también se eliminarán todos sus municipios vinculados");
+        labelDiv.appendChild(labelContent);
+        $('#deleteDepartamentoModal').modal('toggle')
+    }
+</script>
 
 <script src="<c:url value="/resources/font-awesome/js/all.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/dashboard.js"/>"></script>
