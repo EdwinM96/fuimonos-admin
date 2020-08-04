@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 @Controller
-@RequestMapping(value= "/pais/paises")
 public class PaisController {
 
     private final PaisService paisService;
@@ -29,7 +28,7 @@ public class PaisController {
         this.paisService = paisService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value= "/pais/paises")
     public ModelAndView verPaises(@RequestParam(value = "page", defaultValue = "0")
                                   Integer page,
                                   HttpServletRequest request,
@@ -52,7 +51,7 @@ public class PaisController {
 
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value= "/pais/paises", method = RequestMethod.POST)
     public void agregarPais(@ModelAttribute("paisModel")
                             Pais paisModel,
                             HttpServletRequest request,
@@ -61,6 +60,15 @@ public class PaisController {
         paisService.save(paisModel);
 
         response.sendRedirect(request.getContextPath() + "/pais/paises");
+
+    }
+
+    @RequestMapping(value = "pais/delete")
+    public String eliminarPais(@RequestParam(value = "paisId")
+                               Integer paisId) {
+
+        paisService.delete(paisId);
+        return "redirect:/pais/paises";
 
     }
 

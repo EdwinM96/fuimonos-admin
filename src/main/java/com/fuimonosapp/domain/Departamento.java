@@ -46,7 +46,7 @@ public class Departamento {
     @Column(name = "nombre_departamento")
     private String nombre_departamento;
     
-    @OneToMany(mappedBy = "departamento_id")
+    @OneToMany(mappedBy = "departamento_id", cascade = CascadeType.REMOVE)
     private Set<Restaurante> restaurante;
     /*
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
