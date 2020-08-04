@@ -1,15 +1,16 @@
 <%-- 
-    Document   : dashboard
-    Created on : 13/06/2020, 10:55:07 PM
+    Document   : editar-driver
+    Created on : 2/08/2020, 11:13:31 AM
     Author     : HP PC
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Inicio</title>
+        <title>Fuimonos</title>
         <!-- CSS only -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -35,11 +36,6 @@
 
             .hamburger--emphatic.is-active .hamburger-inner::after {
                 background-color: white !important;
-            }
-            a, a:hover, a:visited, a:link, a:active
-            {
-                color:white;
-                text-decoration: none;
             }
         </style>
     </head>
@@ -127,7 +123,7 @@
                     </div>    <div class="scrollbar-sidebar">
                         <div class="app-sidebar__inner">
                             <ul class="vertical-nav-menu">
-                                <li class="app-sidebar__heading">My Account</li>
+                                <li class="app-sidebar__heading">Administrador</li>
                                 <li>
                                     <a href="${pageContext.request.contextPath}/dashboard" class="mm-active">
                                         <i class="metismenu-icon pe-7s-display2"></i>
@@ -148,47 +144,45 @@
 
                     <div class="app-main__inner">
                         <div class="row">
-                            <div class="col-lg-6 mt-4">
-                                <a href="${pageContext.request.contextPath}/restaurantes">
-                                <button type="button" class="btn btn-primary btn-lg btn-block" style="padding-top:30px;padding-bottom:30px; font-size: 24px">
-                                    <i class="fas fa-utensils"></i>
-                                    Restaurantes
-                                </button>
-                                </a>
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-header">
+                                        Editando&nbsp;<strong>Driver</strong>
+                                    </div>
+                                    <form method="POST" action="${pageContext.request.contextPath}/driver/editar">
+                                    <div class="row mt-4 mb-5">
+                                        <div class="col-lg-1"></div> 
+                                        <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
+                                            <div class="form-label-group">
+                                                <label for="nombre">Nombre: <font color="red">*</font></label>
+                                                <input type="text" id="nombre" class="form-control" value="${driver.nombreDriver}" name="nombre" maxlength="32"  required/>
+                                            </div>
+                                        </div>       
+                                        <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
+                                            <div class="form-label-group">
+                                                <label for="nombreDeUsuario">Nombre de usuario: <font color="red">*</font></label>
+                                                <input type="text" id="nombreDeUsuario" class="form-control" value="${driver.username}" name="username" maxlength="32" required/>
+                                            </div>
+                                        </div>   
+                                        <div class="col-sm-9 col-md-7 col-lg-4 col-11 mx-auto">
+                                            <div class="form-label-group">
+                                                <label for="contra">Contraseña: <font color="red">*</font></label>
+                                                <input type="password" id="contra" class="form-control" value="${driver.pass}" name="password" maxlength="32"  required/>
+                                            </div>
+                                        </div>   
+                                        <input type="hidden" value="${driver.driverId}" name="driverId"/>
+                                    </div>
+                                    <div class="text-center mb-5 mt-3">
+                                        <button type="submit" class="btn btn-success btn-lg" style="padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;font-size: 18px; margin-right:10px">Guardar</button>
+                                        <a href="${pageContext.request.contextPath}/drivers">
+                                            <button type="button" class="btn btn-danger btn-lg" style="padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;font-size: 18px; margin-left:10px">Cancelar</button>
+                                        </a>
+                                    </div>
+                                </form>
                             </div>
-                                <div class="col-lg-6 mt-4">
-                                <a href="${pageContext.request.contextPath}/drivers">
-                                <button type="button" class="btn btn-secondary btn-lg btn-block" style="padding-top:30px;padding-bottom:30px; font-size: 24px; color:white">
-                                    <i class="fas fa-motorcycle" style=""></i>
-                                    Drivers
-                                </button>
-                                </a>
-                            </div>
-                            
                         </div>
-                                <div class="row">
-                                    <div class="col-lg-6 mt-4">
-                                <a href="${pageContext.request.contextPath}/pedidos">
-                                <button type="button" class="btn btn-danger btn-lg btn-block" style="padding-top:30px;padding-bottom:30px; font-size: 24px">
-                                    <i class="far fa-list-alt"></i>
-                                    Pedidos
-                                </button>
-                                </a>
-                            </div>
-                                <div class="col-lg-6 mt-4">
-                                <a href="${pageContext.request.contextPath}/usuarios">
-                                <button type="button" class="btn btn-success btn-lg btn-block" style="padding-top:30px;padding-bottom:30px; font-size: 24px">
-                                    <i class="fas fa-users"></i>
-                                    Usuarios
-                                </button>
-                                </a>
-                            </div>
-                                </div>
-                                <div class="row">
-                                    
-                                </div>
-                        
                     </div>
+                         </div>
                     <div class="app-wrapper-footer">
                         <div class="app-footer">
                             <div class="app-footer__inner">

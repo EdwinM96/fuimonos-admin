@@ -1,6 +1,6 @@
 <%-- 
-    Document   : dashboard
-    Created on : 13/06/2020, 10:55:07 PM
+    Document   : pedidos
+    Created on : 3/08/2020, 01:38:31 AM
     Author     : HP PC
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Inicio</title>
+        <title>Fuimonos</title>
         <!-- CSS only -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -35,11 +35,6 @@
 
             .hamburger--emphatic.is-active .hamburger-inner::after {
                 background-color: white !important;
-            }
-            a, a:hover, a:visited, a:link, a:active
-            {
-                color:white;
-                text-decoration: none;
             }
         </style>
     </head>
@@ -129,7 +124,7 @@
                             <ul class="vertical-nav-menu">
                                 <li class="app-sidebar__heading">My Account</li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/dashboard" class="mm-active">
+                                    <a href="${pageContext.request.contextPath}/dashboard" class="">
                                         <i class="metismenu-icon pe-7s-display2"></i>
                                         Inicio
                                     </a>
@@ -147,48 +142,78 @@
                 <div class="app-main__outer">
 
                     <div class="app-main__inner">
+                        <c:if test="${pedidoActualizado}">
+                            <div class="alert alert-success" role="alert">
+                                Pedido Actualizado!
+                            </div>
+                        </c:if>
                         <div class="row">
-                            <div class="col-lg-6 mt-4">
-                                <a href="${pageContext.request.contextPath}/restaurantes">
-                                <button type="button" class="btn btn-primary btn-lg btn-block" style="padding-top:30px;padding-bottom:30px; font-size: 24px">
-                                    <i class="fas fa-utensils"></i>
-                                    Restaurantes
-                                </button>
-                                </a>
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                        <div class="card-header" style="font-weight:bold;font-size: 16px;">
+                                            Pedidos
+                                           
+                                        </div>
+                                            
+                                    <div class="table-responsive">
+                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:8%"></th>
+                                                    <th>Nombre</th>
+                                                    <th>Resatuante</th>
+                                                    <th>Driver</th>
+                                                    <th>Total</th>
+                                                    <th style="width:13%"></th>
+                                                    <th style="width:5%"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${pedidos}" var="pedido" varStatus="index">
+                                                    <tr>
+                                                        <td class="text-center" style="font-weight: bold">
+
+                                                            ${(index.index + 1)}.
+                                                        </td>
+                                                        <td>${pedido.usuario_id.nombre}&nbsp;${pedido.usuario_id.apellido}</td>
+                                                        <td>${pedido.restaurante_id.nombre}</td>
+                                                        <td>${pedido.driver_asignado.nombreDriver}</td>
+                                                        <td>
+                                                            ${pedido.total_de_pedido}
+                                                        </td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <div class="d-block text-center card-footer">
+                                        <nav aria-label="...">
+                                            <ul class="pagination justify-content-center">
+                                                <li class="page-item ${firstPage?'disabled':''}">
+                                                    <a class="page-link" href="${lastPageUrl}" tabindex="-1">Previous</a>
+                                                </li>
+                                                <li class="page-item ${firstPage?'active':''}"><a class="page-link" href="${firstPageUrl}">${firstPageNumber!=null?firstPageNumber:1}</a></li>
+                                                    <c:if test="${secondPageExist}">
+                                                    <li class="page-item ${secondPage?'active':''}">
+                                                        <a class="page-link" href="${secondPageUrl}">${secondPageNumber}</a>
+                                                    </li>
+                                                </c:if>
+                                                <c:if test="${thirdPageExist}">
+                                                    <li class="page-item ${thirdPage?'active':''}"><a class="page-link" href="${thirdPageUrl}">${thirdPageNumber}</a></li>
+                                                    </c:if>
+                                                <li class="page-item ${nextPageExist?'':'disabled'}">
+                                                    <a class="page-link" href="${nextPageUrl}">Next</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
                             </div>
-                                <div class="col-lg-6 mt-4">
-                                <a href="${pageContext.request.contextPath}/drivers">
-                                <button type="button" class="btn btn-secondary btn-lg btn-block" style="padding-top:30px;padding-bottom:30px; font-size: 24px; color:white">
-                                    <i class="fas fa-motorcycle" style=""></i>
-                                    Drivers
-                                </button>
-                                </a>
-                            </div>
-                            
                         </div>
-                                <div class="row">
-                                    <div class="col-lg-6 mt-4">
-                                <a href="${pageContext.request.contextPath}/pedidos">
-                                <button type="button" class="btn btn-danger btn-lg btn-block" style="padding-top:30px;padding-bottom:30px; font-size: 24px">
-                                    <i class="far fa-list-alt"></i>
-                                    Pedidos
-                                </button>
-                                </a>
-                            </div>
-                                <div class="col-lg-6 mt-4">
-                                <a href="${pageContext.request.contextPath}/usuarios">
-                                <button type="button" class="btn btn-success btn-lg btn-block" style="padding-top:30px;padding-bottom:30px; font-size: 24px">
-                                    <i class="fas fa-users"></i>
-                                    Usuarios
-                                </button>
-                                </a>
-                            </div>
-                                </div>
-                                <div class="row">
-                                    
-                                </div>
-                        
-                    </div>
+                         </div>
                     <div class="app-wrapper-footer">
                         <div class="app-footer">
                             <div class="app-footer__inner">

@@ -5,6 +5,8 @@
  */
 package com.fuimonosapp.domain;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,59 +30,54 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(schema = "public", name = "pedido")
 public class Pedido {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pedido_id")
     private Integer pedido_id;
-    
+
     @Column(name = "codigo_pedido")
     private String codido_pedido;
-    
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario_id;
-    
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurante_id")
     private Restaurante restaurante_id;
-    
+
     @OneToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "driver_asignado")
+    @JoinColumn(name = "driver_asignado")
     private Driver driver_asignado;
-    
-    @OneToOne(mappedBy = "id_pedido_actual", cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY, optional = false)
-        private Driver drivers;
-    
+
     @Column(name = "forma_de_pago")
     private String forma_de_pago;
-    
+
     @Column(name = "total_de_pedido")
     private Integer total_de_pedido;
-    
+
+    @Column(name = "pedido_entregado")
+    private String pedido_entregado;
+
+    @Column(name = "notas")
+    private String notas;
+
     @Column(name = "pedido_pagado")
     private Boolean pedido_pagado;
-    
+
     @Column(name = "fecha_ordenado")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fecha_ordenado;
-    
+
     @Column(name = "tiempo_prom_entrega")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date tiempo_prom_entrega;
 
-    public Driver getDrivers() {
-        return drivers;
-    }
-
-    public void setDrivers(Driver drivers) {
-        this.drivers = drivers;
-    }
-    
-    
+    @Column(name = "tiempo_extra", columnDefinition = "TIME")
+    private LocalTime tiempoExtra;
 
     public Integer getPedido_id() {
         return pedido_id;
@@ -122,12 +119,6 @@ public class Pedido {
         this.driver_asignado = driver_asignado;
     }
 
-   
-
-   
-
-   
-
     public String getForma_de_pago() {
         return forma_de_pago;
     }
@@ -167,9 +158,29 @@ public class Pedido {
     public void setTiempo_prom_entrega(Date tiempo_prom_entrega) {
         this.tiempo_prom_entrega = tiempo_prom_entrega;
     }
-    
-    public Pedido(){
-        
+
+    public String getPedido_entregado() {
+        return pedido_entregado;
     }
-    
+
+    public void setPedido_entregado(String pedido_entregado) {
+        this.pedido_entregado = pedido_entregado;
+    }
+
+    public String getNotas() {
+        return notas;
+    }
+
+    public LocalTime getTiempoExtra() {
+        return tiempoExtra;
+    }
+
+    public void setTiempoExtra(LocalTime tiempoExtra) {
+        this.tiempoExtra = tiempoExtra;
+    }
+
+    public Pedido() {
+
+    }
+
 }

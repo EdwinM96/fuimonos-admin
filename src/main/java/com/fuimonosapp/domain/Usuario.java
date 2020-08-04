@@ -36,7 +36,6 @@ public class Usuario {
     @Column(name = "username")
     private String username;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "pass")
     private String pass;
 
