@@ -56,23 +56,23 @@ public class MainController {
 		return mv;
 	}
         
-        @RequestMapping("/attempt-login")
-        public void attemptLogin(@RequestParam(value="username", required=true) String username,@RequestParam(value="password", required=true) String password,
-                HttpServletResponse response, HttpServletRequest request) throws IOException{
-            
-                Administrador adminFill = new Administrador();
-                adminFill.setUsername(username);
-                adminFill.setPass(password);
-                Administrador adminResponse = adminService.loginAdministrador(adminFill);
-                if(adminResponse != null){
-                    request.getSession().setAttribute("adminUser", adminResponse);
-                    response.sendRedirect(request.getContextPath()+"/dashboard");
-                }
-                else{
-                   response.sendRedirect(request.getContextPath()+"?failedAttempt=true"); 
-                }
-            
-        }
+    @RequestMapping("/attempt-login")
+    public void attemptLogin(@RequestParam(value="username", required=true) String username,@RequestParam(value="password", required=true) String password,
+            HttpServletResponse response, HttpServletRequest request) throws IOException{
+
+            Administrador adminFill = new Administrador();
+            adminFill.setUsername(username);
+            adminFill.setPass(password);
+            Administrador adminResponse = adminService.loginAdministrador(adminFill);
+            if(adminResponse != null){
+                request.getSession().setAttribute("adminUser", adminResponse);
+                response.sendRedirect(request.getContextPath()+"/dashboard");
+            }
+            else{
+               response.sendRedirect(request.getContextPath()+"?failedAttempt=true");
+            }
+
+    }
         
         @RequestMapping("/dashboard")
         public ModelAndView dashboard(HttpServletRequest request, HttpServletResponse response) throws IOException{
