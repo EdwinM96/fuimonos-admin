@@ -63,17 +63,19 @@ public class RestauranteController {
     Logger l = Logger.getLogger("restaurante");
 
     @GetMapping("/restaurantes")
-    public ModelAndView restaurantesList(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException {
+    public ModelAndView restaurantesList(@RequestParam(name = "searchWord", required = false) String searchWord,
+            @RequestParam(name = "page", defaultValue = "0") Integer page,
+            HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException {
         if (SessionUtils.assertLogin(request)) {
             ModelAndView mav = new ModelAndView();
             HttpSession session = request.getSession();
             l.info(request.getParameter("page"));
-            Page<Restaurante> restaurantes = restaService.findBySearchWord(request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 0,
-                    request.getParameter("searchWord"));
+            Page<Restaurante> restaurantes = restaService.findBySearchWord(page,searchWord);
 
             mav.addObject("restaurantes", restaurantes.getContent());
-            mav.addAllObjects(PagingAndSorting.generalPagingAndSorting(restaurantes, request, (String) session.getAttribute("searchWord"), null, "restaurantes"));
+            mav.addAllObjects(PagingAndSorting.generalPagingAndSorting(restaurantes, request, searchWord, null, "restaurantes"));
             mav.setViewName("restaurante/restaurantes");
+            mav.addObject("restauranteFilter", searchWord);
             if(request.getParameter("success")!=null){ if(Boolean.parseBoolean(request.getParameter("success"))){ mav.addObject("creatingAccountSuccess", true);}}
             if(request.getParameter("deleted")!=null){ if(Boolean.parseBoolean(request.getParameter("deleted"))){ mav.addObject("deletingAccountSuccess", true);}}
             return mav;

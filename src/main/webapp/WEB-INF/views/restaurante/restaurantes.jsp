@@ -177,7 +177,7 @@
                     </div>    <div class="app-header__content">
                         <div class="app-header-left">
                         </div>
-                        
+
                     </div>
                 </div>               <div class="app-main">
                     <div class="app-sidebar sidebar-shadow">
@@ -234,81 +234,87 @@
 
                         <div class="app-main__inner">
                             <c:if test="${creatingAccountSuccess}">
-                            <div class="alert alert-success" role="alert">
-                                Restaurante creado!
-                            </div>
-                        </c:if>
+                                <div class="alert alert-success" role="alert">
+                                    Restaurante creado!
+                                </div>
+                            </c:if>
                             <c:if test="${deletingAccountSuccess}">
-                            <div class="alert alert-success" role="alert">
-                                Restaurante eliminado!
-                            </div>
-                        </c:if>
+                                <div class="alert alert-success" role="alert">
+                                    Restaurante eliminado!
+                                </div>
+                            </c:if>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="main-card mb-3 card">
-                                         <div class="card-header" style="font-weight:bold;font-size: 16px;">
-                                             Restaurantes
-                                             <div class="btn-actions-pane-right">
-                                                 <a href="${pageContext.request.contextPath}/restaurante/crear"><button type="button" class="btn-success btn">+ Agregar Restaurante</button></a>
-                                             </div>
-                                         </div>
-                                    <div class="table-responsive">
-                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width:8%"></th>
-                                                    <th>Nombre</th>
-                                                    <th>Representante</th>
-                                                    <th style="width:13%"></th>
-                                                    <th style="width:5%"></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${restaurantes}" var="restaurante" varStatus="index">
-                                                    <tr>
-                                                        <td class="text-center" style="font-weight: bold">
-     
-                                                       ${(index.index + 1)}.
-                                                        </td>
-                                                <td>${restaurante.nombre}</td>
-                                                <td>${restaurante.representante}</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/restaurante?id=${restaurante.restauranteId}">
-                                                        <button class="btn btn-primary">Ver detalles</button>
-                                                    </a>
-                                                </td>
-                                                <td class="justify-content-end">
-                                                    <a>
-                                                        <button type="button" class="btn btn-danger" onclick="llenarModalEliminar(${restaurante.restauranteId},'${restaurante.nombre}')">&times;</button>
-                                                    </a>
-                                                </td>
-                                                    </tr>
-                                            </c:forEach>
-                                            </tbody>
-                                        </table>
+                                        <form method="GET" action="${pageContext.request.contextPath}/restaurantes">
+                                            <div class="card-header" style="font-weight:bold;font-size: 16px;">
 
-                                    </div>
-                                         <div class="d-block text-center card-footer">
-                                        <nav aria-label="...">
-                                            <ul class="pagination justify-content-center">
-                                                <li class="page-item ${firstPage?'disabled':''}">
-                                                    <a class="page-link" href="${lastPageUrl}" tabindex="-1">Previous</a>
-                                                </li>
-                                                <li class="page-item ${firstPage?'active':''}"><a class="page-link" href="${firstPageUrl}">${firstPageNumber!=null?firstPageNumber:1}</a></li>
-                                                <c:if test="${secondPageExist}">
-                                                    <li class="page-item ${secondPage?'active':''}">
-                                                        <a class="page-link" href="${secondPageUrl}">${secondPageNumber}</a>
+                                                Restaurantes
+                                                <div class="search-word mt-2 mb-2 pl-4 pr-2"><input type="search" maxlength="24" class="form-control" placeholder="Buscar..." name="searchWord" value="${restauranteFilter}" onsearch="onClear(this)"></div>
+                                                <div class=""><button type="submit" class="btn btn-success">Buscar</button></div>
+
+                                                <div class="btn-actions-pane-right">
+                                                    <a href="${pageContext.request.contextPath}/restaurante/crear"><button type="button" class="btn-success btn">+ Agregar Restaurante</button></a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="table-responsive">
+                                            <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width:8%"></th>
+                                                        <th>Nombre</th>
+                                                        <th>Representante</th>
+                                                        <th style="width:13%"></th>
+                                                        <th style="width:5%"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${restaurantes}" var="restaurante" varStatus="index">
+                                                        <tr>
+                                                            <td class="text-center" style="font-weight: bold">
+
+                                                                ${(index.index + 1)}.
+                                                            </td>
+                                                            <td>${restaurante.nombre}</td>
+                                                            <td>${restaurante.representante}</td>
+                                                            <td>
+                                                                <a href="${pageContext.request.contextPath}/restaurante?id=${restaurante.restauranteId}">
+                                                                    <button class="btn btn-primary">Ver detalles</button>
+                                                                </a>
+                                                            </td>
+                                                            <td class="justify-content-end">
+                                                                <a>
+                                                                    <button type="button" class="btn btn-danger" onclick="llenarModalEliminar(${restaurante.restauranteId}, '${restaurante.nombre}')">&times;</button>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                        <div class="d-block text-center card-footer">
+                                            <nav aria-label="...">
+                                                <ul class="pagination justify-content-center">
+                                                    <li class="page-item ${firstPage?'disabled':''}">
+                                                        <a class="page-link" href="${lastPageUrl}" tabindex="-1">Previous</a>
                                                     </li>
-                                                </c:if>
-                                                <c:if test="${thirdPageExist}">
-                                                    <li class="page-item ${thirdPage?'active':''}"><a class="page-link" href="${thirdPageUrl}">${thirdPageNumber}</a></li>
+                                                    <li class="page-item ${firstPage?'active':''}"><a class="page-link" href="${firstPageUrl}">${firstPageNumber!=null?firstPageNumber:1}</a></li>
+                                                        <c:if test="${secondPageExist}">
+                                                        <li class="page-item ${secondPage?'active':''}">
+                                                            <a class="page-link" href="${secondPageUrl}">${secondPageNumber}</a>
+                                                        </li>
                                                     </c:if>
-                                                <li class="page-item ${nextPageExist?'':'disabled'}">
-                                                    <a class="page-link" href="${nextPageUrl}">Next</a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
+                                                    <c:if test="${thirdPageExist}">
+                                                        <li class="page-item ${thirdPage?'active':''}"><a class="page-link" href="${thirdPageUrl}">${thirdPageNumber}</a></li>
+                                                        </c:if>
+                                                    <li class="page-item ${nextPageExist?'':'disabled'}">
+                                                        <a class="page-link" href="${nextPageUrl}">Next</a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -316,7 +322,7 @@
                         <div class="app-wrapper-footer">
                             <div class="app-footer">
                                 <div class="app-footer__inner">
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -324,73 +330,83 @@
                     </div>
                 </div>
             </div>
-                <div class="modal fade" id="deleteRestauranteModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Desea eliminar este restaurante?</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="text-center" id="nombreRestauranteModal" style="font-weight: bold; font-size:24px"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <a href="" id="modalDeleteLink"><button type="button" class="btn btn-danger">Eliminar</button></a>
-                            </div>
+            <div class="modal fade" id="deleteRestauranteModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Desea eliminar este restaurante?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center" id="nombreRestauranteModal" style="font-weight: bold; font-size:24px"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <a href="" id="modalDeleteLink"><button type="button" class="btn btn-danger">Eliminar</button></a>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <script type="text/javascript">
-                    function llenarModalEliminar(id,nombreRestaurante){
-                        document.getElementById("modalDeleteLink").href = "${pageContext.request.contextPath}/restaurante/delete?id="+id;
-                         var labelDiv = document.getElementById("nombreRestauranteModal");
-                         while (labelDiv.firstChild) {
-                            labelDiv.removeChild(labelDiv.firstChild);
-                         }
-                        var labelContent = document.createTextNode(nombreRestaurante);
-                        labelDiv.appendChild(labelContent);
-                        $('#deleteRestauranteModal').modal('toggle')
+            <script type="text/javascript">
+                function llenarModalEliminar(id, nombreRestaurante) {
+                    document.getElementById("modalDeleteLink").href = "${pageContext.request.contextPath}/restaurante/delete?id=" + id;
+                    var labelDiv = document.getElementById("nombreRestauranteModal");
+                    while (labelDiv.firstChild) {
+                        labelDiv.removeChild(labelDiv.firstChild);
                     }
+                    var labelContent = document.createTextNode(nombreRestaurante);
+                    labelDiv.appendChild(labelContent);
+                    $('#deleteRestauranteModal').modal('toggle')
+                }
 
-                </script>
-                <!-- <table>
-                     <tr>
-                         <th>Id</th>
-                         <th>Nombre</th>
-                         <th>Usuario</th>
-                         <th>Pass</th>
-                     </tr>
-     
-                <c:forEach items="${restaurantes}" var="restaurante" >
-                    <tr>
-                        <td>${restaurante.restauranteId}</td>
-                        <td>${restaurante.nombre}</td>
-                        <td>${restaurante.username}</td>
-                        <td>${restaurante.pass}</td>
-                    </tr>
-                </c:forEach>
-            </table>
+            </script>
+            <script>
 
-            <form class="form1" action="${pageContext.request.contextPath}/saveRestaurante" method="POST">
-                <input class="name " type="text" align="center" placeholder="Usua"name="nombre">
-                <input class="pass" type="password" align="center" placeholder="Contraseña" name="pass">
-                <input class="username" type="text" align="center" placeholder="username" name="username">
+                function onClear(field) {
+                    if (field.value === null) {
+                        window.location.replace("${pageContext.request.contextPath}/restaurantes");
+                    } else if (field.value === "") {
+                        window.location.replace("${pageContext.request.contextPath}/restaurantes");
+                    }
+                }
+            </script>
+            <!-- <table>
+                 <tr>
+                     <th>Id</th>
+                     <th>Nombre</th>
+                     <th>Usuario</th>
+                     <th>Pass</th>
+                 </tr>
+ 
+            <c:forEach items="${restaurantes}" var="restaurante" >
+                <tr>
+                    <td>${restaurante.restauranteId}</td>
+                    <td>${restaurante.nombre}</td>
+                    <td>${restaurante.username}</td>
+                    <td>${restaurante.pass}</td>
+                </tr>
+            </c:forEach>
+        </table>
 
-                <button type="submit" class="submit">Ingresar</button>
-            </form>
+        <form class="form1" action="${pageContext.request.contextPath}/saveRestaurante" method="POST">
+            <input class="name " type="text" align="center" placeholder="Usua"name="nombre">
+            <input class="pass" type="password" align="center" placeholder="Contraseña" name="pass">
+            <input class="username" type="text" align="center" placeholder="username" name="username">
 
-             <form class="form1" action="${pageContext.request.contextPath}/busqueda" method="POST">
-                <label>Ingresar codigo de restaurante: </label>
-                <input type="number" name="codigo">
-                <br>
-                <button type="submit" name="action" value="borrar">Borrar</button><br>
-                <button type="submit" name="action" value="actualizar">Actualizar</button><br>
+            <button type="submit" class="submit">Ingresar</button>
+        </form>
 
-            </form>-->
-                <script type="text/javascript" src="<c:url value="/resources/dashboard.js"/>"></script>
+         <form class="form1" action="${pageContext.request.contextPath}/busqueda" method="POST">
+            <label>Ingresar codigo de restaurante: </label>
+            <input type="number" name="codigo">
+            <br>
+            <button type="submit" name="action" value="borrar">Borrar</button><br>
+            <button type="submit" name="action" value="actualizar">Actualizar</button><br>
+
+        </form>-->
+            <script type="text/javascript" src="<c:url value="/resources/dashboard.js"/>"></script>
         </body>
     </html>

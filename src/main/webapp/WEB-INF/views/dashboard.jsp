@@ -185,7 +185,14 @@
                             </div>
                                 </div>
                                 <div class="row">
-                                    
+                                    <div class="col-lg-6 mt-4">
+                                <!--<a href="${pageContext.request.contextPath}/administrador">
+                                <button type="button" class="btn btn-dark btn-lg btn-block" style="padding-top:30px;padding-bottom:30px; font-size: 24px">
+                                    <i class="far fa-user"></i>
+                                    Administrador
+                                </button>
+                                </a>-->
+                            </div>
                                 </div>
                         
                     </div>
