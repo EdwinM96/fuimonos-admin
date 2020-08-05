@@ -15,17 +15,21 @@
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+
 
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-            crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/metismenu/dist/metisMenu.min.css">
     <link rel="stylesheet" href="<c:url value="/resources/dashboard.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/metismenu/pe-icon-7-stroke/css/pe-icon-7-stroke.css" />">
@@ -248,11 +252,19 @@
             </div>
             <div class="modal-body">
                 <form:form method="POST" action="municipios?departamentoId=${departamento.departamento_id}" modelAttribute="municipioNewModel">
-                    <div class="row mt-4 mb-4 ml-4">
-                        <div class="form-label-group">
-                            <label>Nombre del departamento: <span style="color:red">*</span></label>
+                    <div class="row mt-4 mb-4 ml-4 mr-4">
+                        <div class="form-label-group w-100 mb-2">
+                            <label>Nombre del municipio: <span style="color:red">*</span></label>
                             <form:input path="nombre_municipio" cssClass="form-control"/>
                         </div>
+<%--                        <div class="form-label-group w-100 mb-2">
+                            <label>Costo de entrega: <span style="color:red">*</span></label>
+                            <form:input path="costo_de_entrega" cssClass="form-control"/>
+                        </div>
+                        <div class="form-label-group w-100 mb-2">
+                            <label>Tiempo de entrega estimado: <span style="color:red">*</span></label>
+                            <form:input path="tiempo_de_entrega_estimado" cssClass="form-control"/>
+                        </div>--%>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -298,6 +310,7 @@
         labelDiv.appendChild(labelContent);
         $('#deleteMunicipioModal').modal('toggle')
     }
+
 </script>
 
 <script src="<c:url value="/resources/font-awesome/js/all.js"/>"></script>

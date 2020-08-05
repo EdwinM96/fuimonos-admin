@@ -2,7 +2,6 @@ package com.fuimonosapp.controller;
 
 import com.fuimonosapp.domain.Departamento;
 import com.fuimonosapp.domain.Municipio;
-import com.fuimonosapp.domain.Pais;
 import com.fuimonosapp.service.DepartamentoService;
 import com.fuimonosapp.service.MunicipiosService;
 import com.fuimonosapp.util.PagingAndSorting;
@@ -63,7 +62,7 @@ public class MunicipioController {
 
     }
 
-    @RequestMapping(value= "/pais/paises", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public void agregarMunicipio(@RequestParam("departamentoId")
                                  Integer departamentoId,
                                  @ModelAttribute("municipioNewModel")
@@ -72,7 +71,7 @@ public class MunicipioController {
                                  HttpServletResponse response) throws IOException {
 
         Departamento departamento = departamentoService.findOne(departamentoId);
-        municipioNewModel.setDepartamento_id(departamento);
+        municipioNewModel.setDepartamento(departamento);
         municipiosService.save(municipioNewModel);
 
         response.sendRedirect(request.getContextPath() + "/municipios?departamentoId=" + departamentoId);
