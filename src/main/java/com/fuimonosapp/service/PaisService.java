@@ -10,6 +10,8 @@ import com.fuimonosapp.repository.PaisRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,13 +21,21 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class PaisService {
+
+    private final PaisRepository paisRepository;
+
+    private static final Integer PAGE_SIZE = 10;
+
     @Autowired
-    PaisRepository paisRepository;
-    
-    @Transactional
-    public List<Pais> findAll() {
-        return paisRepository.findAll();
+    public PaisService(PaisRepository paisRepository) {
+        this.paisRepository = paisRepository;
     }
+
+    @Transactional
+    public Page<Pais> findAllbyPage(Integer currentPage) {
+        return paisRepository.findAll(PageRequest.of(currentPage, PAGE_SIZE));
+    }
+
     @Transactional
     public void save(Pais pais) throws DataAccessException {
          paisRepository.saveAndFlush(pais);

@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -35,7 +34,7 @@ public class Municipio {
 
      @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "departamento_id")
-    private Departamento departamento_id;
+    private Departamento departamento;
 
     @Column(name = "tiempo_de_entrega_estimado")
     @Temporal(TemporalType.DATE)
@@ -56,12 +55,12 @@ public class Municipio {
         this.municipio_id = municipio_id;
     }
 
-    public Departamento getDepartamento_id() {
-        return departamento_id;
+    public Departamento getDepartamento() {
+        return departamento;
     }
 
-    public void setDepartamento_id(Departamento departamento_id) {
-        this.departamento_id = departamento_id;
+    public void setDepartamento(Departamento departamento_id) {
+        this.departamento = departamento_id;
     }
 
 

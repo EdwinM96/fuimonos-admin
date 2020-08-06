@@ -5,7 +5,11 @@
  */
 package com.fuimonosapp.repository;
 
+import com.fuimonosapp.domain.Departamento;
 import com.fuimonosapp.domain.Municipio;
+import com.fuimonosapp.domain.Pais;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +19,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface MunicipioRepository extends JpaRepository<Municipio, Integer> {
-    
+
+    Page<Municipio> findByDepartamento(Departamento departamento, Pageable pageable);
+
 }

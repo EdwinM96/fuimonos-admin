@@ -1,2 +1,4 @@
 /target/
+.idea/
+*.iml
 /src/main/webapp/WEB-INF/views/administrador/añadir-administrador.jsp
