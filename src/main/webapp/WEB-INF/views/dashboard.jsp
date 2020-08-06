@@ -175,11 +175,19 @@
                                 </button>
                                 </a>
                             </div>
-                                <div class="col-lg-6 mt-4">
+                            <div class="col-lg-6 mt-4">
                                 <a href="${pageContext.request.contextPath}/usuarios">
                                 <button type="button" class="btn btn-success btn-lg btn-block" style="padding-top:30px;padding-bottom:30px; font-size: 24px">
                                     <i class="fas fa-users"></i>
                                     Usuarios
+                                </button>
+                                </a>
+                            </div>
+                            <div class="col-lg-6 mt-4">
+                                <a href="${pageContext.request.contextPath}/pais/paises">
+                                <button type="button" class="btn btn-primary btn-lg btn-block" style="padding-top:30px;padding-bottom:30px; font-size: 24px">
+                                    <i class="fas fa-map"></i>
+                                    Paises
                                 </button>
                                 </a>
                             </div>
