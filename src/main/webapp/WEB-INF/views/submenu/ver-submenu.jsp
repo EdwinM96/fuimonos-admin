@@ -124,7 +124,7 @@
                             <ul class="vertical-nav-menu">
                                 <li class="app-sidebar__heading">My Account</li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/dashboard" class="mm-active">
+                                    <a href="${pageContext.request.contextPath}/dashboard" class="">
                                         <i class="metismenu-icon pe-7s-display2"></i>
                                         Inicio
                                     </a>
