@@ -35,32 +35,9 @@ public class OpcionSubMenu {
 
     @Column(name = "seleccionado_por_defecto")
     private Boolean seleccionadoPorDefecto;
-
-    @OneToOne(mappedBy = "opcionsubmenuId", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    private OpcionDeSubMenuSeleccionado opcionDeSubMenuSeleccionado;
-
-    @OneToMany(mappedBy = "opcionsubmenu", fetch = FetchType.LAZY)
-    private List<SeleccionSubMenuPlatilloFavorito> seleccionSubMenuPlatilloFavoritos;
     
     @Column(name = "orden")
     private Integer orden;
-
-    public OpcionDeSubMenuSeleccionado getOpcionDeSubMenuSeleccionado() {
-        return opcionDeSubMenuSeleccionado;
-    }
-
-    public void setOpcionDeSubMenuSeleccionado(OpcionDeSubMenuSeleccionado opcionDeSubMenuSeleccionado) {
-        this.opcionDeSubMenuSeleccionado = opcionDeSubMenuSeleccionado;
-    }
-
-    public List<SeleccionSubMenuPlatilloFavorito> getSeleccionSubMenuPlatilloFavoritos() {
-        return seleccionSubMenuPlatilloFavoritos;
-    }
-
-    public void setSeleccionSubMenuPlatilloFavoritos(List<SeleccionSubMenuPlatilloFavorito> seleccionSubMenuPlatilloFavoritos) {
-        this.seleccionSubMenuPlatilloFavoritos = seleccionSubMenuPlatilloFavoritos;
-    }
 
     public Double getPrecio() {
         return precio;
