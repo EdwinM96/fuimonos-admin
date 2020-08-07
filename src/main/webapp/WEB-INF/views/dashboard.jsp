@@ -127,7 +127,7 @@
                     </div>    <div class="scrollbar-sidebar">
                         <div class="app-sidebar__inner">
                             <ul class="vertical-nav-menu">
-                                <li class="app-sidebar__heading">My Account</li>
+                                <li class="app-sidebar__heading">Administrador</li>
                                 <li>
                                     <a href="${pageContext.request.contextPath}/dashboard" class="mm-active">
                                         <i class="metismenu-icon pe-7s-display2"></i>

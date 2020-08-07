@@ -141,9 +141,9 @@
                     </div>    <div class="scrollbar-sidebar">
                         <div class="app-sidebar__inner">
                             <ul class="vertical-nav-menu">
-                                <li class="app-sidebar__heading">My Account</li>
+                                <li class="app-sidebar__heading">Administrador</li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/dashboard" class="mm-active">
+                                    <a href="${pageContext.request.contextPath}/dashboard" class="">
                                         <i class="metismenu-icon pe-7s-display2"></i>
                                         Inicio
                                     </a>
@@ -205,7 +205,7 @@
                                                         <td>${usuario.nombre}&nbsp;${usuario.apellido}</td>
                                                         <td>${usuario.celular}</td>
                                                         <td>${usuario.habilitado?"<div class=\"text-success\">Habilitado</div>"
-                                                              :"<p class=\"text-danger\">Inhabilitado</p>"}</td>
+                                                              :"<div class=\"text-danger\">Inhabilitado</div>"}</td>
                                                         <td class="justify-content-end">
                                                             <a href="${pageContext.request.contextPath}/usuario/cambiarEstatus?id=${usuario.usuario_id}">
                                                                 ${usuario.habilitado?"<button class=\"btn btn-danger\">Inhabilitar</div>"
