@@ -76,11 +76,20 @@ public class Pedido {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date tiempo_prom_entrega;
 
-    @Column(name = "tiempo_extra", columnDefinition = "TIME")
-    private LocalTime tiempoExtra;
-    
+    @Column(name = "tiempo_adicional", columnDefinition = "TIME")
+    private LocalTime tiempoAdicional;
+
     @Column(name = "status")
     private String status;
+
+    @Column(name = "total_en_restaurante")
+    private Double totalEnRestaurante;
+
+    @Column(name = "total_de_cargos_extra")
+    private Double totalDeCargosExtra;
+
+    @Column(name = "total_en_restaurante_sin_comision")
+    private Double totalEnRestauranteSinComision;
 
     public Integer getPedido_id() {
         return pedido_id;
@@ -138,6 +147,22 @@ public class Pedido {
         this.total_de_pedido = total_de_pedido;
     }
 
+    public String getPedido_entregado() {
+        return pedido_entregado;
+    }
+
+    public void setPedido_entregado(String pedido_entregado) {
+        this.pedido_entregado = pedido_entregado;
+    }
+
+    public String getNotas() {
+        return notas;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
+    }
+
     public Boolean getPedido_pagado() {
         return pedido_pagado;
     }
@@ -162,24 +187,12 @@ public class Pedido {
         this.tiempo_prom_entrega = tiempo_prom_entrega;
     }
 
-    public String getPedido_entregado() {
-        return pedido_entregado;
+    public LocalTime getTiempoAdicional() {
+        return tiempoAdicional;
     }
 
-    public void setPedido_entregado(String pedido_entregado) {
-        this.pedido_entregado = pedido_entregado;
-    }
-
-    public String getNotas() {
-        return notas;
-    }
-
-    public LocalTime getTiempoExtra() {
-        return tiempoExtra;
-    }
-
-    public void setTiempoExtra(LocalTime tiempoExtra) {
-        this.tiempoExtra = tiempoExtra;
+    public void setTiempoAdicional(LocalTime tiempoAdicional) {
+        this.tiempoAdicional = tiempoAdicional;
     }
 
     public String getStatus() {
@@ -189,8 +202,30 @@ public class Pedido {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
+
+    public Double getTotalEnRestaurante() {
+        return totalEnRestaurante;
+    }
+
+    public void setTotalEnRestaurante(Double totalEnRestaurante) {
+        this.totalEnRestaurante = totalEnRestaurante;
+    }
+
+    public Double getTotalDeCargosExtra() {
+        return totalDeCargosExtra;
+    }
+
+    public void setTotalDeCargosExtra(Double totalDeCargosExtra) {
+        this.totalDeCargosExtra = totalDeCargosExtra;
+    }
+
+    public Double getTotalEnRestauranteSinComision() {
+        return totalEnRestauranteSinComision;
+    }
+
+    public void setTotalEnRestauranteSinComision(Double totalEnRestauranteSinComision) {
+        this.totalEnRestauranteSinComision = totalEnRestauranteSinComision;
+    }
 
     public Pedido() {
 

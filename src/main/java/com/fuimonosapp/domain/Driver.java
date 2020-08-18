@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -34,29 +35,24 @@ public class Driver implements Serializable {
 
     @Column(name = "username")
     private String username;
-    
+
     @Column(name = "pass")
     private String pass;
-    
+
     @Column(name = "nombre_driver")
     private String nombreDriver;
 
-    @Column(name = "maximo_de_ordenes_conc")
-    private Integer maximoOrdenesConc;
+    @Column(name = "hora_de_entrada")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date horaDeEntrada;
 
-    @Column(name = "entrega_actual")
-    private String entregaActual;
+    @Column(name = "hora_de_salida")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date horaDeSalida;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_pedido_actual", referencedColumnName = "pedido_id")
-    private Pedido pedidoActual;
-    
     @Column(name = "habilitado")
     private Boolean habilitado;
 
-    @Column(name = "horas_a_trabajar")
-    private Integer horasATrabajar;
-    
     @Column(name = "fecha_creado")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaCreado;
@@ -93,30 +89,21 @@ public class Driver implements Serializable {
         this.nombreDriver = nombreDriver;
     }
 
-    public Integer getMaximoOrdenesConc() {
-        return maximoOrdenesConc;
+    public Date getHoraDeEntrada() {
+        return horaDeEntrada;
     }
 
-    public void setMaximoOrdenesConc(Integer maximoOrdenesConc) {
-        this.maximoOrdenesConc = maximoOrdenesConc;
+    public void setHoraDeEntrada(Date horaDeEntrada) {
+        this.horaDeEntrada = horaDeEntrada;
     }
 
-    public String getEntregaActual() {
-        return entregaActual;
+    public Date getHoraDeSalida() {
+        return horaDeSalida;
     }
 
-    public void setEntregaActual(String entregaActual) {
-        this.entregaActual = entregaActual;
+    public void setHoraDeSalida(Date horaDeSalida) {
+        this.horaDeSalida = horaDeSalida;
     }
-
-    public Pedido getPedidoActual() {
-        return pedidoActual;
-    }
-
-    public void setPedidoActual(Pedido pedidoActual) {
-        this.pedidoActual = pedidoActual;
-    }
-    
 
     public Boolean getHabilitado() {
         return habilitado;
@@ -124,14 +111,6 @@ public class Driver implements Serializable {
 
     public void setHabilitado(Boolean habilitado) {
         this.habilitado = habilitado;
-    }
-
-    public Integer getHorasATrabajar() {
-        return horasATrabajar;
-    }
-
-    public void setHorasATrabajar(Integer horasATrabajar) {
-        this.horasATrabajar = horasATrabajar;
     }
 
     public Date getFechaCreado() {
@@ -142,7 +121,7 @@ public class Driver implements Serializable {
         this.fechaCreado = fechaCreado;
     }
 
-
+    
 
     public Driver() {
 

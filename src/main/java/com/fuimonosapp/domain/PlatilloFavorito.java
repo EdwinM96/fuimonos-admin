@@ -32,8 +32,9 @@ public class PlatilloFavorito {
     @JoinColumn(name = "platillo_id")
     private Platillo platillo;
 
-    @Column(name = "nombre")
-    private String nombre;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
     public Integer getPlatillofavorito_id() {
         return platillofavorito_id;
@@ -51,15 +52,15 @@ public class PlatilloFavorito {
         this.platillo = platillo;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public PlatilloFavorito(){
-        
+    public PlatilloFavorito() {
+
     }
 }

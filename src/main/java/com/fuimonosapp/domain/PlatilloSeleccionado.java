@@ -30,7 +30,7 @@ public class PlatilloSeleccionado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "platilloseleccionado_id")
-    private Integer platilloseleccionado_id;
+    private Integer platilloseleccionadoId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "platillo_id")
@@ -41,26 +41,25 @@ public class PlatilloSeleccionado {
     private OpcionDeSubMenuSeleccionado opcionDeSubMenuSeleccionado;
 
     @Column(name = "precio_total")
-    private Integer precio_total;
+    private Integer precioTotal;
 
     @Column(name = "nombre")
     private String nombre;
 
-    public OpcionDeSubMenuSeleccionado getOpcionDeSubMenuSeleccionado() {
-        return opcionDeSubMenuSeleccionado;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedidoId;
+
+    public PlatilloSeleccionado() {
+
     }
 
-    public void setOpcionDeSubMenuSeleccionado(OpcionDeSubMenuSeleccionado opcionDeSubMenuSeleccionado) {
-        this.opcionDeSubMenuSeleccionado = opcionDeSubMenuSeleccionado;
+    public Integer getPlatilloseleccionadoId() {
+        return platilloseleccionadoId;
     }
 
-  
-    public Integer getPlatilloseleccionado_id() {
-        return platilloseleccionado_id;
-    }
-
-    public void setPlatilloseleccionado_id(Integer platilloseleccionado_id) {
-        this.platilloseleccionado_id = platilloseleccionado_id;
+    public void setPlatilloseleccionadoId(Integer platilloseleccionadoId) {
+        this.platilloseleccionadoId = platilloseleccionadoId;
     }
 
     public Platillo getPlatillo() {
@@ -71,12 +70,20 @@ public class PlatilloSeleccionado {
         this.platillo = platillo;
     }
 
-    public Integer getPrecio_total() {
-        return precio_total;
+    public OpcionDeSubMenuSeleccionado getOpcionDeSubMenuSeleccionado() {
+        return opcionDeSubMenuSeleccionado;
     }
 
-    public void setPrecio_total(Integer precio_total) {
-        this.precio_total = precio_total;
+    public void setOpcionDeSubMenuSeleccionado(OpcionDeSubMenuSeleccionado opcionDeSubMenuSeleccionado) {
+        this.opcionDeSubMenuSeleccionado = opcionDeSubMenuSeleccionado;
+    }
+
+    public Integer getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public void setPrecioTotal(Integer precioTotal) {
+        this.precioTotal = precioTotal;
     }
 
     public String getNombre() {
@@ -87,8 +94,14 @@ public class PlatilloSeleccionado {
         this.nombre = nombre;
     }
 
-    public PlatilloSeleccionado() {
-
+    public Pedido getPedidoId() {
+        return pedidoId;
     }
+
+    public void setPedidoId(Pedido pedidoId) {
+        this.pedidoId = pedidoId;
+    }
+    
+    
 
 }
