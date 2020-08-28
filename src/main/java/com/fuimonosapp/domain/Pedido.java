@@ -90,6 +90,9 @@ public class Pedido {
 
     @Column(name = "total_en_restaurante_sin_comision")
     private Double totalEnRestauranteSinComision;
+    
+    @Column(name = "direccion")
+    private String direccion;
 
     public Integer getPedido_id() {
         return pedido_id;
@@ -227,6 +230,14 @@ public class Pedido {
         this.totalEnRestauranteSinComision = totalEnRestauranteSinComision;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+    
     public Pedido() {
 
     }

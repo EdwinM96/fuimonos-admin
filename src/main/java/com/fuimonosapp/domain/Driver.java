@@ -56,6 +56,7 @@ public class Driver implements Serializable {
     @Column(name = "fecha_creado")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaCreado;
+    
 
     public Integer getDriverId() {
         return driverId;

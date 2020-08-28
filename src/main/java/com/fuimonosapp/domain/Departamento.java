@@ -41,7 +41,6 @@ public class Departamento {
 
     @Transient
     private Integer pais_id;
-    
 
     @Column(name = "nombre_departamento")
     private String nombre_departamento;

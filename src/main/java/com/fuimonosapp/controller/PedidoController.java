@@ -65,8 +65,8 @@ public class PedidoController {
         }
         Pedido pedido = ps.findOne(pedidoId);
         if(tiempoExtra != null){
-            if(pedido.getTiempoExtra()==null){ pedido.setTiempoExtra(LocalTime.MIN);}
-            pedido.setTiempoExtra(pedido.getTiempoExtra().plusMinutes(tiempoExtra));
+            if(pedido.getTiempoAdicional()==null){ pedido.setTiempoAdicional(LocalTime.MIN);}
+            pedido.setTiempoAdicional(pedido.getTiempoAdicional().plusMinutes(tiempoExtra));
         }
         if(driverAsignado!=null){
             Driver driver = ds.findById(driverAsignado);
